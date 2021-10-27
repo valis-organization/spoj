@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+//RAFALCHAMPIK
 /***
  * https://www.spoj.com/problems/SMPDIV/
  */
@@ -25,6 +25,6 @@ public class Zadanie2 {
                 System.out.println("ERROR");
         }
 
-// rafalchampl
+
     }
 }
