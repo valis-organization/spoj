@@ -9,7 +9,17 @@ public class Zadanie2 {
         if (t > 100) System.exit(0);
         if (t < 0) System.exit(0);
         for (int i = 0; i < t; i++) {
-            System.out.println("Siema");
+            int n, x, y, ai;
+            n = scan.nextInt();
+            x = scan.nextInt();
+            y = scan.nextInt();
+            if (x < n && x % n != 0) {
+                for (ai = 0; ai < n; ai++) {
+                    if (ai % x == 0 && ai % y != 0)
+                        System.out.println(ai);
+                }
+            } else
+                System.out.println("ERROR");
         }
 
 
