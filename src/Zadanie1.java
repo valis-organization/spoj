@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/***
+ * https://www.spoj.com/problems/TEST/
+ */
 public class Zadanie1 {
 
     public static void main(String[] args) {
