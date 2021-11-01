@@ -18,22 +18,22 @@ public class Prime1 {
                 p = new boolean[n];
                 if (1 <= m && m <= n && n - m <= 1000000 && n <= 1000000000) {
                     for (int a = m; a < n; a++) {
-                        if (a != 0)
-                            p[a] = true;
+                        if (a != 1)
+                            p[a - 1] = true;
                     }
 
                     for (int j = 2; j <= n; j++) {
-                        if(p[j-1])
-                        System.out.println(j);
-                        for(int d=2*j; d<=n; d= d + j)
-                            p[d-1] = false;
-                        }
+                        if (p[j - 1])
+                            System.out.println(j);
+                        for (int d = 2 * j; d <= n; d = d + j)
+                            p[d - 1] = false;
                     }
-
                 }
+
             }
         }
     }
+}
 
 
 
