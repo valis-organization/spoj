@@ -8,19 +8,19 @@ import java.util.Scanner;
 public class DivisorSummation {
 
     public static void main(String[] args) {
-        int testy, liczba, suma = 0;
+        int testCount, baseNumber, summation = 0;
         Scanner scan = new Scanner(System.in);
-        testy = scan.nextInt();
-        for (int i = 0; i < testy; i++) {
-            liczba = scan.nextInt();
-            for (int j = 1; j < liczba; j++) {
-                if (liczba % j == 0) {
-                    suma += j;
+        testCount = scan.nextInt();
+        for (int i = 0; i < testCount; i++) {
+            baseNumber = scan.nextInt();
+            for (int j = 1; j < baseNumber; j++) {
+                if (baseNumber % j == 0) {
+                    summation += j;
 
                 }
             }
-            System.out.println(suma);
-            suma = 0;
+            System.out.println(summation);
+            summation = 0;
         }
     }
 }
