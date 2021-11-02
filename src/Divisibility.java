@@ -3,7 +3,7 @@ import java.util.Scanner;
 /***
  * https://www.spoj.com/problems/SMPDIV/
  */
-public class Zadanie2 {
+public class Divisibility {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);

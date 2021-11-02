@@ -3,7 +3,7 @@ import java.util.Scanner;
 /***
  * https://www.spoj.com/problems/TEST/
  */
-public class Zadanie1 {
+public class Test {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
