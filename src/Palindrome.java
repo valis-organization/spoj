@@ -6,6 +6,14 @@ import java.util.Scanner;
  */
 public class Palindrome {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        Scanner scan = new Scanner(System.in);
+        int testCount;
+        testCount = scan.nextInt();
+
+        for(int i=0; i<testCount; i++){
+
+
+        }
+
     }
 }
