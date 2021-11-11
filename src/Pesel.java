@@ -34,7 +34,7 @@ public class Pesel {
                     System.out.println("D");
                 else
                     System.out.println("N");
-                suma = 0;
+                suma = 0; // Resetowanie sumy
             }
         }
     }
