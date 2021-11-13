@@ -12,6 +12,7 @@ public class Pesel {
         char[] convert = strpesel.toCharArray(); // konwertowanie stringa do chara
         return convert;
     }
+
     static boolean isPeselValid(long pesel){
         char[] convert = longToCharArray(pesel);
         int numberOfPesel; // zmienna koncowa (przekonwertowany long do stringa, string do chara, char do inta)
