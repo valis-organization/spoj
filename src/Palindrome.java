@@ -7,17 +7,17 @@ import java.util.Scanner;
 public class Palindrome {
     static char[] longToCharArray(long number) {
         String strnumber = String.valueOf(number); // konwertowanie longa do stringa
-        char[] convert = strnumber.toCharArray(); // konwertowanie stringa do chara
-        return convert;
+        char[] palinCharArray = strnumber.toCharArray(); // konwertowanie stringa do chara
+        return palinCharArray;
     }
 
     static boolean isNumberPalindrome(long palindrome) {
-        char[] convert = longToCharArray(palindrome);
+        char[] palinCharArray = longToCharArray(palindrome);
         boolean numberIsPalindrome = false;
         int palinArray[];
-        palinArray = new int[convert.length];
-        for (int j = 0; j < convert.length; j++) {
-            int palin = Integer.parseInt(String.valueOf(convert[j])); //konwertowanie chara do inta
+        palinArray = new int[palinCharArray.length];
+        for (int j = 0; j < palinCharArray.length; j++) {
+            int palin = Integer.parseInt(String.valueOf(palinCharArray[j])); //konwertowanie chara do inta
             palinArray[j] = palin; // wkladanie chara j do arraya;
         }
 
