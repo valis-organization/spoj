@@ -13,15 +13,26 @@ public class Palindrome {
 
     static boolean isNumberPalindrome(long palindrome) {
         char[] convert = longToCharArray(palindrome);
-        boolean ok;
-        for (int i = 0; i < convert.length; i++) {
-            if (convert[i] == convert[convert.length - i])
-                ok = true;
-            else
-                ok = false;
+        boolean numberIsPalindrome = false;
+        int palinArray[];
+        palinArray = new int[convert.length];
+        for (int j = 0; j < convert.length; j++) {
+            int palin = Integer.parseInt(String.valueOf(convert[j])); //konwertowanie chara do inta
+            palinArray[j] = palin; // wkladanie chara j do arraya;
         }
-        if(ok = true)
+
+        for (int i = 1; i < palinArray.length; i++) {
+            if (palinArray[i-1] == palinArray[palinArray.length - i])
+                numberIsPalindrome = true;
+            else{
+                numberIsPalindrome = false;
+                break;
+            }
+
+        }
+        if(numberIsPalindrome == true)
             return true;
+
         else
             return false;
     }
@@ -37,9 +48,9 @@ public class Palindrome {
             palindrome = scan.nextLong();
             if (palindrome <= 1000000) {
                 if (isNumberPalindrome(palindrome) == true)
-                    System.out.println("Seima");
+                    System.out.println("Liczba jest palindromem");
                 else
-                    System.out.println("nie siema");
+                    System.out.println("Liczba nie jest palindromem");
             }
 
         }
