@@ -47,16 +47,12 @@ public class Palindrome {
         for (int i = 0; i < testCount; i++) {
             palindrome = scan.nextLong();
             if (palindrome <= 1000000) {
-                if (isNumberPalindrome(palindrome) == true) {
                     for (long j = 1; j < 1000000; j++) {
                         if (isNumberPalindrome(palindrome + j) == true) {
                             System.out.println(palindrome + j);
                             break;
                         }
                     }
-                }
-                else
-                    System.out.println("Liczba nie jest palindromem");
             }
 
         }
