@@ -24,4 +24,4 @@ public class DivisorSummation {
         }
     }
 }
-
+// git reset --hard HEAD
