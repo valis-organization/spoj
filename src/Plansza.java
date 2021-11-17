@@ -20,12 +20,12 @@ public class Plansza {
             }
             previousPosX = playerPosX;
             previousPosY = playerPosY;
-            board[playerPosX][playerPosY] = "O"; // Pozycja poczatkowa
+            board[playerPosX][playerPosY] = "O"; //Pozycja poczatkowa
 
             for (int i = 0; i < board_X; i++) {
                 System.out.println("");
                 for (int j = 0; j < board_Y; j++) {
-                    if (board[playerPosX][playerPosY] == board[i][j]) {
+                    if (board[playerPosX][playerPosY] == board[i][j]) { // Rysuje plansze
                         board[i][j] = "O";
                         System.out.print(board[i][j]);
                     } else {
@@ -37,7 +37,7 @@ public class Plansza {
             }
             key = scan.nextInt();
             board[previousPosX][previousPosY] = "X"; // Pozycja poprzednia
-            if (key == 1) {
+            if (key == 1) {   // Chodzenie (poki co 4 = Gora, 3 = Dol, 2 = Prawo, 1 = Lewo
                 playerPosY --;
             }
             if (key == 2) {
@@ -50,7 +50,8 @@ public class Plansza {
                 playerPosX--;
             }
 
-            if(playerPosX>=5)
+
+            if(playerPosX>=5) //Nie wychodzi poza granice planszy
                 playerPosX--;
             if(playerPosY>=10)
                 playerPosY--;
