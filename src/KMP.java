@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /***
@@ -5,17 +7,18 @@ import java.util.Scanner;
  */
 public class KMP {
 
-    public static void matchingPositions(String pattern, String stringToCheck, int patternLength) {
+    public static List<Integer> matchingPositions(String pattern, String stringToCheck, int patternLength) {
         char[] patternInChar = pattern.toCharArray();
         char[] stringToCheckInChar = stringToCheck.toCharArray();
         boolean doesPatternMatch = false;
+        List<Integer> positions=new ArrayList<Integer>();
         if (pattern.length() > stringToCheck.length()) {
-            System.out.print("");
+            return positions;
         } else {
             for (int i = 0; i < stringToCheck.length(); i++) {
                 if (stringToCheck.length() - i>=patternLength-1) {
                     if (doesPatternMatch)
-                        System.out.println(i - 1);
+                        positions.add(i - 1);
                     doesPatternMatch = false;
                     for (int j = 1; j < patternLength; j++) {
                         if (patternInChar[0] == stringToCheckInChar[i]) {
@@ -29,21 +32,24 @@ public class KMP {
                 }else
                     break;
             }
-        }
+        } return positions;
     }
 
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int testCount;
+        int testCount,patternLength;
         testCount = scan.nextInt();
-        int patternLength;
+
         String pattern, stringToCheck;
         for (int i = 0; i < testCount; i++) {
             patternLength = scan.nextInt();
             pattern = scan.next();
             stringToCheck = scan.next();
-            matchingPositions(pattern, stringToCheck, patternLength);
+            int sizeOfList = matchingPositions(pattern,stringToCheck,patternLength).size();
+            for(int j = 0; j<sizeOfList;j++)
+           System.out.println(matchingPositions(pattern, stringToCheck, patternLength).get(j));
+
         }
     }
 }
