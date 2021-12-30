@@ -11,12 +11,12 @@ public class KMP {
         char[] patternInChar = pattern.toCharArray();
         char[] stringToCheckInChar = stringToCheck.toCharArray();
         boolean doesPatternMatch = false;
-        List<Integer> positions=new ArrayList<Integer>();
+        List<Integer> positions = new ArrayList<Integer>();
         if (pattern.length() > stringToCheck.length()) {
             return positions;
         } else {
             for (int i = 0; i < stringToCheck.length(); i++) {
-                if (stringToCheck.length() - i>=patternLength-1) {
+                if (stringToCheck.length() - i >= patternLength - 1) {
                     if (doesPatternMatch)
                         positions.add(i - 1);
                     doesPatternMatch = false;
@@ -29,16 +29,17 @@ public class KMP {
                         }
 
                     }
-                }else
+                } else
                     break;
             }
-        } return positions;
+        }
+        return positions;
     }
 
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int testCount,patternLength;
+        int testCount, patternLength;
         testCount = scan.nextInt();
 
         String pattern, stringToCheck;
@@ -46,9 +47,9 @@ public class KMP {
             patternLength = scan.nextInt();
             pattern = scan.next();
             stringToCheck = scan.next();
-            int sizeOfList = matchingPositions(pattern,stringToCheck,patternLength).size();
-            for(int j = 0; j<sizeOfList;j++)
-           System.out.println(matchingPositions(pattern, stringToCheck, patternLength).get(j));
+            int sizeOfList = matchingPositions(pattern, stringToCheck, patternLength).size();
+            for (int j = 0; j < sizeOfList; j++)
+                System.out.println(matchingPositions(pattern, stringToCheck, patternLength).get(j));
 
         }
     }
