@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        Line rafal = new Line(new Point(4,8),new Point(7,3));
+        Line rafal = new Line(new Point(-32,432),new Point(92,-255));
         System.out.println(rafal.p1.x);
         System.out.println(rafal.p1.y);
         System.out.println(rafal.p2.x);
@@ -16,5 +16,7 @@ public class Main {
         }catch (Exception exception){
             System.out.println("The exception was thrown: " + exception.getMessage());
         }
+
+        System.out.println(rafal.getLength());
     }
 }

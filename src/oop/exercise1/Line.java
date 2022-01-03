@@ -11,4 +11,12 @@ public class Line {
         }
     }
 
+    double getLength(){
+       float lengthX = p1.x - p2.x;
+       float lengthY = p1.y - p2.y;
+       float lengthOfLineToThePowerOf2 =  (lengthX*lengthX) + (lengthY*lengthY);
+       double lengthOfLine = Math.sqrt(lengthOfLineToThePowerOf2);
+       return lengthOfLine;
+    }
+
 }
