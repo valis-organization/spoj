@@ -26,19 +26,27 @@ public class StringMerge {
             return false;
     }
 
-    static void string_merge(String firstRow, String secondRow) {
+    static String string_merge(String firstRow, String secondRow) {
         char[] convertedFirst = firstStringToCharArray(firstRow);
         char[] convertedSecond = secondStringToCharArray(secondRow);
+       // char[] finalStringInChar;
+
         if (isFirstRowLongerThanSecond(firstRow, secondRow)) {
+            char[] finalStringInChar = new char[secondRow.length()*2];
             for (int i = 0; i < secondRow.length(); i++) {
-                System.out.print(convertedFirst[i]);
-                System.out.print(convertedSecond[i]);
+                finalStringInChar[i] = convertedFirst[i];
+                finalStringInChar[i+1] = convertedSecond[i];
             }
+            String finalString = String.valueOf(finalStringInChar);
+            return finalString;
         } else {
+            char[] finalStringInChar = new char[firstRow.length()*2];
             for (int i = 0; i < firstRow.length(); i++) {
-                System.out.print(convertedFirst[i]);
-                System.out.print(convertedSecond[i]);
+                finalStringInChar[i] = convertedFirst[i];
+                finalStringInChar[i+1] = convertedSecond[i];
             }
+            String finalString = String.valueOf(finalStringInChar);
+            return finalString;
         }
 
     }
@@ -50,8 +58,7 @@ public class StringMerge {
         for (int i = 0; i < testCount; i++) {
             firstRow = scan.next();
             secondRow = scan.next();
-            string_merge(firstRow,secondRow);
-            System.out.println();
+            System.out.println(string_merge(firstRow,secondRow));
         }
     }
 
