@@ -6,7 +6,7 @@ public class Chapter {
     String chapterName;
     int chapterNumber;
 
-    Chapter(String chapterName, int chapterNumber){
+    Chapter(String chapterName, int chapterNumber) {
         this.chapterName = chapterName;
         this.chapterNumber = chapterNumber;
     }

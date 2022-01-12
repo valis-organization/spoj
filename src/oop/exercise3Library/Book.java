@@ -3,6 +3,7 @@ package oop.exercise3Library;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Book {
@@ -29,17 +30,13 @@ public class Book {
     public boolean equals(Object obj) {
         try {
             Book book = (Book) obj;
-            if (this.text == book.text) {
-                System.out.println("TRUE " + this + book);
-                return true;
-            } else if (this.author.authorSurname == book.author.authorSurname) {
-                System.out.println("TRUE " + this + book);
-                return true;
-            } else if (this.author.authorName == book.author.authorName) {
-                System.out.println("TRUE " + this + book);
+            if (Objects.equals(this.text, book.text) &&
+                    Objects.equals(this.nameOfTheBook, book.nameOfTheBook) &&
+                    this.author == book.author &&
+                    this.chapters == book.chapters &&
+                    this.numberOfPages == book.numberOfPages) {
                 return true;
             }
-            System.out.println("FALSE " + this + book);
             return false;
         } catch (Exception e) {
             System.out.println("FALSE - EXCEPTION ");

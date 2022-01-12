@@ -3,9 +3,8 @@ package oop.exercise3Library;
 import java.util.ArrayList;
 
 public class Shelf {
-    public int shelfCapacity; // in the number of books it can handle
+    public int shelfCapacity;
     public ArrayList<Book> books;
-    public int freeSlots;
 
     Shelf(int shelfCapacity, ArrayList<Book> books) throws Exception {
         this.shelfCapacity = shelfCapacity;
@@ -14,23 +13,18 @@ public class Shelf {
         if (shelfCapacity < books.size()) {
             throw new Exception("Books can't exceed the size of a shelf.");
         }
-        freeSlots = shelfCapacity - books.size();
     }
 
     Shelf(int shelfCapacity) {
         this.shelfCapacity = shelfCapacity;
-        if (!books.isEmpty()) {
-            freeSlots = shelfCapacity;
-        } else {
-            freeSlots = shelfCapacity - books.size();
-        }
     }
 
-    void addBook(Book gangplank) {
-        if (this.books.size() > shelfCapacity) {
+    boolean addBook(Book gangplank) {
+        if (this.books.size() <= shelfCapacity) {
             books.add(gangplank);
-            freeSlots--;
+            return true;
         }
+        return false;
     }
 
     void addBook(ArrayList<Book> books) {
@@ -44,13 +38,12 @@ public class Shelf {
         }
     }
 
-    void removeBook(Book book) {
-        if (!books.isEmpty()) {
+    boolean removeBook(Book book) {
+        if (books.contains(book)) {
             books.remove(book);
-            freeSlots++;
-        } else {
-            System.out.println("Shelf is empty.");
+            return true;
         }
+        return false;
     }
 
     ArrayList<Book> getBooksByAuthor(Author author) {
@@ -58,9 +51,12 @@ public class Shelf {
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).author == author) {
                 booksByAuthor.add(books.get(i));
-                freeSlots--;
             }
         }
         return booksByAuthor;
+    }
+
+    int getFreeSlots() {
+        return shelfCapacity - books.size();
     }
 }

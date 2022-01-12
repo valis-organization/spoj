@@ -27,9 +27,9 @@ public class Main {
 
         pulka.addBook(book1);
         System.out.println(pulka.books.toString());
-        System.out.println("Wolne miejsca:" + pulka.freeSlots);
+        System.out.println("Wolne miejsca:" + pulka.getFreeSlots());
         pulka.addBook(book2);
-        System.out.println("Wolne miejsca:" + pulka.freeSlots);
+        System.out.println("Wolne miejsca:" + pulka.getFreeSlots());
 
         ArrayList<Chapter> chaptersOfKsiomzka = new ArrayList<>();
         chaptersOfKsiomzka.add(new Chapter("champ", 1));
@@ -51,5 +51,12 @@ public class Main {
 
         System.out.println(books);
         System.out.println(pulka.getBooksByAuthor(rafau));
+        System.out.println(pulka.getFreeSlots());
+        pulka.removeBook(book1);
+        System.out.println(books);
+        if(pulka.getFreeSlots() > 0 )
+        {
+            pulka.addBook(book1);
+        }
     }
 }
