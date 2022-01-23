@@ -6,9 +6,9 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.io.File;
 
-public class voice {
+public class SoundHandler {
 
-    public void playVoice(String voiceLocation) {
+    public void playSound(String voiceLocation) {
         try {
             File voicePath = new File(voiceLocation);
             if (voicePath.exists()) {

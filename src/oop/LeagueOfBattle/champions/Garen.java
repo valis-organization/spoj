@@ -1,10 +1,9 @@
 package oop.LeagueOfBattle.champions;
 
 
-import oop.LeagueOfBattle.champions.base.Hero;
+import oop.LeagueOfBattle.champions.base.Champion;
 
-public class Garen extends Hero {
-
+public class Garen extends Champion {
     public Garen() {
         name = "Garen";
         hp = 100;
@@ -15,6 +14,7 @@ public class Garen extends Hero {
         actionPoints = 3;
         currentActionPoints = actionPoints;
         isSpellOnCooldown = new boolean[3];
+        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\PickGaren.wav";
     }
 
     @Override
@@ -24,18 +24,18 @@ public class Garen extends Hero {
     }
 
     @Override
-    public void basicAttack(Hero hero) {
-        hero.getDemage(attackDimig);
+    public void basicAttack(Champion champion) {
+        champion.getDemage(attackDimig);
         currentActionPoints--;
     }
 
     @Override
-    public void spellQ(Hero hero) {
+    public void spellQ(Champion champion) {
         //Garen deals damage (3x his base ad)
         if (!isSpellOnCooldown[0]) {
             if (currentActionPoints >= 2) {
                 System.out.println("DEMACIA!!!!");
-                hero.getDemage(attackDimig * 3);
+                champion.getDemage(attackDimig * 3);
                 currentActionPoints = currentActionPoints - 2;
                 isSpellOnCooldown[0] = true;
             } else {
@@ -56,7 +56,7 @@ public class Garen extends Hero {
     }
 
     @Override
-    public void spellE(Hero hero) {
+    public void spellE(Champion champion) {
 
     }
 

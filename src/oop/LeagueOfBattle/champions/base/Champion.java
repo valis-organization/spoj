@@ -1,8 +1,10 @@
 package oop.LeagueOfBattle.champions.base;
 
+import oop.LeagueOfBattle.voiceLines.SoundHandler;
+
 import java.util.Arrays;
 
-public abstract class Hero {
+public abstract class Champion {
     protected String name;
     protected float hp;
     protected float armor;
@@ -13,6 +15,7 @@ public abstract class Hero {
     protected int actionPoints;
     public int currentActionPoints; //protected ma byc, ale inne klasy nie moga zmienic tej zmiennej - zapytac przemka xd
     protected boolean[] isSpellOnCooldown;
+    protected String soundPath;
 
     public abstract void getDemage(float attackDimig);
 
@@ -31,19 +34,24 @@ public abstract class Hero {
     public final void resetCurrentActionPoints() {
         currentActionPoints = actionPoints;
     }
-
+    public final String getName(){
+        return name;
+    }
+    public final String getSound(){
+        return soundPath;
+    }
     public final void resetCooldowns() {
         Arrays.fill(isSpellOnCooldown, false);
     }
 
-    public abstract void basicAttack(Hero hero);
+    public abstract void basicAttack(Champion champion);
 
 
-    public abstract void spellQ(Hero hero);
+    public abstract void spellQ(Champion champion);
 
     public abstract void spellW();
 
-    public abstract void spellE(Hero hero);
+    public abstract void spellE(Champion champion);
 
     public abstract void ultimateSpell();
 
@@ -52,4 +60,5 @@ public abstract class Hero {
     public String toString() {
         return name;
     }
+
 }

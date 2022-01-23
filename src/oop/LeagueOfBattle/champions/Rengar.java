@@ -1,8 +1,8 @@
 package oop.LeagueOfBattle.champions;
 
-import oop.LeagueOfBattle.champions.base.Hero;
+import oop.LeagueOfBattle.champions.base.Champion;
 
-public class Rengar extends Hero {
+public class Rengar extends Champion {
 
     public Rengar() {
         name = "Rengar";
@@ -14,6 +14,7 @@ public class Rengar extends Hero {
         actionPoints = 4;
         currentActionPoints = actionPoints;
         isSpellOnCooldown = new boolean[3];
+        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\PickRengar.wav";
     }
 
     @Override
@@ -23,18 +24,18 @@ public class Rengar extends Hero {
     }
 
     @Override
-    public void basicAttack(Hero hero) {
-        hero.getDemage(attackDimig);
+    public void basicAttack(Champion champion) {
+        champion.getDemage(attackDimig);
         currentActionPoints--;
     }
 
     @Override
-    public void spellQ(Hero hero) {
+    public void spellQ(Champion champion) {
         //Basic attack with MORE damage
         if (!isSpellOnCooldown[0]) {
             if (currentActionPoints >= 2) {
 
-                hero.getDemage((float) (attackDimig * 2));
+                champion.getDemage((float) (attackDimig * 2));
                 currentActionPoints = currentActionPoints - 2;
                 isSpellOnCooldown[0] = true;
             } else {
@@ -62,10 +63,10 @@ public class Rengar extends Hero {
     }
 
     @Override
-    public void spellE(Hero hero) {
-        hero.getDemage((float) (attackDimig * 0.9));
+    public void spellE(Champion champion) {
+        champion.getDemage((float) (attackDimig * 0.9));
         this.currentActionPoints = this.currentActionPoints - 2;
-        hero.currentActionPoints--;
+        champion.currentActionPoints--;
     }
 
     @Override
