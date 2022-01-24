@@ -13,14 +13,23 @@ public abstract class Champion {
     protected float attackDimig;
     protected float armorPenetration;
     protected int actionPoints;
-    public int currentActionPoints; //protected ma byc, ale inne klasy nie moga zmienic tej zmiennej - zapytac przemka xd
+    public int currentActionPoints;
     protected boolean[] isSpellOnCooldown;
     protected String soundPath;
+    protected boolean assasin;
+    protected SoundHandler soundHandler = new SoundHandler();
+    protected int randomVoice = (int) (Math.random() * 2) + 1;
+    protected int requiredActionPoints;
+    //int rand = (int)(Math.random() * range) + min;
 
     public abstract void getDemage(float attackDimig);
 
     public final float getHp() {
         return hp;
+    }
+
+    public final boolean isAssasin(){
+        return assasin;
     }
 
     public final float getArmorPenetration() {

@@ -10,8 +10,13 @@ public class Game {
     Champion champion2;
 
    public Game(Champion champion1, Champion champion2) {
-        this.champion1 = champion1;
-        this.champion2 = champion2;
+       if(champion2.isAssasin()){
+           this.champion1 = champion2;
+           this.champion2 = champion1;
+       }else{
+           this.champion1 = champion1;
+           this.champion2 = champion2;
+       }
     }
     public void mainGame() {
         while (champion1.getHp() > 0 && champion2.getHp() > 0) {

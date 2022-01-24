@@ -1,6 +1,7 @@
 package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.voiceLines.SoundHandler;
 
 public class Rengar extends Champion {
 
@@ -14,7 +15,8 @@ public class Rengar extends Champion {
         actionPoints = 4;
         currentActionPoints = actionPoints;
         isSpellOnCooldown = new boolean[3];
-        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\PickRengar.wav";
+        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\PickRengar.wav";
+        assasin = true;
     }
 
     @Override
@@ -34,9 +36,13 @@ public class Rengar extends Champion {
         //Basic attack with MORE damage
         if (!isSpellOnCooldown[0]) {
             if (currentActionPoints >= 2) {
-
                 champion.getDemage((float) (attackDimig * 2));
                 currentActionPoints = currentActionPoints - 2;
+                if (randomVoice == 1) {
+                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarQ1.wav");
+                } else {
+                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarQ2.wav");
+                }
                 isSpellOnCooldown[0] = true;
             } else {
                 System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
@@ -55,6 +61,11 @@ public class Rengar extends Champion {
         if (randomNum == 0 || randomNum == 1) {
             hp = hp + healedHp;
             System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp);
+            if (randomVoice == 1) {
+                soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarW1.wav");
+            } else {
+                soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarW2.wav");
+            }
         } else {
             System.out.println("You did not heal yourself");
         }
@@ -64,9 +75,23 @@ public class Rengar extends Champion {
 
     @Override
     public void spellE(Champion champion) {
-        champion.getDemage((float) (attackDimig * 0.9));
-        this.currentActionPoints = this.currentActionPoints - 2;
-        champion.currentActionPoints--;
+        if (!isSpellOnCooldown[2]) {
+            if (currentActionPoints >= 2) {
+                champion.getDemage((float) (attackDimig * 0.9));
+                this.currentActionPoints = this.currentActionPoints - 2;
+                if (randomVoice == 1) {
+                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarE1.wav");
+                } else {
+                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarE2.wav");
+                }
+                champion.currentActionPoints--;
+                isSpellOnCooldown[2] = true;
+            } else {
+                System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
+            }
+        } else {
+            System.out.println("Your spell is on cooldown!");
+        }
     }
 
     @Override

@@ -14,7 +14,8 @@ public class Garen extends Champion {
         actionPoints = 3;
         currentActionPoints = actionPoints;
         isSpellOnCooldown = new boolean[3];
-        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\PickGaren.wav";
+        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav";
+        assasin = false;
     }
 
     @Override
