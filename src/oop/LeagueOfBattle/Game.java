@@ -29,6 +29,7 @@ public class Game {
             }
             roundCount++;
             System.out.println("ROUND: " + roundCount + ". FIGHT!");
+            resetCooldowns();
             System.out.print(champion1.getClass().getSimpleName() + "'s turn!            ");
             System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
             System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
@@ -55,7 +56,12 @@ public class Game {
         if (roundCount % champion1.getUltimateCooldown() == 0) {
             champion1.resetUltimate();
             System.out.println(champion1 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
+        } else if (roundCount % champion2.getUltimateCooldown() == 0) {
+            champion2.resetUltimate();
+            System.out.println(champion2 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
         }
+        champion1.passiveSpell();
+        champion2.passiveSpell();
     }
 
     private void startRounds() {
@@ -64,7 +70,6 @@ public class Game {
         Champion attackedChampion = champion2;
         String move;
         int turn = 1;
-        resetCooldowns();
         do {
 
             System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
@@ -91,7 +96,7 @@ public class Game {
                     break;
                 }
                 case "rafalchamp": {
-                    attackedChampion.getDemage(10000);
+                    attackedChampion.getDamage(10000,0);
                     break;
                 }
             }

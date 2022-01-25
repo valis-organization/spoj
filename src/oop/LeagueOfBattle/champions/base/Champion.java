@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public abstract class Champion {
     protected String name;
+    protected float maxHP;
     protected float hp;
     protected float armor;
     protected float magicResist;
@@ -25,7 +26,9 @@ public abstract class Champion {
     //int rand = (int)(Math.random() * range) + min;
 
 
-    public abstract void getDemage(float attackDimig);
+    public abstract void getDamage(float attackDimig, float armor);
+
+    public abstract void getTrueDamage(float attackDimig);
 
     public final float getHp() {
         return hp;
@@ -39,8 +42,8 @@ public abstract class Champion {
         return assasin;
     }
 
-    public final float getArmorPenetration() {
-        return armorPenetration;
+    public final float getArmor() {
+        return armor;
     }
 
     public final int getCurrentActionPoints() {
