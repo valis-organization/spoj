@@ -96,7 +96,7 @@ public class Game {
                     break;
                 }
                 case "rafalchamp": {
-                    attackedChampion.getDamage(10000,0);
+                    attackedChampion.getDamage(10000, 0);
                     break;
                 }
             }

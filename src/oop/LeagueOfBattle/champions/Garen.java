@@ -26,6 +26,7 @@ public class Garen extends Champion {
         hp = hp - attackDimig;
         System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " True damage.");
     }
+
     @Override
     public void getDamage(float attackDimig, float armor) {
         hp = hp - (attackDimig / (armor / 2));
@@ -34,7 +35,7 @@ public class Garen extends Champion {
 
     @Override
     public void basicAttack(Champion champion) {
-        champion.getDamage(attackDimig,champion.getArmor());
+        champion.getDamage(attackDimig, champion.getArmor());
         currentActionPoints--;
     }
 
@@ -43,7 +44,7 @@ public class Garen extends Champion {
         //Garen deals damage (3x his base ad)
         if (!isSpellOnCooldown[0]) {
             if (currentActionPoints >= 2) {
-                champion.getDamage(attackDimig * 3,champion.getArmor());
+                champion.getDamage(attackDimig * 3, champion.getArmor());
                 currentActionPoints = currentActionPoints - 2;
                 isSpellOnCooldown[0] = true;
                 if (randomVoice == 1) {
@@ -74,7 +75,7 @@ public class Garen extends Champion {
 
     @Override
     public void spellE(Champion champion) { //Garen can spin random amount of times. Spin deals 3 + (1 dmg*every spin)
-        if(currentActionPoints>=2) {
+        if (currentActionPoints >= 2) {
             int spins = (int) (Math.random() * 13);
             float spinsDamage = 15;
             System.out.println(spins);
@@ -82,22 +83,22 @@ public class Garen extends Champion {
                 spinsDamage = spinsDamage + 7;
             }
             champion.getDamage(spinsDamage, champion.getArmor());
-            currentActionPoints = currentActionPoints-2;
+            currentActionPoints = currentActionPoints - 2;
             if (randomVoice == 1) {
                 soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenE1.wav");
             } else {
                 soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenE2.wav");
             }
-        }else{
+        } else {
             System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
         }
     }
 
     @Override
     public void ultimateSpell(Champion champion) {
-        if(currentActionPoints >= 3) {
+        if (currentActionPoints >= 3) {
             if (!isUltimateOnCooldown) {
-                champion.getTrueDamage((float) (5+((maxHP-hp)*0.30)));
+                champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.30)));
                 currentActionPoints = 0;
                 int rand = (int) (Math.random() * 2) + 1;
                 if (rand == 1) {
@@ -108,7 +109,7 @@ public class Garen extends Champion {
             } else {
                 System.out.println("Your spell is on cooldown!");
             }
-        }else{
+        } else {
             System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
         }
     }
@@ -116,9 +117,9 @@ public class Garen extends Champion {
     @Override
     public void passiveSpell() {
         //Perseverance: Garen regeneraters 7% of his hp every round. He also gains 2 armor.
-        if(hp!=maxHP) {
+        if (hp != maxHP) {
             hp = (float) (hp + ((maxHP - hp) * 0.07));
-            System.out.println("Perseverance: Garen regenerated " +  ((maxHP - hp) * 0.07) + " hp.");
+            System.out.println("Perseverance: Garen regenerated " + ((maxHP - hp) * 0.07) + " hp.");
         }
         armor++;
     }

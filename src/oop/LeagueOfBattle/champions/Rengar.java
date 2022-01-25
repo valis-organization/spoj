@@ -36,7 +36,7 @@ public class Rengar extends Champion {
 
     @Override
     public void basicAttack(Champion champion) {
-        champion.getDamage(attackDimig,champion.getArmor());
+        champion.getDamage(attackDimig, champion.getArmor());
         currentActionPoints--;
     }
 
@@ -45,7 +45,7 @@ public class Rengar extends Champion {
         //Basic attack with MORE damage
         if (!isSpellOnCooldown[0]) {
             if (currentActionPoints >= 2) {
-                champion.getDamage(attackDimig * 3, (float) (champion.getArmor() - (armorPenetration*0.1)));
+                champion.getDamage(attackDimig * 3, (float) (champion.getArmor() - (armorPenetration * 0.1)));
                 currentActionPoints = currentActionPoints - 2;
                 if (randomVoice == 1) {
                     soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarQ1.wav");
@@ -86,7 +86,7 @@ public class Rengar extends Champion {
     public void spellE(Champion champion) {
         if (!isSpellOnCooldown[2]) {
             if (currentActionPoints >= 2) {
-                champion.getDamage((float) (attackDimig * 0.9),getArmor());
+                champion.getDamage((float) (attackDimig * 0.9), getArmor());
                 this.currentActionPoints = this.currentActionPoints - 2;
                 if (randomVoice == 1) {
                     soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarE1.wav");
@@ -106,7 +106,7 @@ public class Rengar extends Champion {
     @Override
     public void ultimateSpell(Champion champion) {
         //rengar unleash his power
-        if(currentActionPoints >= 3) {
+        if (currentActionPoints >= 3) {
             if (!isUltimateOnCooldown) {
                 currentActionPoints = 10;
                 attackDimig = attackDimig + 20;
@@ -119,7 +119,7 @@ public class Rengar extends Champion {
             } else {
                 System.out.println("Your spell is on cooldown!");
             }
-        }else{
+        } else {
             System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
         }
     }
@@ -127,7 +127,7 @@ public class Rengar extends Champion {
     @Override
     public void passiveSpell() {
         //Bonetooth necklace: Rengar collets Thropies for his victims (every round +5 AD)
-        attackDimig = attackDimig+5;
+        attackDimig = attackDimig + 5;
         System.out.println("Bonetooth necklace: Rengar got +5 AD");
     }
 
