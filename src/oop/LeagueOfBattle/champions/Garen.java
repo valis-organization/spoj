@@ -20,7 +20,7 @@ public class Garen extends Champion {
         isSpellOnCooldown = new boolean[3];
         isUltimateOnCooldown = true;
         ultimateCooldown = 5;
-        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav";
+        soundPath = "zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav";
         assasin = false;
     }
 
@@ -50,7 +50,7 @@ public class Garen extends Champion {
                 champion.getDamage(attackDimig * 3, champion.getArmor());
                 currentActionPoints = currentActionPoints - 2;
                 isSpellOnCooldown[0] = true;
-                if (randomVoice == 1) {
+                if (MathHelper.randomInt(0,1) == 1) {
                     soundHandler.playSound(GarenSounds.Q1);
                 } else {
                     soundHandler.playSound(GarenSounds.Q2);
@@ -68,7 +68,7 @@ public class Garen extends Champion {
         //Adding amount of armor. (concept: TENACITY: Gains 1 action point, allows to use 1 spell and removes 2 action points)  - 1 Action Point
         armor = (float) (armor + 1.5);
         System.out.println("Increased your armor and MR! Now A: " + armor);
-        if (randomVoice == 1) {
+        if (MathHelper.randomInt(0,1) == 1) {
             soundHandler.playSound(GarenSounds.E1);
         } else {
             soundHandler.playSound(GarenSounds.E2);
@@ -79,7 +79,7 @@ public class Garen extends Champion {
     @Override
     public void spellE(Champion champion) { //Garen can spin random amount of times. Spin deals 3 + (1 dmg*every spin)
         if (currentActionPoints >= 2) {
-            int spins = (int) (Math.random() * 13);
+            int spins = MathHelper.randomInt(0,13);
             float spinsDamage = 15;
             System.out.println(spins);
             for (int i = 1; i <= spins; i++) {
@@ -87,7 +87,7 @@ public class Garen extends Champion {
             }
             champion.getDamage(spinsDamage, champion.getArmor());
             currentActionPoints = currentActionPoints - 2;
-            if (randomVoice == 1) {
+            if (MathHelper.randomInt(0,1) == 1) {
                 soundHandler.playSound(GarenSounds.E1);
             } else {
                 soundHandler.playSound(GarenSounds.E2);

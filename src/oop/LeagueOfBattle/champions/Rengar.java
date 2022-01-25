@@ -1,6 +1,7 @@
 package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.Rengar.RengarSounds;
 
 public class Rengar extends Champion {
@@ -19,7 +20,7 @@ public class Rengar extends Champion {
         isSpellOnCooldown = new boolean[3];
         isUltimateOnCooldown = true;
         ultimateCooldown = 4;
-        soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\PickRengar.wav";
+        soundPath = "zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\PickRengar.wav";
         assasin = true;
     }
 
@@ -48,7 +49,7 @@ public class Rengar extends Champion {
             if (currentActionPoints >= 2) {
                 champion.getDamage(attackDimig * 3, (float) (champion.getArmor() - (armorPenetration * 0.1)));
                 currentActionPoints = currentActionPoints - 2;
-                if (randomVoice == 1) {
+                if (MathHelper.randomInt(0,1) == 1) {
                     soundHandler.playSound(RengarSounds.Q1);
                 } else {
                     soundHandler.playSound(RengarSounds.Q2);
@@ -65,13 +66,13 @@ public class Rengar extends Champion {
     @Override
     public void spellW() {
         //Rengar heals for x (from 0 to 21) hp, and has 40% chances for it
-        int randomNum = (int) (Math.random() * 5);
-        int healedHp = (int) (Math.random() * 21);
+        int randomNum = MathHelper.randomInt(0,4);
+        int healedHp =  MathHelper.randomInt(0,21);
 
         if (randomNum == 0 || randomNum == 1) {
             hp = hp + healedHp;
             System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp);
-            if (randomVoice == 1) {
+            if (MathHelper.randomInt(0,1) == 1) {
                 soundHandler.playSound(RengarSounds.W1);
             } else {
                 soundHandler.playSound(RengarSounds.W2);
@@ -89,7 +90,7 @@ public class Rengar extends Champion {
             if (currentActionPoints >= 2) {
                 champion.getDamage((float) (attackDimig * 0.9), getArmor());
                 this.currentActionPoints = this.currentActionPoints - 2;
-                if (randomVoice == 1) {
+                if (MathHelper.randomInt(0,1) == 1) {
                     soundHandler.playSound(RengarSounds.E1);
                 } else {
                     soundHandler.playSound(RengarSounds.E2);
