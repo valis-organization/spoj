@@ -3,26 +3,32 @@ package oop.LeagueOfBattle;
 import oop.LeagueOfBattle.champions.base.Champion;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
 
     Champion champion1;
     Champion champion2;
+    int roundCount = 0;
 
-   public Game(Champion champion1, Champion champion2) {
-       if(champion2.isAssasin()){
-           this.champion1 = champion2;
-           this.champion2 = champion1;
-       }else{
-           this.champion1 = champion1;
-           this.champion2 = champion2;
-       }
+    public Game(Champion champion1, Champion champion2) {
+        if (champion2.isAssasin()) {
+            this.champion1 = champion2;
+            this.champion2 = champion1;
+        } else {
+            this.champion1 = champion1;
+            this.champion2 = champion2;
+        }
     }
-    public void mainGame() {
+
+    public void mainGame() throws InterruptedException {
         while (champion1.getHp() > 0 && champion2.getHp() > 0) {
-            for (int i = 0; i < 10; i++) {
+            TimeUnit.SECONDS.sleep(2);
+            for (int i = 0; i < 15; i++) {
                 System.out.println(" ");
             }
+            roundCount++;
+            System.out.println("ROUND: " + roundCount + ". FIGHT!");
             System.out.print(champion1.getClass().getSimpleName() + "'s turn!            ");
             System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
             System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
@@ -30,11 +36,14 @@ public class Game {
             startRounds();
         }
     }
+
     private void winning() {
-        if (champion2.getHp() > champion1.getHp()) {
-            System.out.println(champion2.getClass().getSimpleName() + " has won!");
-        } else {
-            System.out.println(champion1.getClass().getSimpleName() + " has won!");
+        if (champion2.getHp() <= 0 || champion1.getHp() <= 0) {
+            if (champion1.getHp() <= 0) {
+                System.out.println(champion2.getClass().getSimpleName() + " has won!");
+            } else {
+                System.out.println(champion1.getClass().getSimpleName() + " has won!");
+            }
         }
     }
 
@@ -43,7 +52,12 @@ public class Game {
         champion2.resetCurrentActionPoints();
         champion1.resetCooldowns();
         champion2.resetCooldowns();
+        if (roundCount % champion1.getUltimateCooldown() == 0) {
+            champion1.resetUltimate();
+            System.out.println(champion1 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
+        }
     }
+
     private void startRounds() {
         Scanner scan = new Scanner(System.in);
         Champion champion = champion1;
@@ -73,7 +87,7 @@ public class Game {
                     break;
                 }
                 case "r": {
-                    champion.ultimateSpell();
+                    champion.ultimateSpell(attackedChampion);
                     break;
                 }
                 case "rafalchamp": {

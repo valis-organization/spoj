@@ -75,7 +75,7 @@ public class Garen extends Champion {
     }
 
     @Override
-    public void ultimateSpell() {
+    public void ultimateSpell(Champion champion) {
         int rand = (int)(Math.random() * 2) + 1;
         if (rand == 1) {
             soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenR1.wav");

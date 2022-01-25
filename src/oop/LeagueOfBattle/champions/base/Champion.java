@@ -15,6 +15,8 @@ public abstract class Champion {
     protected int actionPoints;
     public int currentActionPoints;
     protected boolean[] isSpellOnCooldown;
+    protected boolean isUltimateOnCooldown;
+    protected int ultimateCooldown;
     protected String soundPath;
     protected boolean assasin;
     protected SoundHandler soundHandler = new SoundHandler();
@@ -22,13 +24,18 @@ public abstract class Champion {
     protected int requiredActionPoints;
     //int rand = (int)(Math.random() * range) + min;
 
+
     public abstract void getDemage(float attackDimig);
 
     public final float getHp() {
         return hp;
     }
 
-    public final boolean isAssasin(){
+    public int getUltimateCooldown() {
+        return ultimateCooldown;
+    }
+
+    public final boolean isAssasin() {
         return assasin;
     }
 
@@ -43,14 +50,21 @@ public abstract class Champion {
     public final void resetCurrentActionPoints() {
         currentActionPoints = actionPoints;
     }
-    public final String getName(){
+
+    public final String getName() {
         return name;
     }
-    public final String getSound(){
+
+    public final String getSound() {
         return soundPath;
     }
+
     public final void resetCooldowns() {
         Arrays.fill(isSpellOnCooldown, false);
+    }
+
+    public final void resetUltimate() {
+        isUltimateOnCooldown = false;
     }
 
     public abstract void basicAttack(Champion champion);
@@ -62,9 +76,10 @@ public abstract class Champion {
 
     public abstract void spellE(Champion champion);
 
-    public abstract void ultimateSpell();
+    public abstract void ultimateSpell(Champion champion);
 
     public abstract void passiveSpell();
+
     @Override
     public String toString() {
         return name;

@@ -15,6 +15,8 @@ public class Rengar extends Champion {
         actionPoints = 4;
         currentActionPoints = actionPoints;
         isSpellOnCooldown = new boolean[3];
+        isUltimateOnCooldown = true;
+        ultimateCooldown = 4;
         soundPath = "C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\PickRengar.wav";
         assasin = true;
     }
@@ -95,8 +97,20 @@ public class Rengar extends Champion {
     }
 
     @Override
-    public void ultimateSpell() {
-
+    public void ultimateSpell(Champion champion) {
+        //rengar unleash his power
+        if (!isUltimateOnCooldown) {
+            currentActionPoints = 10;
+            attackDimig = 120;
+            spellQ(champion);
+            spellW();
+            spellE(champion);
+            currentActionPoints = 0;
+            attackDimig = 80;
+            isUltimateOnCooldown = true;
+        } else {
+            System.out.println("Your spell is on cooldown!");
+        }
     }
 
     @Override

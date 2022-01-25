@@ -33,8 +33,8 @@ public class Main {
         Champion champion2 = pickingHandler.pickingChampion(champion);
         soundHandler.playSound(champion2.getSound());
 
-        System.out.println("The battle will begin in 3 seconds!");
-        TimeUnit.SECONDS.sleep(3);
+        System.out.println("The battle will begin in 2 seconds!");
+     //   TimeUnit.SECONDS.sleep(3);
 
         Game game = new Game(champion1, champion2);
         game.mainGame();
