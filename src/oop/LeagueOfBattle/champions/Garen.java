@@ -2,6 +2,9 @@ package oop.LeagueOfBattle.champions;
 
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.helpers.MathHelper;
+import oop.LeagueOfBattle.voiceLines.Garen.GarenSounds;
+import oop.LeagueOfBattle.voiceLines.SoundHandler;
 
 public class Garen extends Champion {
     public Garen() {
@@ -48,9 +51,9 @@ public class Garen extends Champion {
                 currentActionPoints = currentActionPoints - 2;
                 isSpellOnCooldown[0] = true;
                 if (randomVoice == 1) {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenQ1.wav");
+                    soundHandler.playSound(GarenSounds.Q1);
                 } else {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenQ2.wav");
+                    soundHandler.playSound(GarenSounds.Q2);
                 }
             } else {
                 System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
@@ -66,9 +69,9 @@ public class Garen extends Champion {
         armor = (float) (armor + 1.5);
         System.out.println("Increased your armor and MR! Now A: " + armor);
         if (randomVoice == 1) {
-            soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenW1.wav");
+            soundHandler.playSound(GarenSounds.E1);
         } else {
-            soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenW2.wav");
+            soundHandler.playSound(GarenSounds.E2);
         }
         currentActionPoints--;
     }
@@ -85,9 +88,9 @@ public class Garen extends Champion {
             champion.getDamage(spinsDamage, champion.getArmor());
             currentActionPoints = currentActionPoints - 2;
             if (randomVoice == 1) {
-                soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenE1.wav");
+                soundHandler.playSound(GarenSounds.E1);
             } else {
-                soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenE2.wav");
+                soundHandler.playSound(GarenSounds.E2);
             }
         } else {
             System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
@@ -100,11 +103,10 @@ public class Garen extends Champion {
             if (!isUltimateOnCooldown) {
                 champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.30)));
                 currentActionPoints = 0;
-                int rand = (int) (Math.random() * 2) + 1;
-                if (rand == 1) {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenR1.wav");
+                if (MathHelper.randomInt(0,1) == 1) {
+                    soundHandler.playSound(GarenSounds.R1);
                 } else {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenR2.wav");
+                    soundHandler.playSound(GarenSounds.R2);
                 }
             } else {
                 System.out.println("Your spell is on cooldown!");

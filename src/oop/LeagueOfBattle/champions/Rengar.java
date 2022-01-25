@@ -1,6 +1,7 @@
 package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.voiceLines.Rengar.RengarSounds;
 
 public class Rengar extends Champion {
 
@@ -48,9 +49,9 @@ public class Rengar extends Champion {
                 champion.getDamage(attackDimig * 3, (float) (champion.getArmor() - (armorPenetration * 0.1)));
                 currentActionPoints = currentActionPoints - 2;
                 if (randomVoice == 1) {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarQ1.wav");
+                    soundHandler.playSound(RengarSounds.Q1);
                 } else {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarQ2.wav");
+                    soundHandler.playSound(RengarSounds.Q2);
                 }
                 isSpellOnCooldown[0] = true;
             } else {
@@ -71,9 +72,9 @@ public class Rengar extends Champion {
             hp = hp + healedHp;
             System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp);
             if (randomVoice == 1) {
-                soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarW1.wav");
+                soundHandler.playSound(RengarSounds.W1);
             } else {
-                soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarW2.wav");
+                soundHandler.playSound(RengarSounds.W2);
             }
         } else {
             System.out.println("You did not heal yourself");
@@ -89,9 +90,9 @@ public class Rengar extends Champion {
                 champion.getDamage((float) (attackDimig * 0.9), getArmor());
                 this.currentActionPoints = this.currentActionPoints - 2;
                 if (randomVoice == 1) {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarE1.wav");
+                    soundHandler.playSound(RengarSounds.E1);
                 } else {
-                    soundHandler.playSound("C:\\Users\\Dawid\\IdeaProjects\\zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\rengarE2.wav");
+                    soundHandler.playSound(RengarSounds.E2);
                 }
                 champion.currentActionPoints--;
                 isSpellOnCooldown[2] = true;
