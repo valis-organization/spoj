@@ -31,7 +31,7 @@ public class Rengar extends Champion {
     @Override
     public void getTrueDamage(float attackDimig) {
         hp = hp - attackDimig;
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " damage.");
+        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " True damage.");
     }
 
     @Override
@@ -106,7 +106,7 @@ public class Rengar extends Champion {
     @Override
     public void ultimateSpell(Champion champion) {
         //rengar unleash his power
-        if(currentActionPoints == actionPoints) {
+        if(currentActionPoints >= 3) {
             if (!isUltimateOnCooldown) {
                 currentActionPoints = 10;
                 attackDimig = attackDimig + 20;

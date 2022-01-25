@@ -24,7 +24,7 @@ public class Garen extends Champion {
     @Override
     public void getTrueDamage(float attackDimig) {
         hp = hp - attackDimig;
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " damage.");
+        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " True damage.");
     }
     @Override
     public void getDamage(float attackDimig, float armor) {
@@ -95,7 +95,7 @@ public class Garen extends Champion {
 
     @Override
     public void ultimateSpell(Champion champion) {
-        if(currentActionPoints >= actionPoints) {
+        if(currentActionPoints >= 3) {
             if (!isUltimateOnCooldown) {
                 champion.getTrueDamage((float) (5+((maxHP-hp)*0.30)));
                 currentActionPoints = 0;
