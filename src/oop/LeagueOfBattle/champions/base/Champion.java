@@ -18,7 +18,7 @@ public abstract class Champion {
     protected String soundPath;
     protected boolean assasin;
     protected SoundHandler soundHandler = new SoundHandler();
-    protected int randomVoice = (int) (Math.random() * 2) + 1;
+    protected int randomVoice = (int) (Math.random() * 2);
     protected int requiredActionPoints;
     //int rand = (int)(Math.random() * range) + min;
 
