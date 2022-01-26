@@ -14,48 +14,23 @@ public abstract class Champion {
     protected float attackDimig;
     protected float armorPenetration;
     protected int actionPoints;
-    public int currentActionPoints;
     protected boolean[] isSpellOnCooldown;
-    protected boolean isUltimateOnCooldown;
-    protected int ultimateCooldown;
-    protected String soundPath;
-    protected boolean assasin;
-    protected SoundHandler soundHandler = new SoundHandler();
+    public int currentActionPoints; //TODO why public
+    protected boolean isUltimateOnCooldown; //todo abstraction around coldowns -> spells
+    protected int ultimateCooldown; //todo abstrcation
+
+    protected String soundPath;//todo interface? Sound provider?
+    protected boolean assasin;  //todo interface?
+    protected SoundHandler soundHandler = new SoundHandler(); //todo pass as argument / necessary?
+
+    //???
+    public abstract void getTrueDamage(float attackDimig);
 
     public abstract void getDamage(float attackDimig, float armor);
 
-    public abstract void getTrueDamage(float attackDimig);
-
-    public final float getHp() {
-        return hp;
-    }
-
-    public int getUltimateCooldown() {
-        return ultimateCooldown;
-    }
-
-    public final boolean isAssasin() {
-        return assasin;
-    }
-
-    public final float getArmor() {
-        return armor;
-    }
-
-    public final int getCurrentActionPoints() {
-        return currentActionPoints;
-    }
-
-    public final void resetCurrentActionPoints() {
+    //reset
+    public final void resetCurrentActionPoints() { //
         currentActionPoints = actionPoints;
-    }
-
-    public final String getName() {
-        return name;
-    }
-
-    public final String getSound() {
-        return soundPath;
     }
 
     public final void resetCooldowns() {
@@ -66,18 +41,48 @@ public abstract class Champion {
         isUltimateOnCooldown = false;
     }
 
+    //spells
     public abstract void basicAttack(Champion champion);
-
 
     public abstract void spellQ(Champion champion);
 
-    public abstract void spellW();
+    public abstract void spellW(); //todo missing champion
 
     public abstract void spellE(Champion champion);
 
     public abstract void ultimateSpell(Champion champion);
 
     public abstract void passiveSpell();
+
+    //getters, setters
+    public final String getName() {
+        return name;
+    }
+
+    public final String getSound() {
+        return soundPath;
+    }
+
+    public final float getHp() {
+        return hp;
+    }
+
+    public final float getArmor() {
+        return armor;
+    }
+
+    public final int getCurrentActionPoints() {
+        return currentActionPoints;
+    }
+
+    public int getUltimateCooldown() {
+        return ultimateCooldown;
+    }
+
+    public final boolean isAssasin() {
+        return assasin;
+    }
+
 
     @Override
     public String toString() {

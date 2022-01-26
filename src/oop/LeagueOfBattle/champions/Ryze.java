@@ -3,7 +3,8 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 
 public class Ryze extends Champion {
-
+    private int randomVoice = 0; //todo code did not compile. eddit that value
+    //todo btw it can be moved to other file
     public Ryze() {
         name = "Ryze";
         maxHP = 100;

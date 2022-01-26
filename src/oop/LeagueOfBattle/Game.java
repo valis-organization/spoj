@@ -6,13 +6,12 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
-
     Champion champion1;
     Champion champion2;
     int roundCount = 0;
 
     public Game(Champion champion1, Champion champion2) {
-        if (champion2.isAssasin()) {
+        if (champion2.isAssasin()) { // todo crate abstraction around the logic of picking first player to move
             this.champion1 = champion2;
             this.champion2 = champion1;
         } else {
@@ -21,10 +20,11 @@ public class Game {
         }
     }
 
-    public void mainGame() throws InterruptedException {
+    public void mainGame() throws InterruptedException { //todo rename to start()
+        //todo abstract while() to a function e.g !playerDied() : Boolean
         while (champion1.getHp() > 0 && champion2.getHp() > 0) {
             TimeUnit.SECONDS.sleep(2);
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 15; i++) { //todo abstraction around displaying stuff
                 System.out.println(" ");
             }
             roundCount++;
@@ -39,43 +39,43 @@ public class Game {
     }
 
     private void winning() {
-        if (champion2.getHp() <= 0 || champion1.getHp() <= 0) {
+        if (champion2.getHp() <= 0 || champion1.getHp() <= 0) { //todo can be simplified to if(champion1.getHp()  < champion2.getHp())...
             if (champion1.getHp() <= 0) {
                 System.out.println(champion2.getClass().getSimpleName() + " has won!");
             } else {
                 System.out.println(champion1.getClass().getSimpleName() + " has won!");
             }
         }
-    }
+    }//todo return winning Champion
 
     private void resetCooldowns() {
         champion1.resetCurrentActionPoints();
         champion2.resetCurrentActionPoints();
         champion1.resetCooldowns();
         champion2.resetCooldowns();
-        if (roundCount % champion1.getUltimateCooldown() == 0) {
+        if (roundCount % champion1.getUltimateCooldown() == 0) { //todo why is there such a logic? /abstract of comment
             champion1.resetUltimate();
             System.out.println(champion1 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
         } else if (roundCount % champion2.getUltimateCooldown() == 0) {
             champion2.resetUltimate();
             System.out.println(champion2 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
         }
-        champion1.passiveSpell();
+        champion1.passiveSpell(); //todo using passive spell is not "resetColdown", change the name of the function so its more general
         champion2.passiveSpell();
     }
 
     private void startRounds() {
-        Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
         Champion champion = champion1;
         Champion attackedChampion = champion2;
         String move;
-        int turn = 1;
-        do {
-
+        int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
+        //todo/ and name can be more descriptive then like: playerInMove : Champion
+        do { //todo try not to use do{}while when simple while can be used
             System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
             move = scan.next();
-            switch (move) {
-                case "a": {
+            switch (move) { //extract using a spell based on key to function
+                case "a": { //todo extract to enums
                     champion.basicAttack(attackedChampion);
                     break;
                 }
@@ -100,7 +100,7 @@ public class Game {
                     break;
                 }
             }
-            if (turn == 1 && champion.getCurrentActionPoints() == 0) {
+            if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
                 champion = champion2;
                 attackedChampion = champion1;
                 turn = 0;
@@ -121,9 +121,7 @@ public class Game {
             if (champion.getHp() < 0) {
                 break;
             }
-
         } while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0);
-        winning();
+        winning(); //todo unproper func name, should be more desciptive e.g determineWinner(), dont use bezokolicznikow :)
     }
-
 }

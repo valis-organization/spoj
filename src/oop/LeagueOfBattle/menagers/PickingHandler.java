@@ -23,7 +23,6 @@ public class PickingHandler {
     }
 
     public Champion pickingChampion(String championName) {
-
         switch (championName) {
             case "Garen": {
                 System.out.println("You've chosen Garen, THE MIGHT OF DEMACIA!");
