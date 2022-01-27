@@ -1,8 +1,12 @@
 package oop.LeagueOfBattle.champions;
 
+import oop.LeagueOfBattle.champions.base.ChampSpell;
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.champions.base.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.Rengar.RengarSounds;
+
+import java.util.List;
 
 public class Rengar extends Champion {
 
@@ -26,8 +30,29 @@ public class Rengar extends Champion {
 
     @Override
     public void getDamage(float attackDimig, float armor) {
-        hp = hp - (attackDimig / (armor / 2));
+        hp = hp - (attackDimig / (armor / 2));//todo why devide by 2?
         System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig / (armor / 2) + " damage.");
+    }
+
+    @Override
+    public void receiveSpell(Spell spell) {
+        hp = hp - spell.trueDmg;
+
+        float relativeArmor = (armor - (armor * spell.armorPen));
+        hp = hp - spell.addDmg / relativeArmor != 0 ? relativeArmor : 1;
+
+        float relativeMr = (magicResist - (magicResist * spell.magicPen));
+        hp = hp - spell.apDmg / relativeMr != 0 ? relativeMr : 1;
+    }
+
+    @Override
+    public Spell useSpeelQ() {
+        return null;
+    }
+
+    @Override
+    public List<ChampSpell> usableSpells() {
+        return null;
     }
 
     @Override
@@ -49,7 +74,7 @@ public class Rengar extends Champion {
             if (currentActionPoints >= 2) {
                 champion.getDamage(attackDimig * 3, (float) (champion.getArmor() - (armorPenetration * 0.1)));
                 currentActionPoints = currentActionPoints - 2;
-                if (MathHelper.randomInt(1,2) == 1) {
+                if (MathHelper.randomInt(1,2) == 1) {//todo extract to other class
                     soundHandler.playSound(RengarSounds.Q1);
                 } else {
                     soundHandler.playSound(RengarSounds.Q2);
