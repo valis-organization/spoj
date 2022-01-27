@@ -7,4 +7,5 @@ public class RengarSounds {
     public static String W2 = "src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\RengarW2.wav";
     public static String E1 = "src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\RengarE1.wav";
     public static String E2 = "src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\RengarE2.wav";
+    public static String Pick = "src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\PickRengar.wav";
 }

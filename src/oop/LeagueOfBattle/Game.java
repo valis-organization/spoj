@@ -20,9 +20,16 @@ public class Game {
         }
     }
 
-    public void mainGame() throws InterruptedException { //todo rename to start()
-        //todo abstract while() to a function e.g !playerDied() : Boolean
-        while (champion1.getHp() > 0 && champion2.getHp() > 0) {
+    boolean playerDied() {
+        if (champion1.getHp() <= 0 || champion2.getHp() <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void start() throws InterruptedException {
+        while (!playerDied()) {
             TimeUnit.SECONDS.sleep(2);
             for (int i = 0; i < 15; i++) { //todo abstraction around displaying stuff
                 System.out.println(" ");
@@ -38,7 +45,7 @@ public class Game {
         }
     }
 
-    private void winning() {
+    private void determineWinner() {
         if (champion2.getHp() <= 0 || champion1.getHp() <= 0) { //todo can be simplified to if(champion1.getHp()  < champion2.getHp())...
             if (champion1.getHp() <= 0) {
                 System.out.println(champion2.getClass().getSimpleName() + " has won!");
@@ -97,6 +104,18 @@ public class Game {
                 }
                 case "rafalchamp": {
                     attackedChampion.getDamage(10000, 0);
+                    champion.currentActionPoints = 0;
+                    break;
+                }
+                case "nextRound": {
+                    champion1.currentActionPoints = 0;
+                    champion2.currentActionPoints = 0;
+                    break;
+                }
+                case "test": {
+                    champion.currentActionPoints = 1000;
+                    champion.resetCooldowns();
+                    champion.resetUltimate();
                     break;
                 }
             }
@@ -122,6 +141,6 @@ public class Game {
                 break;
             }
         } while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0);
-        winning(); //todo unproper func name, should be more desciptive e.g determineWinner(), dont use bezokolicznikow :)
+        determineWinner();
     }
 }

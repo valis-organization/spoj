@@ -8,9 +8,9 @@ public class Rengar extends Champion {
 
     public Rengar() {
         name = "Rengar";
-        maxHP = 100;
-        hp = 100;
-        armor = 10;
+        maxHP = 200;
+        hp = 200;
+        armor = 20;
         magicResist = 10;
         abilityPower = 0;
         attackDimig = 50;
@@ -20,7 +20,7 @@ public class Rengar extends Champion {
         isSpellOnCooldown = new boolean[3];
         isUltimateOnCooldown = true;
         ultimateCooldown = 4;
-        soundPath = "zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Rengar\\PickRengar.wav";
+        soundPath = RengarSounds.Pick;
         assasin = true;
     }
 
@@ -49,7 +49,7 @@ public class Rengar extends Champion {
             if (currentActionPoints >= 2) {
                 champion.getDamage(attackDimig * 3, (float) (champion.getArmor() - (armorPenetration * 0.1)));
                 currentActionPoints = currentActionPoints - 2;
-                if (MathHelper.randomInt(0,1) == 1) {
+                if (MathHelper.randomInt(1,2) == 1) {
                     soundHandler.playSound(RengarSounds.Q1);
                 } else {
                     soundHandler.playSound(RengarSounds.Q2);
@@ -66,13 +66,13 @@ public class Rengar extends Champion {
     @Override
     public void spellW() {
         //Rengar heals for x (from 0 to 21) hp, and has 40% chances for it
-        int randomNum = MathHelper.randomInt(0,4);
+        int randomNum = MathHelper.randomInt(1,5);
         int healedHp =  MathHelper.randomInt(0,21);
 
-        if (randomNum == 0 || randomNum == 1) {
+        if (randomNum == 1 || randomNum == 2) {
             hp = hp + healedHp;
             System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp);
-            if (MathHelper.randomInt(0,1) == 1) {
+            if (MathHelper.randomInt(1,2) == 1) {
                 soundHandler.playSound(RengarSounds.W1);
             } else {
                 soundHandler.playSound(RengarSounds.W2);
@@ -90,7 +90,7 @@ public class Rengar extends Champion {
             if (currentActionPoints >= 2) {
                 champion.getDamage((float) (attackDimig * 0.9), getArmor());
                 this.currentActionPoints = this.currentActionPoints - 2;
-                if (MathHelper.randomInt(0,1) == 1) {
+                if (MathHelper.randomInt(1,2) == 1) {
                     soundHandler.playSound(RengarSounds.E1);
                 } else {
                     soundHandler.playSound(RengarSounds.E2);
@@ -119,8 +119,8 @@ public class Rengar extends Champion {
                 attackDimig = attackDimig - 20;
                 isUltimateOnCooldown = true;
             } else {
-                System.out.println("Your spell is on cooldown!");
             }
+                System.out.println("Your spell is on cooldown!");
         } else {
             System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
         }

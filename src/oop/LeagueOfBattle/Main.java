@@ -1,7 +1,5 @@
 package oop.LeagueOfBattle;
 
-import oop.LeagueOfBattle.champions.Garen;
-import oop.LeagueOfBattle.champions.Rengar;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.menagers.ChampionCreator;
 import oop.LeagueOfBattle.menagers.PickingHandler;
@@ -9,9 +7,7 @@ import oop.LeagueOfBattle.voiceLines.SoundHandler;
 
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -34,9 +30,8 @@ public class Main {
         soundHandler.playSound(champion2.getSound());
 
         System.out.println("The battle will begin in 2 seconds!");
-        //   TimeUnit.SECONDS.sleep(3);
 
         Game game = new Game(champion1, champion2);
-        game.mainGame();
+        game.start();
     }
 }

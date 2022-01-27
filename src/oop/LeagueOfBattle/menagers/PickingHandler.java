@@ -36,6 +36,18 @@ public class PickingHandler {
                 champions.remove(champion);
                 return champion;
             }
+            case "Ryze": {
+                System.out.println("You've chosen Ryze, THE RUNE MAGE!");
+                Champion champion = findCharacter(championName);
+                champions.remove(champion);
+                return champion;
+            }
+            case "Vladimir": {
+                System.out.println("You've chosen Vladimir, THE CRIMSON REAPER!");
+                Champion champion = findCharacter(championName);
+                champions.remove(champion);
+                return champion;
+            }
         }
         return null;
     }

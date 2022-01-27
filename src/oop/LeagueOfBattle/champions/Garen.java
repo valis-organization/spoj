@@ -9,9 +9,9 @@ import oop.LeagueOfBattle.voiceLines.SoundHandler;
 public class Garen extends Champion {
     public Garen() {
         name = "Garen";
-        maxHP = 200;
-        hp = 200;
-        armor = 20;
+        maxHP = 400;
+        hp = 400;
+        armor = 40;
         magicResist = 20;
         abilityPower = 0;
         attackDimig = 20;
@@ -20,7 +20,7 @@ public class Garen extends Champion {
         isSpellOnCooldown = new boolean[3];
         isUltimateOnCooldown = true;
         ultimateCooldown = 5;
-        soundPath = "zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav";
+        soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
         assasin = false;
     }
 
@@ -50,7 +50,7 @@ public class Garen extends Champion {
                 champion.getDamage(attackDimig * 3, champion.getArmor());
                 currentActionPoints = currentActionPoints - 2;
                 isSpellOnCooldown[0] = true;
-                if (MathHelper.randomInt(0,1) == 1) {
+                if (MathHelper.randomInt(1,2) == 1) {
                     soundHandler.playSound(GarenSounds.Q1);
                 } else {
                     soundHandler.playSound(GarenSounds.Q2);
@@ -68,10 +68,10 @@ public class Garen extends Champion {
         //Adding amount of armor. (concept: TENACITY: Gains 1 action point, allows to use 1 spell and removes 2 action points)  - 1 Action Point
         armor = (float) (armor + 1.5);
         System.out.println("Increased your armor and MR! Now A: " + armor);
-        if (MathHelper.randomInt(0,1) == 1) {
-            soundHandler.playSound(GarenSounds.E1);
+        if (MathHelper.randomInt(1,2) == 1) {
+            soundHandler.playSound(GarenSounds.W1);
         } else {
-            soundHandler.playSound(GarenSounds.E2);
+            soundHandler.playSound(GarenSounds.W2);
         }
         currentActionPoints--;
     }
@@ -87,7 +87,7 @@ public class Garen extends Champion {
             }
             champion.getDamage(spinsDamage, champion.getArmor());
             currentActionPoints = currentActionPoints - 2;
-            if (MathHelper.randomInt(0,1) == 1) {
+            if (MathHelper.randomInt(1,2) == 1) {
                 soundHandler.playSound(GarenSounds.E1);
             } else {
                 soundHandler.playSound(GarenSounds.E2);
@@ -101,9 +101,9 @@ public class Garen extends Champion {
     public void ultimateSpell(Champion champion) {
         if (currentActionPoints >= 3) {
             if (!isUltimateOnCooldown) {
-                champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.30)));
+                champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.15)));
                 currentActionPoints = 0;
-                if (MathHelper.randomInt(0,1) == 1) {
+                if (MathHelper.randomInt(1,2) == 1) {
                     soundHandler.playSound(GarenSounds.R1);
                 } else {
                     soundHandler.playSound(GarenSounds.R2);
@@ -118,10 +118,10 @@ public class Garen extends Champion {
 
     @Override
     public void passiveSpell() {
-        //Perseverance: Garen regeneraters 7% of his hp every round. He also gains 2 armor.
+        //Perseverance: Garen regeneraters 3.5% of his hp every round. He also gains 2 armor.
         if (hp != maxHP) {
-            hp = (float) (hp + ((maxHP - hp) * 0.07));
-            System.out.println("Perseverance: Garen regenerated " + ((maxHP - hp) * 0.07) + " hp.");
+            hp = (float) (hp + ((maxHP - hp) * 0.035));
+            System.out.println("Perseverance: Garen regenerated " + ((maxHP - hp) * 0.035) + " hp.");
         }
         armor++;
     }
