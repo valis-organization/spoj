@@ -6,50 +6,37 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
-public class ChampSpell {
-    SpellClass spellClass;
-    Spell spell;
-}
-
-enum SpellClass {
-    Q, W, E, R, PASSIVE
-}
-
-
 public abstract class Champion {
     protected String name;
+    //hp
     protected float maxHP;
     protected float hp;
+    //defense
     protected float armor;
     protected float magicResist;
+    //damage
     protected float abilityPower;
     protected float attackDimig;
     protected float armorPenetration;
+    protected float magicPenetration;
+
     protected int actionPoints;
-    protected boolean[] isSpellOnCooldown;
     public int currentActionPoints; //TODO why public
-    protected boolean isUltimateOnCooldown; //todo abstraction around coldowns -> spells
-    protected int ultimateCooldown; //todo abstrcation
 
     protected String soundPath;//todo interface? Sound provider?
-    protected boolean assasin;  //todo interface?
+    protected boolean isAssasin;  //todo interface?
     protected SoundHandler soundHandler = new SoundHandler(); //todo pass as argument / necessary?
 
-    protected List<ChampSpell> spells = Collections.emptyList();
+    protected List<Spell> spells = Collections.emptyList();
+    abstract public void receiveSpell(Spell.Details details);
 
-    abstract public void receiveSpell(Spell spell);
-
-    abstract public Spell useSpeelQ();
+    abstract public Spell.Details useQ();
         //todo use spell or throw exception
 
-    public abstract List<ChampSpell> usableSpells();
-
-
-    //???
-    public abstract void getTrueDamage(float attackDimig);
-
-    public abstract void getDamage(float attackDimig, float armor);//todo why passing armor????
+    public List<Spell> usableSpells(){
+        //todo
+        return Collections.emptyList();
+    }
 
     //reset
     public final void resetCurrentActionPoints() { //
@@ -63,19 +50,6 @@ public abstract class Champion {
     public final void resetUltimate() {
         isUltimateOnCooldown = false;
     }
-
-    //spells
-    public abstract void basicAttack(Champion champion);
-
-    public abstract void spellQ(Champion champion);
-
-    public abstract void spellW(); //todo missing champion
-
-    public abstract void spellE(Champion champion);
-
-    public abstract void ultimateSpell(Champion champion);
-
-    public abstract void passiveSpell();
 
     //getters, setters
     public final String getName() {
@@ -98,14 +72,9 @@ public abstract class Champion {
         return currentActionPoints;
     }
 
-    public int getUltimateCooldown() {
-        return ultimateCooldown;
-    }
-
     public final boolean isAssasin() {
-        return assasin;
+        return isAssasin;
     }
-
 
     @Override
     public String toString() {

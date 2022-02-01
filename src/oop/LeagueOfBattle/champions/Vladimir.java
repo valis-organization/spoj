@@ -19,7 +19,7 @@ public class Vladimir extends Champion {
         isUltimateOnCooldown = true;
         ultimateCooldown = 5;
         soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
-        assasin = false;
+        isAssasin = false;
     }
 
     @Override

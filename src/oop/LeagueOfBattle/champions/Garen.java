@@ -4,7 +4,6 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.Garen.GarenSounds;
-import oop.LeagueOfBattle.voiceLines.SoundHandler;
 
 public class Garen extends Champion {
     public Garen() {
@@ -21,7 +20,7 @@ public class Garen extends Champion {
         isUltimateOnCooldown = true;
         ultimateCooldown = 5;
         soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
-        assasin = false;
+        isAssasin = false;
     }
 
     @Override

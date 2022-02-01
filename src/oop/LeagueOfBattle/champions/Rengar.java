@@ -1,6 +1,5 @@
 package oop.LeagueOfBattle.champions;
 
-import oop.LeagueOfBattle.champions.base.ChampSpell;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
@@ -25,7 +24,7 @@ public class Rengar extends Champion {
         isUltimateOnCooldown = true;
         ultimateCooldown = 4;
         soundPath = RengarSounds.Pick;
-        assasin = true;
+        isAssasin = true;
     }
 
     @Override
@@ -35,7 +34,7 @@ public class Rengar extends Champion {
     }
 
     @Override
-    public void receiveSpell(Spell spell) {
+    public void receiveSpell(Spell.Details spell) {
         hp = hp - spell.trueDmg;
 
         float relativeArmor = (armor - (armor * spell.armorPen));
@@ -46,12 +45,12 @@ public class Rengar extends Champion {
     }
 
     @Override
-    public Spell useSpeelQ() {
+    public Spell.Details useSpeelQ() {
         return null;
     }
 
     @Override
-    public List<ChampSpell> usableSpells() {
+    public List<Spell> usableSpells() {
         return null;
     }
 

@@ -22,7 +22,7 @@ public class Ryze extends Champion {
         isUltimateOnCooldown = true;
         ultimateCooldown = 4;
         soundPath = RyzeSounds.Pick;
-        assasin = false;
+        isAssasin = false;
     }
 
     boolean isMarked = false;
