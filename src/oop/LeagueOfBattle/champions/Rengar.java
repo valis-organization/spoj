@@ -1,7 +1,8 @@
 package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
-import oop.LeagueOfBattle.champions.base.Spell;
+import oop.LeagueOfBattle.champions.base.spell.Description;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.Rengar.RengarSounds;
 
@@ -28,32 +29,10 @@ public class Rengar extends Champion {
     }
 
     @Override
-    public void getDamage(float attackDimig, float armor) {
-        hp = hp - (attackDimig / (armor / 2));//todo why devide by 2?
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig / (armor / 2) + " damage.");
+    public Description useQ() {
+       Description description = new Description(0,attackDimig*3,0,0,armorPenetration,0);
+        return description;
     }
-
-    @Override
-    public void receiveSpell(Spell.Details spell) {
-        hp = hp - spell.trueDmg;
-
-        float relativeArmor = (armor - (armor * spell.armorPen));
-        hp = hp - spell.addDmg / relativeArmor != 0 ? relativeArmor : 1;
-
-        float relativeMr = (magicResist - (magicResist * spell.magicPen));
-        hp = hp - spell.apDmg / relativeMr != 0 ? relativeMr : 1;
-    }
-
-    @Override
-    public Spell.Details useSpeelQ() {
-        return null;
-    }
-
-    @Override
-    public List<Spell> usableSpells() {
-        return null;
-    }
-
     @Override
     public void getTrueDamage(float attackDimig) {
         hp = hp - attackDimig;

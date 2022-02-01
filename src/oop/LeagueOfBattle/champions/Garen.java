@@ -2,6 +2,7 @@ package oop.LeagueOfBattle.champions;
 
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.Garen.GarenSounds;
 
@@ -23,23 +24,6 @@ public class Garen extends Champion {
         isAssasin = false;
     }
 
-    @Override
-    public void getTrueDamage(float attackDimig) {
-        hp = hp - attackDimig;
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " True damage.");
-    }
-
-    @Override
-    public void getDamage(float attackDimig, float armor) {
-        hp = hp - (attackDimig / (armor / 2));
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig / (armor / 2) + " damage.");
-    }
-
-    @Override
-    public void basicAttack(Champion champion) {
-        champion.getDamage(attackDimig, champion.getArmor());
-        currentActionPoints--;
-    }
 
     @Override
     public void spellQ(Champion champion) {
@@ -70,7 +54,7 @@ public class Garen extends Champion {
         if (MathHelper.randomInt(1,2) == 1) {
             soundHandler.playSound(GarenSounds.W1);
         } else {
-            soundHandler.playSound(GarenSounds.W2);
+            soundHandler.playSound(GarenSounds.W2)
         }
         currentActionPoints--;
     }
@@ -125,4 +109,31 @@ public class Garen extends Champion {
         armor++;
     }
 
+    @Override
+    public Description useQ() {
+        return new Description(0,attackDimig*3,0,0,0,0);
+    }
+
+    @Override
+    public Description useW() {
+        armor = armor+2;
+        magicResist = magicResist +2;
+        return new Description();
+    }
+
+    @Override
+    public Description useE() {
+        int spins = MathHelper.randomInt(0,13);
+        int spinsDamage = 15;
+        for (int i = 1; i <= spins; i++) {
+            spinsDamage = spinsDamage + 7;
+        }
+        return new Description(0,spinsDamage,0,0,0,0);
+    }
+
+    @Override
+    public Description useR() {
+        int dimigDealt = (int) (5 + ((maxHP - hp) * 0.15));
+        return new Description();
+    }
 }

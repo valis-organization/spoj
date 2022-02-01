@@ -1,41 +1,65 @@
 package oop.LeagueOfBattle.champions.base;
 
+import oop.LeagueOfBattle.champions.base.spell.Description;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.voiceLines.SoundHandler;
 
-import java.util.Arrays;
+import javax.swing.text.DefaultEditorKit;
 import java.util.Collections;
 import java.util.List;
 
 public abstract class Champion {
     protected String name;
     //hp
-    protected float maxHP;
-    protected float hp;
+    protected int maxHP;
+    protected int hp;
     //defense
-    protected float armor;
-    protected float magicResist;
+    protected int armor;
+    protected int magicResist;
     //damage
-    protected float abilityPower;
-    protected float attackDimig;
+    protected int abilityPower;
+    protected int attackDimig;
     protected float armorPenetration;
     protected float magicPenetration;
 
     protected int actionPoints;
-    public int currentActionPoints; //TODO why public
+    protected int currentActionPoints; //TODO why public
 
     protected String soundPath;//todo interface? Sound provider?
     protected boolean isAssasin;  //todo interface?
     protected SoundHandler soundHandler = new SoundHandler(); //todo pass as argument / necessary?
 
     protected List<Spell> spells = Collections.emptyList();
-    abstract public void receiveSpell(Spell.Details details);
 
-    abstract public Spell.Details useQ();
-        //todo use spell or throw exception
+    public final void receiveSpell(Description description) {
 
-    public List<Spell> usableSpells(){
-        //todo
-        return Collections.emptyList();
+        int relativeArmor = (int) ((armor * (1 - armorPenetration)) / 2);
+        int relativeMR = (int) ((magicResist * (1 - magicPenetration)) / 2);
+        relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
+        relativeMR = relativeMR == 0 ? 1 : relativeMR;
+
+        this.hp = hp - description.addDmg / relativeArmor;
+        this.hp = hp - description.apDmg / relativeMR;
+        this.hp = hp - description.trueDmg;
+        this.currentActionPoints = currentActionPoints - description.removedActionPoints;
+
+    }
+    public Description useAA(){
+        return new Description(0,attackDimig,0,0,0,0);
+    }
+    abstract public Description useQ();
+    abstract public Description useW();
+    abstract public Description useE();
+    abstract public Description useR();
+
+    public List<Spell> usableSpells() {
+        List<Spell> spellsWithoutCooldown = spells;
+        for (Spell spell : spells) {
+            if (!spell.isOnCooldown) {
+                spellsWithoutCooldown.remove(spell);
+            }
+        }
+        return spellsWithoutCooldown;
     }
 
     //reset
@@ -44,11 +68,9 @@ public abstract class Champion {
     }
 
     public final void resetCooldowns() {
-        Arrays.fill(isSpellOnCooldown, false);
-    }
-
-    public final void resetUltimate() {
-        isUltimateOnCooldown = false;
+        for (Spell spell : spells) {
+            spell.isOnCooldown = false;
+        }
     }
 
     //getters, setters
