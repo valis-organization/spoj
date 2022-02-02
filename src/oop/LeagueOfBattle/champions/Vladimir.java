@@ -3,7 +3,7 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.Rengar.RengarSounds;
-
+/*
 public class Vladimir extends Champion {
     public Vladimir() {
         name = "Vladimir";
@@ -95,3 +95,4 @@ public class Vladimir extends Champion {
         }
     }
 }
+*/

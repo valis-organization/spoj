@@ -37,7 +37,9 @@ public abstract class Champion {
         int relativeMR = (int) ((magicResist * (1 - magicPenetration)) / 2);
         relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
         relativeMR = relativeMR == 0 ? 1 : relativeMR;
+     //   description.missingHp = maxHP - hp;
 
+        this.hp =
         this.hp = hp - description.addDmg / relativeArmor;
         this.hp = hp - description.apDmg / relativeMR;
         this.hp = hp - description.trueDmg;
@@ -45,7 +47,7 @@ public abstract class Champion {
 
     }
     public Description useAA(){
-        return new Description(0,attackDimig,0,0,0,0);
+        return new Description();
     }
     abstract public Description useQ();
     abstract public Description useW();

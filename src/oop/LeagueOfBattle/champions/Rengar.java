@@ -21,30 +21,34 @@ public class Rengar extends Champion {
         actionPoints = 4;
         armorPenetration = 10;
         currentActionPoints = actionPoints;
-        isSpellOnCooldown = new boolean[3];
-        isUltimateOnCooldown = true;
-        ultimateCooldown = 4;
+  //      isSpellOnCooldown = new boolean[3];
+   //     isUltimateOnCooldown = true;
+     //   ultimateCooldown = 4;
         soundPath = RengarSounds.Pick;
         isAssasin = true;
     }
 
     @Override
     public Description useQ() {
-       Description description = new Description(0,attackDimig*3,0,0,armorPenetration,0);
+       Description description = new Description(0,attackDimig*3,0,0,armorPenetration,0,false);
         return description;
     }
+
     @Override
-    public void getTrueDamage(float attackDimig) {
-        hp = hp - attackDimig;
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " True damage.");
+    public Description useW() {
+        return null;
     }
 
     @Override
-    public void basicAttack(Champion champion) {
-        champion.getDamage(attackDimig, champion.getArmor());
-        currentActionPoints--;
+    public Description useE() {
+        return null;
     }
 
+    @Override
+    public Description useR() {
+        return null;
+    }
+    /*
     @Override
     public void spellQ(Champion champion) {
         //Basic attack with MORE damage
@@ -84,7 +88,6 @@ public class Rengar extends Champion {
             System.out.println("You did not heal yourself");
         }
         currentActionPoints--;
-
     }
 
     @Override
@@ -135,5 +138,5 @@ public class Rengar extends Champion {
         attackDimig = attackDimig + 5;
         System.out.println("Bonetooth necklace: Rengar got +5 AD");
     }
-
+*/
 }

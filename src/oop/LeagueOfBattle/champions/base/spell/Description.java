@@ -8,9 +8,9 @@ public class Description {
     public int trueDmg = 0;
     public float armorPen = 0;
     public float magicPen = 0;
-    public int missingHp = 0;
+    public boolean damageByMissingHp;
 
-    public Description(int removedActionPoints, int addDmg, int apDmg, int trueDmg, float armorPen, float magicPen) {
+    public Description(int removedActionPoints, int addDmg, int apDmg, int trueDmg, float armorPen, float magicPen,boolean damageByMissingHp) {
         this.removedActionPoints = removedActionPoints;
 
         this.addDmg = addDmg;
@@ -27,6 +27,7 @@ public class Description {
         this.trueDmg = 0;
         this.armorPen = 0;
         this.magicPen = 0;
+        this.damageByMissingHp = false;
     }
 
 }

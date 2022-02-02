@@ -1,5 +1,5 @@
 package oop.LeagueOfBattle;
-
+/*
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.menagers.ChampionCreator;
 import oop.LeagueOfBattle.menagers.PickingHandler;
@@ -35,3 +35,4 @@ public class Main {
         game.start();
     }
 }
+*/

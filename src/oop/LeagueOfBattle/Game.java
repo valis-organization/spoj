@@ -4,7 +4,7 @@ import oop.LeagueOfBattle.champions.base.Champion;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
+/*
 public class Game {
     Champion champion1;
     Champion champion2;
@@ -144,3 +144,4 @@ public class Game {
         determineWinner();
     }
 }
+*/

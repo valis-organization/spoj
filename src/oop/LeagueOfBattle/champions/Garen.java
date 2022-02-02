@@ -17,89 +17,19 @@ public class Garen extends Champion {
         attackDimig = 20;
         actionPoints = 4;
         currentActionPoints = actionPoints;
-        isSpellOnCooldown = new boolean[3];
-        isUltimateOnCooldown = true;
-        ultimateCooldown = 5;
+        //     isSpellOnCooldown = new boolean[3];
+        //   isUltimateOnCooldown = true;
+        // ultimateCooldown = 5;
         soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
         isAssasin = false;
     }
 
 
-    @Override
-    public void spellQ(Champion champion) {
-        //Garen deals damage (3x his base ad)
-        if (!isSpellOnCooldown[0]) {
-            if (currentActionPoints >= 2) {
-                champion.getDamage(attackDimig * 3, champion.getArmor());
-                currentActionPoints = currentActionPoints - 2;
-                isSpellOnCooldown[0] = true;
-                if (MathHelper.randomInt(1,2) == 1) {
-                    soundHandler.playSound(GarenSounds.Q1);
-                } else {
-                    soundHandler.playSound(GarenSounds.Q2);
-                }
-            } else {
-                System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
-            }
-        } else {
-            System.out.println("Your spell is on cooldown!");
-        }
-    }
 
-    @Override
-    public void spellW() {
-        //Adding amount of armor. (concept: TENACITY: Gains 1 action point, allows to use 1 spell and removes 2 action points)  - 1 Action Point
-        armor = (float) (armor + 1.5);
-        System.out.println("Increased your armor and MR! Now A: " + armor);
-        if (MathHelper.randomInt(1,2) == 1) {
-            soundHandler.playSound(GarenSounds.W1);
-        } else {
-            soundHandler.playSound(GarenSounds.W2)
-        }
-        currentActionPoints--;
-    }
+               // champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.15)));
 
-    @Override
-    public void spellE(Champion champion) { //Garen can spin random amount of times. Spin deals 3 + (1 dmg*every spin)
-        if (currentActionPoints >= 2) {
-            int spins = MathHelper.randomInt(0,13);
-            float spinsDamage = 15;
-            System.out.println(spins);
-            for (int i = 1; i <= spins; i++) {
-                spinsDamage = spinsDamage + 7;
-            }
-            champion.getDamage(spinsDamage, champion.getArmor());
-            currentActionPoints = currentActionPoints - 2;
-            if (MathHelper.randomInt(1,2) == 1) {
-                soundHandler.playSound(GarenSounds.E1);
-            } else {
-                soundHandler.playSound(GarenSounds.E2);
-            }
-        } else {
-            System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
-        }
-    }
 
-    @Override
-    public void ultimateSpell(Champion champion) {
-        if (currentActionPoints >= 3) {
-            if (!isUltimateOnCooldown) {
-                champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.15)));
-                currentActionPoints = 0;
-                if (MathHelper.randomInt(1,2) == 1) {
-                    soundHandler.playSound(GarenSounds.R1);
-                } else {
-                    soundHandler.playSound(GarenSounds.R2);
-                }
-            } else {
-                System.out.println("Your spell is on cooldown!");
-            }
-        } else {
-            System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
-        }
-    }
-
-    @Override
+   /* @Override
     public void passiveSpell() {
         //Perseverance: Garen regeneraters 3.5% of his hp every round. He also gains 2 armor.
         if (hp != maxHP) {
@@ -109,9 +39,11 @@ public class Garen extends Champion {
         armor++;
     }
 
+
+ */
     @Override
     public Description useQ() {
-        return new Description(0,attackDimig*3,0,0,0,0);
+        return new Description(0,attackDimig*3,0,0,0,0,false);
     }
 
     @Override
@@ -128,7 +60,7 @@ public class Garen extends Champion {
         for (int i = 1; i <= spins; i++) {
             spinsDamage = spinsDamage + 7;
         }
-        return new Description(0,spinsDamage,0,0,0,0);
+        return new Description(0,spinsDamage,0,0,0,0,false);
     }
 
     @Override
@@ -137,3 +69,4 @@ public class Garen extends Champion {
         return new Description();
     }
 }
+

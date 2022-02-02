@@ -4,7 +4,7 @@ import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.ryze.RyzeSounds;
 
-public class Ryze extends Champion {
+/*public class Ryze extends Champion {
     private int randomVoice = 0; //todo code did not compile. eddit that value
     //todo btw it can be moved to other file
     public Ryze() {
@@ -153,3 +153,4 @@ public class Ryze extends Champion {
 
     }
 }
+*/
