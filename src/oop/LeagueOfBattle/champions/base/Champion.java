@@ -8,7 +8,8 @@ import javax.swing.text.DefaultEditorKit;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Champion {
+
+public abstract class Champion implements Enemy {
     protected String name;
     //hp
     protected int maxHP;
@@ -49,10 +50,10 @@ public abstract class Champion {
     public Description useAA(){
         return new Description();
     }
-    abstract public Description useQ();
-    abstract public Description useW();
-    abstract public Description useE();
-    abstract public Description useR();
+    abstract public Description useQ(Enemy enemy);
+    abstract public Description useW(Enemy enemy);
+    abstract public Description useE(Enemy enemy);
+    abstract public Description useR(Enemy enemy);
 
     public List<Spell> usableSpells() {
         List<Spell> spellsWithoutCooldown = spells;
@@ -105,4 +106,9 @@ public abstract class Champion {
         return name;
     }
 
+
+    @Override
+    public final int getHpPercentage() {
+        return hp/maxHP;
+    }
 }
