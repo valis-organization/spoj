@@ -24,7 +24,7 @@ public abstract class Champion implements Enemy {
     protected float magicPenetration;
 
     protected int actionPoints;
-    protected int currentActionPoints; //TODO why public
+    protected int currentActionPoints;
 
     protected String soundPath;//todo interface? Sound provider?
     protected boolean isAssasin;  //todo interface?
@@ -38,9 +38,7 @@ public abstract class Champion implements Enemy {
         int relativeMR = (int) ((magicResist * (1 - magicPenetration)) / 2);
         relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
         relativeMR = relativeMR == 0 ? 1 : relativeMR;
-     //   description.missingHp = maxHP - hp;
 
-        this.hp =
         this.hp = hp - description.addDmg / relativeArmor;
         this.hp = hp - description.apDmg / relativeMR;
         this.hp = hp - description.trueDmg;

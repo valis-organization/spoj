@@ -1,6 +1,7 @@
 package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
@@ -21,54 +22,40 @@ public class Rengar extends Champion {
         actionPoints = 4;
         armorPenetration = 10;
         currentActionPoints = actionPoints;
-  //      isSpellOnCooldown = new boolean[3];
-   //     isUltimateOnCooldown = true;
-     //   ultimateCooldown = 4;
+        //      isSpellOnCooldown = new boolean[3];
+        //     isUltimateOnCooldown = true;
+        //   ultimateCooldown = 4;
         soundPath = RengarSounds.Pick;
         isAssasin = true;
     }
 
     @Override
-    public Description useQ() {
-       Description description = new Description(0,attackDimig*3,0,0,armorPenetration,0,false);
+    public Description useQ(Enemy enemy) {
+        Description description = new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
         return description;
     }
 
     @Override
-    public Description useW() {
+    public Description useW(Enemy enemy) {
         return null;
     }
 
     @Override
-    public Description useE() {
-        return null;
+    public Description useE(Enemy enemy) {
+        Description description = new Description(1, (int) (attackDimig * 0.9), 0, 0, 0, 0, false);
+        return description;
     }
 
     @Override
-    public Description useR() {
-        return null;
+    public Description useR(Enemy enemy) {
+        attackDimig = attackDimig + 20;
+        useQ(enemy);
+        useW(enemy);
+        useE(enemy);
+        attackDimig = attackDimig - 20;
+        return new Description();
     }
     /*
-    @Override
-    public void spellQ(Champion champion) {
-        //Basic attack with MORE damage
-        if (!isSpellOnCooldown[0]) {
-            if (currentActionPoints >= 2) {
-                champion.getDamage(attackDimig * 3, (float) (champion.getArmor() - (armorPenetration * 0.1)));
-                currentActionPoints = currentActionPoints - 2;
-                if (MathHelper.randomInt(1,2) == 1) {//todo extract to other class
-                    soundHandler.playSound(RengarSounds.Q1);
-                } else {
-                    soundHandler.playSound(RengarSounds.Q2);
-                }
-                isSpellOnCooldown[0] = true;
-            } else {
-                System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
-            }
-        } else {
-            System.out.println("Your spell is on cooldown!");
-        }
-    }
 
     @Override
     public void spellW() {
@@ -90,26 +77,6 @@ public class Rengar extends Champion {
         currentActionPoints--;
     }
 
-    @Override
-    public void spellE(Champion champion) {
-        if (!isSpellOnCooldown[2]) {
-            if (currentActionPoints >= 2) {
-                champion.getDamage((float) (attackDimig * 0.9), getArmor());
-                this.currentActionPoints = this.currentActionPoints - 2;
-                if (MathHelper.randomInt(1,2) == 1) {
-                    soundHandler.playSound(RengarSounds.E1);
-                } else {
-                    soundHandler.playSound(RengarSounds.E2);
-                }
-                champion.currentActionPoints--;
-                isSpellOnCooldown[2] = true;
-            } else {
-                System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
-            }
-        } else {
-            System.out.println("Your spell is on cooldown!");
-        }
-    }
 
     @Override
     public void ultimateSpell(Champion champion) {

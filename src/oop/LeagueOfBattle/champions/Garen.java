@@ -4,6 +4,7 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.voiceLines.Garen.GarenSounds;
 
@@ -18,9 +19,6 @@ public class Garen extends Champion {
         attackDimig = 20;
         actionPoints = 4;
         currentActionPoints = actionPoints;
-        //     isSpellOnCooldown = new boolean[3];
-        //   isUltimateOnCooldown = true;
-        // ultimateCooldown = 5;
         soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
         isAssasin = false;
     }
@@ -48,29 +46,13 @@ public class Garen extends Champion {
 
     @Override
     public Description useW(Enemy enemy) {
-        return null;
-    }
-
-    @Override
-    public Description useE(Enemy enemy) {
-        return null;
-    }
-
-    @Override
-    public Description useR(Enemy enemy) {
-        int enemyHpPercentage = enemy.getHpPercentage();
-        return new Description();
-    }
-
-    @Override
-    public Description useW() {
         armor = armor + 2;
         magicResist = magicResist + 2;
         return new Description();
     }
 
     @Override
-    public Description useE() {
+    public Description useE(Enemy enemy) {
         int spins = MathHelper.randomInt(0, 13);
         int spinsDamage = 15;
         for (int i = 1; i <= spins; i++) {
@@ -80,10 +62,17 @@ public class Garen extends Champion {
     }
 
     @Override
+    public Description useR(Enemy enemy) {
+        int enemyHpPercentage = enemy.getHpPercentage();
+
+        return new Description();
+    }
+
+   /* @Override
     public Description useR() {
         int dimigDealt = (int) (5 + ((maxHP - hp) * 0.15));
         return new Description();
     }
-
+*/
 }
 
