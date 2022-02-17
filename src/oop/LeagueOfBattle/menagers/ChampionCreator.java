@@ -1,5 +1,5 @@
 package oop.LeagueOfBattle.menagers;
-/*
+
 import oop.LeagueOfBattle.champions.Garen;
 import oop.LeagueOfBattle.champions.Rengar;
 import oop.LeagueOfBattle.champions.Ryze;
@@ -23,4 +23,3 @@ public class ChampionCreator {
         return championsList;
     }
 }
-*/

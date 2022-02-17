@@ -1,10 +1,11 @@
 package oop.LeagueOfBattle;
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.champions.base.spell.Type;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-/*
+
 public class Game {
     Champion champion1;
     Champion champion2;
@@ -36,7 +37,7 @@ public class Game {
             }
             roundCount++;
             System.out.println("ROUND: " + roundCount + ". FIGHT!");
-            resetCooldowns();
+  //          resetCooldowns();
             System.out.print(champion1.getClass().getSimpleName() + "'s turn!            ");
             System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
             System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
@@ -54,7 +55,7 @@ public class Game {
             }
         }
     }//todo return winning Champion
-
+/*
     private void resetCooldowns() {
         champion1.resetCurrentActionPoints();
         champion2.resetCurrentActionPoints();
@@ -70,7 +71,7 @@ public class Game {
         champion1.passiveSpell(); //todo using passive spell is not "resetColdown", change the name of the function so its more general
         champion2.passiveSpell();
     }
-
+*/
     private void startRounds() {
         Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
         Champion champion = champion1;
@@ -82,27 +83,29 @@ public class Game {
             System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
             move = scan.next();
             switch (move) { //extract using a spell based on key to function
-                case "a": { //todo extract to enums
-                    champion.basicAttack(attackedChampion);
+                case "AA": { //todo extract to enums
+                    champion.useAA();
+                    System.out.println(attackedChampion.getHp());
                     break;
                 }
                 case "q": {
-                    champion.spellQ(attackedChampion);
+                    attackedChampion.receiveSpell(champion.useQ(attackedChampion));
+                    System.out.println(attackedChampion.getHp());
                     break;
                 }
                 case "w": {
-                    champion.spellW();
+                    champion.useW(attackedChampion);
                     break;
                 }
                 case "e": {
-                    champion.spellE(attackedChampion);
+                    champion.useE(attackedChampion);
                     break;
                 }
                 case "r": {
-                    champion.ultimateSpell(attackedChampion);
+                    champion.useR(attackedChampion);
                     break;
                 }
-                case "rafalchamp": {
+         /*       case "rafalchamp": {
                     attackedChampion.getDamage(10000, 0);
                     champion.currentActionPoints = 0;
                     break;
@@ -118,7 +121,9 @@ public class Game {
                     champion.resetUltimate();
                     break;
                 }
+          */
             }
+
             if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
                 champion = champion2;
                 attackedChampion = champion1;
@@ -144,4 +149,3 @@ public class Game {
         determineWinner();
     }
 }
-*/

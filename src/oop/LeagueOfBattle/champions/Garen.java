@@ -23,10 +23,6 @@ public class Garen extends Champion {
         isAssasin = false;
     }
 
-
-    // champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.15)));
-
-
     /* @Override
      public void passiveSpell() {
          //Perseverance: Garen regeneraters 3.5% of his hp every round. He also gains 2 armor.
@@ -64,8 +60,8 @@ public class Garen extends Champion {
     @Override
     public Description useR(Enemy enemy) {
         int enemyHpPercentage = enemy.getHpPercentage();
-
-        return new Description();
+        int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
+        return new Description(0,damageDealt,0,0,0,0,true);
     }
 
    /* @Override
