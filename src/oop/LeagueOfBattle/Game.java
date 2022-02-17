@@ -1,7 +1,10 @@
 package oop.LeagueOfBattle;
 
 import oop.LeagueOfBattle.champions.base.Champion;
-import oop.LeagueOfBattle.champions.base.spell.Type;
+import oop.LeagueOfBattle.champions.base.Enemy;
+import oop.LeagueOfBattle.champions.base.spell.Description;
+import oop.LeagueOfBattle.champions.base.spell.KeyType;
+import oop.LeagueOfBattle.menagers.KeyboardMenager;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +23,27 @@ public class Game {
             this.champion2 = champion2;
         }
     }
+    private Description getSpell(KeyType type, Champion champion, Enemy enemy){
 
+        switch (type) {
+            case AA: {
+                return champion.useAA();
+            }
+            case Q: {
+                return champion.useQ(enemy);
+            }
+            case W: {
+                return champion.useW(enemy);
+            }
+            case E: {
+                return champion.useE(enemy);
+            }
+            case R: {
+                return champion.useR(enemy);
+            }
+        }
+        return null;
+    }
     boolean playerDied() {
         if (champion1.getHp() <= 0 || champion2.getHp() <= 0) {
             return true;
@@ -77,52 +100,12 @@ public class Game {
         Champion champion = champion1;
         Champion attackedChampion = champion2;
         String move;
+        KeyType type;
         int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
         //todo/ and name can be more descriptive then like: playerInMove : Champion
         do { //todo try not to use do{}while when simple while can be used
             System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
-            move = scan.next();
-            switch (move) { //extract using a spell based on key to function
-                case "AA": { //todo extract to enums
-                    champion.useAA();
-                    System.out.println(attackedChampion.getHp());
-                    break;
-                }
-                case "q": {
-                    attackedChampion.receiveSpell(champion.useQ(attackedChampion));
-                    System.out.println(attackedChampion.getHp());
-                    break;
-                }
-                case "w": {
-                    champion.useW(attackedChampion);
-                    break;
-                }
-                case "e": {
-                    champion.useE(attackedChampion);
-                    break;
-                }
-                case "r": {
-                    champion.useR(attackedChampion);
-                    break;
-                }
-         /*       case "rafalchamp": {
-                    attackedChampion.getDamage(10000, 0);
-                    champion.currentActionPoints = 0;
-                    break;
-                }
-                case "nextRound": {
-                    champion1.currentActionPoints = 0;
-                    champion2.currentActionPoints = 0;
-                    break;
-                }
-                case "test": {
-                    champion.currentActionPoints = 1000;
-                    champion.resetCooldowns();
-                    champion.resetUltimate();
-                    break;
-                }
-          */
-            }
+            getSpell(KeyboardMenager.getKey(),champion,attackedChampion);
 
             if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
                 champion = champion2;
@@ -141,7 +124,6 @@ public class Game {
                 System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
                 System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
             }
-
             if (champion.getHp() < 0) {
                 break;
             }

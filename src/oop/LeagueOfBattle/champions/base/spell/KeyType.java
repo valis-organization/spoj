@@ -1,10 +1,11 @@
 package oop.LeagueOfBattle.champions.base.spell;
 
-public enum Type {
+public enum KeyType {
     Q,
     W,
     E,
     R,
     PASSIVE,
-    AA
+    AA,
+    UNKNOWN
 }
