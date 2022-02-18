@@ -72,7 +72,7 @@ public class Game {
     }
 
     private void startRounds() {
-        Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
+        Scanner scan = new Scanner(System.in); //abstract whole thing to a controller classasd
         Champion champion = champion1;
         Champion attackedChampion = champion2;
         String move;
