@@ -27,7 +27,7 @@ public class Main {
         System.out.println("List of the Champions: " + champions);
 
         System.out.print("Player 2: ");
-        champio n = scan.next(); //todo abstract
+        champion = scan.next(); //todo abstract
         Champion champion2 = pickingHandler.pickingChampion(champion);
         soundHandler.playSound(champion2.getSound());
 
