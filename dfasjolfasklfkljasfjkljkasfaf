@@ -1,0 +1,374 @@
+[33mcommit 57a8fae61a96766017434d7a5f6ad19001a3b902[m[33m ([m[1;36mHEAD -> [m[1;32mrefactor[m[33m, [m[1;31morigin/refactor[m[33m)[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Fri Feb 18 16:35:42 2022 +0100
+
+    asdasd
+
+[33mcommit 26f46aeb89c25e6a326329ea76dd5680e06d3902[m[33m ([m[1;32mmain[m[33m)[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Fri Feb 18 16:34:19 2022 +0100
+
+    asd
+
+[33mcommit f478338f4d3da193815701804211dfb6e9f4c7bb[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: VALIS <przemek946@gmail.com>
+Date:   Fri Feb 18 16:29:24 2022 +0100
+
+    add yaml configuration
+
+[33mcommit 46a9f9bed25310a881f4540d7ab72a88db0bad28[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Jan 27 21:59:57 2022 +0100
+
+    Adding vladimir
+
+[33mcommit 30857229d47d8fc57c1017f9a8a83a63b1c2c32f[m
+Author: przemyslawpetka <przemek946@gmail.com>
+Date:   Wed Jan 26 23:40:58 2022 +0100
+
+    adding few comments and some code aggregation improvements
+
+[33mcommit 61309c9e10db114b4c2c79135b45ad1972dfa06e[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Jan 26 00:21:20 2022 +0100
+
+    Uproszczone randomowe liczby
+
+[33mcommit d8e7a97ca23a830e2a6e63ea7235fe13af672992[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Jan 26 00:11:16 2022 +0100
+
+    Rozpoczecie tworzenia Ryze'a i ulatwienie sciezek dzwiekowych
+
+[33mcommit 383f4a836e08e468361e7989d284accdf310bcf9[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Jan 25 23:20:01 2022 +0100
+
+    Male poprawki
+
+[33mcommit 287eafe708a9d512f39a77f68869bb9f1f99c1ce[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Jan 25 23:19:31 2022 +0100
+
+    Male poprawki
+
+[33mcommit 309938dc31ba07c0852d026670ea0d0573a63db3[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Jan 25 20:40:56 2022 +0100
+
+    Ukonczenie spelli obu postaci :> Zmienic dzialanie ActionPointow w R
+
+[33mcommit b664109ca59d3ca8ec26d94ede6c33eea2f45613[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Jan 25 15:32:15 2022 +0100
+
+    Naprawienie kilku bugow i zaimplementowanie systemu cooldownu Ultimate Spella
+
+[33mcommit a3b5fd975b4210d200a841a56bcf3496af4e1a17[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Jan 25 13:51:19 2022 +0100
+
+    Udzwiekowienie garena
+
+[33mcommit 356d9bf4a0a6c84515dee8cece1a00a87fe4fafa[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Jan 24 14:46:08 2022 +0100
+
+    Dodanie dzwiekow na Q W E Rengara, Dodanie funkcji isAssasin, dzieki ktorej assasin zawsze rozpoczyna runde jako pierwszy
+
+[33mcommit d1b54477f275568bf7ffa662e2ab445d566f7bc8[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sun Jan 23 16:22:46 2022 +0100
+
+    Ulepszenie kodu i dodanie dzwiekow przy pickowaniu
+
+[33mcommit de9feeeb42b55c763455257ee97dbbacb06c6f30[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sun Jan 23 14:26:39 2022 +0100
+
+    proste pickowanie championow, cooldowny, przerobienie maina na funkcje
+
+[33mcommit c3b8c6fece4036727f53b83276e23e4718074c3b[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Jan 13 23:09:07 2022 +0100
+
+    NEW GAME B)
+
+[33mcommit bc96a6ac8d12c99ad6d79bdbdbdcfa09fb8171e9[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Jan 12 22:38:37 2022 +0100
+
+    Working removeBook
+
+[33mcommit e84d4afbf668612c9bcfb460a8cdda800dc20594[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Jan 12 22:06:41 2022 +0100
+
+    Changes in the program
+
+[33mcommit 610290cf7d041c0d79aadbaf4237e5ab25aa832c[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Jan 4 18:27:19 2022 +0100
+
+    Poprawione zadanie
+
+[33mcommit 843fdf44601b1604fab475343482e0333b558e08[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Jan 4 17:53:19 2022 +0100
+
+    Zadanie z tworzeniem okregu
+
+[33mcommit db564813a9cc43c82fc11a679f10b80cd0298247[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Jan 3 21:22:58 2022 +0100
+
+    Zadanie z linia i punktami
+
+[33mcommit 1ad1a44f66df1bf3e501e78a320923a98d1cd5f6[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Jan 3 20:52:16 2022 +0100
+
+    Pierwsze zadanie objektwoe
+
+[33mcommit 23a24ecf7daa71844cd8fba3a1c5adcac368be38[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Jan 3 13:46:25 2022 +0100
+
+    Zadanie bez funkcji w voidzie
+
+[33mcommit 88bee26283ff9ae90a4e42596a0751ce0274245f[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Dec 30 18:01:50 2021 +0100
+
+    Zformatowany kod
+
+[33mcommit d6622025398a00c10c936f81e3db16dee47b3562[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Dec 30 18:01:28 2021 +0100
+
+    Zadanie wykonane z funkcja List zamiast void
+
+[33mcommit 8fed3bdf54716c241b93f50108e404033d45e633[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Dec 28 23:00:40 2021 +0100
+
+    Nowe zadanie ukonczone, mozna dopracowac i zrobic zamiast funkcje int zamiast void
+
+[33mcommit 4857f07b8f020c453145bd65afaaf52589553b9c[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Dec 23 17:37:26 2021 +0100
+
+    Dodanie zadania i ukonczenie go
+
+[33mcommit 22a9425d6df3a76ea7e9415309b1772c6e0202f4[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Nov 17 22:14:07 2021 +0100
+
+    wtf big brain (pl. duzy mozg) rozwiazalem to samemu ale koks
+    fajne to programowanie nawet
+
+[33mcommit 104b2207c0521914868a27f943074df4e0f709c0[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Nov 17 21:13:05 2021 +0100
+
+    Zmienienie sterowania na WSAD
+
+[33mcommit 697bc7cad7f4296f4a6871430524c782dd5135c1[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Nov 17 14:14:04 2021 +0100
+
+    Dodanie komentarzy
+
+[33mcommit c59222fcc179f9940759c174820c5a87a0c361b1[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Nov 17 14:08:36 2021 +0100
+
+    Program wstepnie dziala. Musze jeszcze zmienic sterowanie na 'WSAD' z '1234' xD i zaimplementowac funkcje
+
+[33mcommit 966abf62ba6b5956da65634c3460c4c799d14123[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Nov 16 11:54:01 2021 +0100
+
+    Ustawienie poczatkowej pozycji playera
+
+[33mcommit 68140ca08e02e180f0389913fc5a1362be0265f3[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Nov 15 14:06:46 2021 +0100
+
+    Program rysuje plansze
+
+[33mcommit 89a38f0c17d0a38322c42c25103251b3106a8414[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Nov 15 13:18:27 2021 +0100
+
+    Stworzenie nowego zadania od wujka pszemka, ktore ma stworzyc plansze
+
+[33mcommit 15b3e6a0d0b8744c5444f660829bccc1a6878ed1[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Nov 15 10:21:03 2021 +0100
+
+    ZAKONCZENIE ZADANIA PALINDROME
+
+[33mcommit 4e83f2f9736fad50666a1d89b0b50aa539dd3843[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Nov 15 10:11:35 2021 +0100
+
+    Program znajduje nastepny najmniejszy palindrom, czyli dziala. Musze jeszcze zmienic program bo na spoju pierwsza liczba
+     nie musi byc palindromem
+
+[33mcommit 60de920289771c1653510ea93edf39d7ab951736[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sun Nov 14 23:16:40 2021 +0100
+
+    Zmiana nazwy zmiennej 'convert' na 'palinCharArray'
+
+[33mcommit 7e4c935aa55ace21e8627ae53a1c749560e21902[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sun Nov 14 23:14:04 2021 +0100
+
+    Skonczylem program do sprawdzania czy liczba jest palindromem, teraz jeszcze musze zrobic zeby wyszukiwal nastepny najmniejszy palindrom
+
+[33mcommit 4f43cfbea9a41cf9f2fac45dd0c0ceb069645e49[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sat Nov 13 21:28:23 2021 +0100
+
+    Dodanie funkcji do zadania PESEL + stworzenie szkieletu zadania Palindrome
+
+[33mcommit dcaf39cf96d36aa2e1721e74e1270a5ed3738daa[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Nov 11 23:44:16 2021 +0100
+
+    Zadanie z dodaniem funkcji
+
+[33mcommit a073a9e4aa109fe0ae64657bb8ed93e1e779762d[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Nov 11 23:00:08 2021 +0100
+
+    Dodanie komentarza do 37 linijki (// Resetowanie sumy)
+
+[33mcommit b732927c76b40cfd90ddcf8ffcce9e91efccb7c3[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Nov 11 22:58:49 2021 +0100
+
+    Zakonczenie zadania PESEL
+
+[33mcommit d1b2971dcedbedb953f08628319549f305956c7d[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Thu Nov 11 20:44:28 2021 +0100
+
+    Nie dziala
+
+[33mcommit 585d4734042bfe656903bdcab3b489cb4b1bdbb6[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sun Nov 7 01:23:39 2021 +0100
+
+    Stworzenie nowego zadania https://pl.spoj.com/problems/JPESEL/
+
+[33mcommit 67f58478edc4ed9fb7f8ac7bb1ac0298eaf32c20[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sun Nov 7 01:21:26 2021 +0100
+
+    Rozpoczecie programu dopiero bo jestem leniwy
+
+[33mcommit 3508a46549aa3a17448f0efc357cd9b2c2a2e7ac[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Nov 2 22:19:48 2021 +0100
+
+    Nowe zadanie - https://www.spoj.com/problems/PALIN/ PALIN - The Next Palindrome
+
+[33mcommit 1e6d5099092bb079fd29955321ec2ce9e9deece6[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Nov 2 14:44:14 2021 +0100
+
+    Zmiana nazw zmiennych
+
+[33mcommit 14ac1fae62c1365bba394023f201c694fb718f6b[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Nov 2 14:10:55 2021 +0100
+
+    Zrobione zadanie (chyba)
+
+[33mcommit ca27c9c0751b1a547b13e9803fd5cccb8d4d1f50[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Nov 2 01:12:01 2021 +0100
+
+    Nowe zadanie - https://www.spoj.com/problems/DIVSUM/
+
+[33mcommit 7b80fc5d38c2eeb34d90289cdaae367ede2cce3c[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Nov 2 01:08:49 2021 +0100
+
+    Zmiana nazw
+
+[33mcommit 0ee484df077ab4c9760536e451304b6d7841c8fd[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Nov 1 18:59:25 2021 +0100
+
+    Zmiana a!=1
+
+[33mcommit 4a4bb2ce52d1ce716cb6a2640ecbfd0688e687ac[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Nov 1 18:56:33 2021 +0100
+
+    chyba dziala
+
+[33mcommit 42231d31ea48790070859ae4d89ef2d43d6f203e[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Sat Oct 30 01:33:35 2021 +0200
+
+    Wykreslanie do 7, jestem blisko ale musze cos zmienic jeszcze
+
+[33mcommit e9ca97aed44824044e95bc128b3335e5c01536e5[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Oct 27 23:47:44 2021 +0200
+
+    Starting the code when im in champselect
+
+[33mcommit 88dc3517c5b830859f1d2e40e50656f60837716b[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Oct 27 21:50:03 2021 +0200
+
+    Adding new task 'PRIME1'
+
+[33mcommit 347ed957c9343c229e2c65b88b717a989a7405b7[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Oct 27 21:38:48 2021 +0200
+
+    Removing rafalchamp from 26th line of code and adding RAFALCHAMPIK to the second one
+
+[33mcommit fa1bad26950716b3dbc04071d19c3ddc790b7e8e[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Oct 27 21:30:42 2021 +0200
+
+    Adding rafalchamp
+
+[33mcommit f2f1e2a0c88c2ecec1959b44a272a64c3b8022ca[m
+Author: VALIS <przemek946@gmail.com>
+Date:   Wed Oct 27 21:24:44 2021 +0200
+
+    add links to exercises
+
+[33mcommit f81a6e4616117934c9619466b7c19ef29a44f7ff[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Wed Oct 27 20:50:58 2021 +0200
+
+    wtf big brain (pl. duzy mozg) rozwiazalem to samemu ale koks
+    fajne to programowanie nawet
+
+[33mcommit e760c3e5365f1be557ece199d8cda087fe243e8f[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Tue Oct 26 21:42:37 2021 +0200
+
+    test i zaczolem program chyba nwm
+
+[33mcommit 08fdd28d23dcc0b07946553a064b20183a5266a3[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Oct 25 20:51:19 2021 +0200
+
+    elo
+
+[33mcommit e8423569a7312a03014e1bd4cc488cc389bff14b[m
+Author: NiezlyPajacPL <poradnikidomajkraft@gmail.com>
+Date:   Mon Oct 25 20:43:25 2021 +0200
+
+    init commit
