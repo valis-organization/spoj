@@ -24,6 +24,8 @@ public class Main {
         soundHandler.playSound(champion1.getSound()); //todo I think it can be a part of pickingHandler
 
         System.out.println("List of the Champions: " + champions);
+        System.out.println("List of the Champions: " + champions);
+
         System.out.print("Player 2: ");
         champion = scan.next(); //todo abstract
         Champion champion2 = pickingHandler.pickingChampion(champion);
