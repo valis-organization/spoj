@@ -22,13 +22,9 @@ public abstract class Champion implements Enemy {
     protected int attackDimig;
     protected float armorPenetration;
     protected float magicPenetration;
-
     protected int actionPoints;
     protected int currentActionPoints;
-
-    protected String soundPath;//todo interface? Sound provider?
     protected boolean isAssasin;  //todo interface?
-    protected SoundHandler soundHandler = new SoundHandler(); //todo pass as argument / necessary?
 
     protected List<Spell> spells = Collections.emptyList();
 
@@ -45,12 +41,17 @@ public abstract class Champion implements Enemy {
         this.currentActionPoints = currentActionPoints - description.removedActionPoints;
 
     }
-    public Description useAA(){
+
+    public Description useAA() {
         return new Description();
     }
+
     abstract public Description useQ(Enemy enemy);
+
     abstract public Description useW(Enemy enemy);
+
     abstract public Description useE(Enemy enemy);
+
     abstract public Description useR(Enemy enemy);
 
     public List<Spell> usableSpells() {
@@ -79,10 +80,6 @@ public abstract class Champion implements Enemy {
         return name;
     }
 
-    public final String getSound() {
-        return soundPath;
-    }
-
     public final float getHp() {
         return hp;
     }
@@ -107,6 +104,6 @@ public abstract class Champion implements Enemy {
 
     @Override
     public final int getHpPercentage() {
-        return hp/maxHP;
+        return hp / maxHP;
     }
 }

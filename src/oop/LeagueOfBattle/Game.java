@@ -5,6 +5,7 @@ import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.KeyType;
 import oop.LeagueOfBattle.menagers.KeyboardMenager;
+import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -13,8 +14,11 @@ public class Game {
     Champion champion1;
     Champion champion2;
     int roundCount = 0;
+    SubtitlesPrinter subtitlesPrinter;
 
-    public Game(Champion champion1, Champion champion2) {
+    public Game(Champion champion1, Champion champion2, SubtitlesPrinter subtitlesPrinter) {
+        this.subtitlesPrinter = subtitlesPrinter;
+
         if (champion2.isAssasin()) { // todo crate abstraction around the logic of picking first player to move
             this.champion1 = champion2;
             this.champion2 = champion1;
@@ -46,7 +50,7 @@ public class Game {
         return null;
     }
 
-    boolean playerDied() {
+    boolean anyChampionDied() {
         if (champion1.getHp() <= 0 || champion2.getHp() <= 0) {
             return true;
         } else {
@@ -55,31 +59,29 @@ public class Game {
     }
 
     public void start() throws InterruptedException {
-        while (!playerDied()) {
+        while (!anyChampionDied()) {
             TimeUnit.SECONDS.sleep(2);
-            for (int i = 0; i < 15; i++) { //todo abstraction around displaying stuff
-                System.out.println(" ");
-            }
-            roundCount++;
-            System.out.println("ROUND: " + roundCount + ". FIGHT!");
+            subtitlesPrinter.printEnter(15);
             //          resetCooldowns();
-            System.out.print(champion1.getClass().getSimpleName() + "'s turn!            ");
-            System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
-            System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
-
+            roundCount++;
+            subtitlesPrinter.printRoundCount(roundCount);
+            subtitlesPrinter.printTurn(champion1.getName());
+            subtitlesPrinter.printHp(champion1);
+            subtitlesPrinter.printHp(champion2);
             startRounds();
         }
     }
 
-    private void determineWinner() {
-        if (champion2.getHp() <= 0 || champion1.getHp() <= 0) { //todo can be simplified to if(champion1.getHp()  < champion2.getHp())...
-            if (champion1.getHp() <= 0) {
-                System.out.println(champion2.getClass().getSimpleName() + " has won!");
+    private Champion determineWinner() {
+        if (anyChampionDied()) {
+            if (champion1.getHp() < champion2.getHp()) {
+                return champion2;
             } else {
-                System.out.println(champion1.getClass().getSimpleName() + " has won!");
+                return champion1;
             }
         }
-    }//todo return winning Champion
+        return null;
+    }
 
     /*
         private void resetCooldowns() {
@@ -106,7 +108,7 @@ public class Game {
         KeyType type;
         int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
         //todo/ and name can be more descriptive then like: playerInMove : Champion
-        while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {//todo try not to use do{}while when simple while can be used
+        while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {
             System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
             getSpell(KeyboardMenager.getKey(), champion, attackedChampion);
 
@@ -131,6 +133,9 @@ public class Game {
                 break;
             }
         }
-        determineWinner();
+        Champion winner = determineWinner();
+        if (winner != null) {
+            subtitlesPrinter.printWinner(winner.getName());
+        }
     }
 }
