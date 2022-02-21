@@ -103,7 +103,7 @@ public class Game {
         KeyType type;
         int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
         //todo/ and name can be more descriptive then like: playerInMove : Champion
-        do { //todo try not to use do{}while when simple while can be used
+        while(champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0){//todo try not to use do{}while when simple while can be used
             System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
             getSpell(KeyboardMenager.getKey(),champion,attackedChampion);
 
@@ -127,7 +127,7 @@ public class Game {
             if (champion.getHp() < 0) {
                 break;
             }
-        } while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0);
+        }
         determineWinner();
     }
 }
