@@ -18,7 +18,6 @@ public class Ryze extends Champion {
         actionPoints = 5;
         armorPenetration = 10;
         currentActionPoints = actionPoints;
-        soundPath = RyzeSounds.Pick;
         isAssasin = false;
     }
 
@@ -40,19 +39,19 @@ public class Ryze extends Champion {
         int random = MathHelper.randomInt(1, 6);
         if (random == 1) {
             abilityPower = abilityPower + 5;
-            soundHandler.playSound(RyzeSounds.W1);
+            //soundHandler.playSound(RyzeSounds.W1);
             System.out.println("Ryze gained 5 AP");
         } else if (random == 2) {
             // resets Q cooldown
-            soundHandler.playSound(RyzeSounds.W2);
+            //soundHandler.playSound(RyzeSounds.W2);
             System.out.println("Ryze: Q COOLDOWN HAS BEEN RESET!");
         } else if (random == 3) {
            // resets W cooldown
-            soundHandler.playSound(RyzeSounds.W3);
+            //soundHandler.playSound(RyzeSounds.W3);
             System.out.println("Ryze: W COOLDOWN HAS BEEN RESET!");
         } else if (random == 4) {
             // resets E cooldown
-            soundHandler.playSound(RyzeSounds.W4);
+            //soundHandler.playSound(RyzeSounds.W4);
             currentActionPoints++;
             System.out.println("Ryze: E COOLDOWN HAS BEEN RESET! Gained 1 action point");
         } else if (random == 5) {

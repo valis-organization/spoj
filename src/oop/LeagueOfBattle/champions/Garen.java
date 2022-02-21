@@ -20,7 +20,6 @@ public class Garen extends Champion {
         attackDimig = 20;
         actionPoints = 4;
         currentActionPoints = actionPoints;
-        soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
         isAssasin = false;
         this.garenVoiceHandler = garenVoiceHandler;
     }

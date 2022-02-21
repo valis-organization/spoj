@@ -15,7 +15,6 @@ public class Vladimir extends Champion {
         attackDimig = 40;
         actionPoints = 4;
         currentActionPoints = actionPoints;
-        soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
         isAssasin = false;
     }
 
