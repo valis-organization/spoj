@@ -23,7 +23,8 @@ public class Game {
             this.champion2 = champion2;
         }
     }
-    private Description getSpell(KeyType type, Champion champion, Enemy enemy){
+
+    private Description getSpell(KeyType type, Champion champion, Enemy enemy) {
 
         switch (type) {
             case AA: {
@@ -44,6 +45,7 @@ public class Game {
         }
         return null;
     }
+
     boolean playerDied() {
         if (champion1.getHp() <= 0 || champion2.getHp() <= 0) {
             return true;
@@ -60,7 +62,7 @@ public class Game {
             }
             roundCount++;
             System.out.println("ROUND: " + roundCount + ". FIGHT!");
-  //          resetCooldowns();
+            //          resetCooldowns();
             System.out.print(champion1.getClass().getSimpleName() + "'s turn!            ");
             System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
             System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
@@ -78,23 +80,24 @@ public class Game {
             }
         }
     }//todo return winning Champion
-/*
-    private void resetCooldowns() {
-        champion1.resetCurrentActionPoints();
-        champion2.resetCurrentActionPoints();
-        champion1.resetCooldowns();
-        champion2.resetCooldowns();
-        if (roundCount % champion1.getUltimateCooldown() == 0) { //todo why is there such a logic? /abstract of comment
-            champion1.resetUltimate();
-            System.out.println(champion1 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
-        } else if (roundCount % champion2.getUltimateCooldown() == 0) {
-            champion2.resetUltimate();
-            System.out.println(champion2 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
+
+    /*
+        private void resetCooldowns() {
+            champion1.resetCurrentActionPoints();
+            champion2.resetCurrentActionPoints();
+            champion1.resetCooldowns();
+            champion2.resetCooldowns();
+            if (roundCount % champion1.getUltimateCooldown() == 0) { //todo why is there such a logic? /abstract of comment
+                champion1.resetUltimate();
+                System.out.println(champion1 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
+            } else if (roundCount % champion2.getUltimateCooldown() == 0) {
+                champion2.resetUltimate();
+                System.out.println(champion2 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
+            }
+            champion1.passiveSpell(); //todo using passive spell is not "resetColdown", change the name of the function so its more general
+            champion2.passiveSpell();
         }
-        champion1.passiveSpell(); //todo using passive spell is not "resetColdown", change the name of the function so its more general
-        champion2.passiveSpell();
-    }
-*/
+    */
     private void startRounds() {
         Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
         Champion champion = champion1;
@@ -103,9 +106,9 @@ public class Game {
         KeyType type;
         int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
         //todo/ and name can be more descriptive then like: playerInMove : Champion
-        while(champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0){//todo try not to use do{}while when simple while can be used
+        while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {//todo try not to use do{}while when simple while can be used
             System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
-            getSpell(KeyboardMenager.getKey(),champion,attackedChampion);
+            getSpell(KeyboardMenager.getKey(), champion, attackedChampion);
 
             if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
                 champion = champion2;

@@ -3,15 +3,12 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
-import oop.LeagueOfBattle.champions.base.spell.Spell;
-import oop.LeagueOfBattle.helpers.MathHelper;
-import oop.LeagueOfBattle.voiceLines.Rengar.RengarSounds;
-
-import java.util.List;
+import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
+import oop.LeagueOfBattle.voiceLines.SoundHandler;
 
 public class Rengar extends Champion {
-
-    public Rengar() {
+    ChampionVoiceLineHandler rengarVoiceHandler;
+    public Rengar(ChampionVoiceLineHandler rengarVoiceHandler) {
         name = "Rengar";
         maxHP = 200;
         hp = 200;
@@ -25,23 +22,26 @@ public class Rengar extends Champion {
         //      isSpellOnCooldown = new boolean[3];
         //     isUltimateOnCooldown = true;
         //   ultimateCooldown = 4;
-        soundPath = RengarSounds.Pick;
         isAssasin = true;
+        this.rengarVoiceHandler = rengarVoiceHandler;
     }
 
     @Override
     public Description useQ(Enemy enemy) {
+        rengarVoiceHandler.playQSound();
         Description description = new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
         return description;
     }
 
     @Override
     public Description useW(Enemy enemy) {
-        return null;
+        rengarVoiceHandler.playWSound();
+        return new Description();
     }
 
     @Override
     public Description useE(Enemy enemy) {
+        rengarVoiceHandler.playESound();
         Description description = new Description(1, (int) (attackDimig * 0.9), 0, 0, 0, 0, false);
         return description;
     }

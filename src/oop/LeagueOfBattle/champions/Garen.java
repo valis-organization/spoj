@@ -4,12 +4,13 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
-import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
-import oop.LeagueOfBattle.voiceLines.Garen.GarenSounds;
+import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
+import oop.LeagueOfBattle.voiceLines.Garen.GarenVoiceHandler;
 
 public class Garen extends Champion {
-    public Garen() {
+    ChampionVoiceLineHandler garenVoiceHandler;
+    public Garen(ChampionVoiceLineHandler garenVoiceHandler) {
         name = "Garen";
         maxHP = 400;
         hp = 400;
@@ -21,6 +22,7 @@ public class Garen extends Champion {
         currentActionPoints = actionPoints;
         soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
         isAssasin = false;
+        this.garenVoiceHandler = garenVoiceHandler;
     }
 
     /* @Override
@@ -37,11 +39,13 @@ public class Garen extends Champion {
   */
     @Override
     public Description useQ(Enemy enemy) {
+        garenVoiceHandler.playQSound();
         return new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
     }
 
     @Override
     public Description useW(Enemy enemy) {
+        garenVoiceHandler.playWSound();
         armor = armor + 2;
         magicResist = magicResist + 2;
         return new Description();
@@ -49,6 +53,7 @@ public class Garen extends Champion {
 
     @Override
     public Description useE(Enemy enemy) {
+        garenVoiceHandler.playESound();
         int spins = MathHelper.randomInt(0, 13);
         int spinsDamage = 15;
         for (int i = 1; i <= spins; i++) {
@@ -59,6 +64,7 @@ public class Garen extends Champion {
 
     @Override
     public Description useR(Enemy enemy) {
+        garenVoiceHandler.playRSound();
         int enemyHpPercentage = enemy.getHpPercentage();
         int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
         return new Description(0,damageDealt,0,0,0,0,true);
