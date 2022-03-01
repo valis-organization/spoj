@@ -35,6 +35,9 @@ public class SubtitlesPrinter {
     public void printPlayer(int playerNumber){
         print("Player " + playerNumber + ": ");
     }
+    public void printStartBattle(){
+       println("The battle will begin in 2 seconds!");
+    }
     private void print(String string) {
         System.out.print(string);
     }
