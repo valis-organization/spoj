@@ -6,12 +6,13 @@ import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
-import oop.LeagueOfBattle.voiceLines.Garen.GarenVoiceHandler;
 
 public class Garen extends Champion {
-    ChampionVoiceLineHandler garenVoiceHandler;
+    private final ChampionVoiceLineHandler garenVoiceHandler;
+    private final String GAREN = "Garen";
+
     public Garen(ChampionVoiceLineHandler garenVoiceHandler) {
-        name = "Garen";
+        name = GAREN;
         maxHP = 400;
         hp = 400;
         armor = 40;
@@ -66,7 +67,7 @@ public class Garen extends Champion {
         garenVoiceHandler.playRSound();
         int enemyHpPercentage = enemy.getHpPercentage();
         int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
-        return new Description(0,damageDealt,0,0,0,0,true);
+        return new Description(0, damageDealt, 0, 0, 0, 0, true);
     }
 
    /* @Override

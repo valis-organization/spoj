@@ -4,7 +4,7 @@ import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.KeyType;
-import oop.LeagueOfBattle.menagers.KeyboardMenager;
+import oop.LeagueOfBattle.menagers.KeyboardManager;
 import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
 import java.util.Scanner;
@@ -47,7 +47,7 @@ public class Game {
             //todo/ and name can be more descriptive then like: playerInMove : Champion
             while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {
                 subtitlesPrinter.printActionPoints(champion.getCurrentActionPoints());
-                getSpell(KeyboardMenager.getKey(), champion, attackedChampion);
+                getSpell(KeyboardManager.getKey(), champion, attackedChampion);
 
                 if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
                     champion = champion2;

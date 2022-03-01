@@ -6,25 +6,25 @@ import oop.LeagueOfBattle.champions.base.spell.KeyType;
 import java.security.Key;
 import java.util.Scanner;
 
-public class KeyboardMenager {
+public class KeyboardManager {
 
     public static KeyType getKey() {
         Scanner scan = new Scanner(System.in);
         String key = scan.next();
         switch (key) {
-            case "AA": {
+            case "AA" -> {
                 return KeyType.AA;
             }
-            case "Q": {
+            case "Q" -> {
                 return KeyType.Q;
             }
-            case "W": {
+            case "W" -> {
                 return KeyType.W;
             }
-            case "E": {
+            case "E" -> {
                 return KeyType.E;
             }
-            case "R": {
+            case "R" -> {
                 return KeyType.R;
             }
         }

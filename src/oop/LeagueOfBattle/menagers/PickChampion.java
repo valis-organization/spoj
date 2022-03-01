@@ -7,36 +7,25 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class PickChampion {
-    ArrayList<Champion> champions;
-    Scanner scan;
-    public PickChampion(ArrayList<Champion> champions, Scanner scan) {
+    private final ArrayList<Champion> champions;
+    private final Scanner scan;
+    private final SubtitlesPrinter subtitlesPrinter;
+    private final String GAREN = "Garen";
+    private final String RENGAR = "Rengar";
+    private final String RYZE = "Ryze";
+    private final String VLADIMIR = "Vladimir";
+
+    public PickChampion(ArrayList<Champion> champions, Scanner scan, SubtitlesPrinter subtitlesPrinter) {
         this.champions = champions;
         this.scan = scan;
+        this.subtitlesPrinter = subtitlesPrinter;
     }
 
     public Champion pickingChampion() {
         String championName = scan.next();
         switch (championName) {
-            case "Garen": {
-                System.out.println("You've chosen Garen, THE MIGHT OF DEMACIA!");
-                Champion champion = findChampionByName(championName);
-                champions.remove(champion);
-                return champion;
-            }
-            case "Rengar": {
-                System.out.println("You've chosen Rengar, THE PRIDESTALKER!");
-                Champion champion = findChampionByName(championName);
-                champions.remove(champion);
-                return champion;
-            }
-            case "Ryze": {
-                System.out.println("You've chosen Ryze, THE RUNE MAGE!");
-                Champion champion = findChampionByName(championName);
-                champions.remove(champion);
-                return champion;
-            }
-            case "Vladimir": {
-                System.out.println("You've chosen Vladimir, THE CRIMSON REAPER!");
+            case GAREN, RENGAR, RYZE, VLADIMIR -> {
+                subtitlesPrinter.printChosenChampion(championName);
                 Champion champion = findChampionByName(championName);
                 champions.remove(champion);
                 return champion;

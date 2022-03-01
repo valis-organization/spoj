@@ -6,10 +6,6 @@ public class MathHelper {
     }
 
     public static boolean randomBoolean() {
-        if (randomInt(1, 2) == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return randomInt(1, 2) == 1;
     }
 }

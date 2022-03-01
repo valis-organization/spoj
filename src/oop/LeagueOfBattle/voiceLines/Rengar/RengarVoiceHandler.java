@@ -17,6 +17,7 @@ public class RengarVoiceHandler implements ChampionVoiceLineHandler {
     public RengarVoiceHandler(SoundHandler soundHandler) {
         this.soundHandler = soundHandler;
     }
+
     @Override
     public void playPickingSound() {
         soundHandler.playSound(Pick);
@@ -24,27 +25,27 @@ public class RengarVoiceHandler implements ChampionVoiceLineHandler {
 
     @Override
     public void playQSound() {
-        if(MathHelper.randomBoolean()){
+        if (MathHelper.randomBoolean()) {
             soundHandler.playSound(Q1);
-        }else{
+        } else {
             soundHandler.playSound(Q2);
         }
     }
 
     @Override
     public void playWSound() {
-        if(MathHelper.randomBoolean()){
+        if (MathHelper.randomBoolean()) {
             soundHandler.playSound(W1);
-        }else{
+        } else {
             soundHandler.playSound(W2);
         }
     }
 
     @Override
     public void playESound() {
-        if(MathHelper.randomBoolean()){
+        if (MathHelper.randomBoolean()) {
             soundHandler.playSound(E1);
-        }else{
+        } else {
             soundHandler.playSound(E2);
         }
     }

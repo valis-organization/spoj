@@ -7,9 +7,11 @@ import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 import oop.LeagueOfBattle.voiceLines.SoundHandler;
 
 public class Rengar extends Champion {
-    ChampionVoiceLineHandler rengarVoiceHandler;
+    private final ChampionVoiceLineHandler rengarVoiceHandler;
+    private final String NAME = "Rengar";
+
     public Rengar(ChampionVoiceLineHandler rengarVoiceHandler) {
-        name = "Rengar";
+        name = NAME;
         maxHP = 200;
         hp = 200;
         armor = 20;
@@ -19,9 +21,6 @@ public class Rengar extends Champion {
         actionPoints = 4;
         armorPenetration = 10;
         currentActionPoints = actionPoints;
-        //      isSpellOnCooldown = new boolean[3];
-        //     isUltimateOnCooldown = true;
-        //   ultimateCooldown = 4;
         isAssasin = true;
         this.rengarVoiceHandler = rengarVoiceHandler;
     }
@@ -29,8 +28,7 @@ public class Rengar extends Champion {
     @Override
     public Description useQ(Enemy enemy) {
         rengarVoiceHandler.playQSound();
-        Description description = new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
-        return description;
+        return new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
     }
 
     @Override
@@ -42,8 +40,7 @@ public class Rengar extends Champion {
     @Override
     public Description useE(Enemy enemy) {
         rengarVoiceHandler.playESound();
-        Description description = new Description(1, (int) (attackDimig * 0.9), 0, 0, 0, 0, false);
-        return description;
+        return new Description(1, (int) (attackDimig * 0.9), 0, 0, 0, 0, false);
     }
 
     @Override

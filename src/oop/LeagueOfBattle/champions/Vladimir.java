@@ -5,8 +5,10 @@ import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 
 public class Vladimir extends Champion {
+    private final String NAME = "Vladimir";
+
     public Vladimir() {
-        name = "Vladimir";
+        name = NAME;
         maxHP = 300;
         hp = 300;
         armor = 20;

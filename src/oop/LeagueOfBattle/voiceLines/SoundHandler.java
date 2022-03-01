@@ -18,7 +18,7 @@ public class SoundHandler {
                 clip.start();
 
             } else {
-                System.out.println("Can't find file");
+                System.out.println("Can't find file" + voiceLocation);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

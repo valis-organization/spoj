@@ -17,14 +17,14 @@ public class Main {
         SubtitlesPrinter subtitlesPrinter = new SubtitlesPrinter();
         Scanner scan = new Scanner(System.in);
         ArrayList<Champion> champions = ChampionCreator.createChampions(soundHandler);
-        PickChampion pickingHandler = new PickChampion(champions, scan);
+        PickChampion pickingHandler = new PickChampion(champions, scan, subtitlesPrinter);
         //Picking Champions
         subtitlesPrinter.printChampionList(champions);
-        subtitlesPrinter.printPlayer(1);
+        subtitlesPrinter.printPlayerToPickNumber(1);
         Champion champion1 = pickingHandler.pickingChampion();
 
         subtitlesPrinter.printChampionList(champions);
-        subtitlesPrinter.printPlayer(2);
+        subtitlesPrinter.printPlayerToPickNumber(2);
         Champion champion2 = pickingHandler.pickingChampion();
 
         subtitlesPrinter.printStartBattle();
