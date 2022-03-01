@@ -19,14 +19,14 @@ public class Main {
         ArrayList<Champion> champions = ChampionCreator.createChampions(soundHandler);
         PickingHandler pickingHandler = new PickingHandler(champions);
         //Picking Champions
-        System.out.println("List of the Champions: " + champions);
-        System.out.print("Player 1: ");//todo abstraction around drawing
+        subtitlesPrinter.printChampionList(champions);
+        subtitlesPrinter.printPlayer(1);
         String champion = scan.next();
         Champion champion1 = pickingHandler.pickingChampion(champion);
         //soundHandler.playSound(champion1.getSound()); //todo I think it can be a part of pickingHandler
 
-        System.out.println("List of the Champions: " + champions);
-        System.out.print("Player 2: ");
+        subtitlesPrinter.printChampionList(champions);
+        subtitlesPrinter.printPlayer(1);
         champion = scan.next(); //todo abstract
         Champion champion2 = pickingHandler.pickingChampion(champion);
       //  soundHandler.playSound(champion2.getSound());

@@ -4,7 +4,6 @@ import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.helpers.MathHelper;
-import oop.LeagueOfBattle.voiceLines.ryze.RyzeSounds;
 
 public class Ryze extends Champion {
     public Ryze() {

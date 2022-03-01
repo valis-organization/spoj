@@ -83,23 +83,6 @@ public class Game {
         return null;
     }
 
-    /*
-        private void resetCooldowns() {
-            champion1.resetCurrentActionPoints();
-            champion2.resetCurrentActionPoints();
-            champion1.resetCooldowns();
-            champion2.resetCooldowns();
-            if (roundCount % champion1.getUltimateCooldown() == 0) { //todo why is there such a logic? /abstract of comment
-                champion1.resetUltimate();
-                System.out.println(champion1 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
-            } else if (roundCount % champion2.getUltimateCooldown() == 0) {
-                champion2.resetUltimate();
-                System.out.println(champion2 + "'s ULTIMATE SPELL COOLDOWN HAS BEEN RESET");
-            }
-            champion1.passiveSpell(); //todo using passive spell is not "resetColdown", change the name of the function so its more general
-            champion2.passiveSpell();
-        }
-    */
     private void startRounds() {
         Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
         Champion champion = champion1;
@@ -109,25 +92,25 @@ public class Game {
         int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
         //todo/ and name can be more descriptive then like: playerInMove : Champion
         while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {
-            System.out.println("Remaining action points: " + champion.getCurrentActionPoints());
+            subtitlesPrinter.printActionPoints(champion.getCurrentActionPoints());
             getSpell(KeyboardMenager.getKey(), champion, attackedChampion);
 
             if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
                 champion = champion2;
                 attackedChampion = champion1;
                 turn = 0;
-                System.out.println();
-                System.out.print(champion.getClass().getSimpleName() + "'s turn!              ");
-                System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
-                System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
+                subtitlesPrinter.printEnter(1);
+                subtitlesPrinter.printTurn(champion.getName());
+                subtitlesPrinter.printHp(champion2);
+                subtitlesPrinter.printHp(champion1);
             } else if (turn == 0 && champion.getCurrentActionPoints() == 0) {
                 champion = champion1;
                 attackedChampion = champion2;
                 turn = 1;
-                System.out.println();
-                System.out.print(champion.getClass().getSimpleName() + "'s turn!              ");
-                System.out.print(champion2.getClass().getSimpleName() + ": " + champion2.getHp() + " hp             ");
-                System.out.println(champion1.getClass().getSimpleName() + ": " + champion1.getHp() + " hp");
+                subtitlesPrinter.printEnter(1);
+                subtitlesPrinter.printTurn(champion.getName());
+                subtitlesPrinter.printHp(champion2);
+                subtitlesPrinter.printHp(champion1);
             }
             if (champion.getHp() < 0) {
                 break;

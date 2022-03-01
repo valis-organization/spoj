@@ -16,6 +16,7 @@ public class GarenVoiceHandler implements ChampionVoiceLineHandler {
     private final String W2 = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenW2.wav";
     private final String R1 = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenR1.wav";
     private final String R2 = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\GarenR2.wav";
+    private final String Pick = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav";
 
     public GarenVoiceHandler(SoundHandler soundHandler) {
         this.soundHandler = soundHandler;
@@ -23,7 +24,7 @@ public class GarenVoiceHandler implements ChampionVoiceLineHandler {
 
     @Override
     public void playPickingSound() {
-
+        soundHandler.playSound(Pick);
     }
 
     @Override

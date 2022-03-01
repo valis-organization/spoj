@@ -19,7 +19,7 @@ public class RengarVoiceHandler implements ChampionVoiceLineHandler {
     }
     @Override
     public void playPickingSound() {
-
+        soundHandler.playSound(Pick);
     }
 
     @Override
