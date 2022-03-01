@@ -28,36 +28,6 @@ public class Game {
         }
     }
 
-    private Description getSpell(KeyType type, Champion champion, Enemy enemy) {
-
-        switch (type) {
-            case AA: {
-                return champion.useAA();
-            }
-            case Q: {
-                return champion.useQ(enemy);
-            }
-            case W: {
-                return champion.useW(enemy);
-            }
-            case E: {
-                return champion.useE(enemy);
-            }
-            case R: {
-                return champion.useR(enemy);
-            }
-        }
-        return null;
-    }
-
-    boolean anyChampionDied() {
-        if (champion1.getHp() <= 0 || champion2.getHp() <= 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void start() throws InterruptedException {
         while (!anyChampionDied()) {
             TimeUnit.SECONDS.sleep(2);
@@ -68,8 +38,68 @@ public class Game {
             subtitlesPrinter.printTurn(champion1.getName());
             subtitlesPrinter.printHp(champion1);
             subtitlesPrinter.printHp(champion2);
-            startRounds();
+            Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
+            Champion champion = champion1;
+            Champion attackedChampion = champion2;
+            String move;
+            KeyType type;
+            int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
+            //todo/ and name can be more descriptive then like: playerInMove : Champion
+            while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {
+                subtitlesPrinter.printActionPoints(champion.getCurrentActionPoints());
+                getSpell(KeyboardMenager.getKey(), champion, attackedChampion);
+
+                if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
+                    champion = champion2;
+                    attackedChampion = champion1;
+                    turn = 0;
+                    subtitlesPrinter.printEnter(1);
+                    subtitlesPrinter.printTurn(champion.getName());
+                    subtitlesPrinter.printHp(champion2);
+                    subtitlesPrinter.printHp(champion1);
+                } else if (turn == 0 && champion.getCurrentActionPoints() == 0) {
+                    champion = champion1;
+                    attackedChampion = champion2;
+                    turn = 1;
+                    subtitlesPrinter.printEnter(1);
+                    subtitlesPrinter.printTurn(champion.getName());
+                    subtitlesPrinter.printHp(champion2);
+                    subtitlesPrinter.printHp(champion1);
+                }
+                if (champion.getHp() < 0) {
+                    break;
+                }
+            }
+            Champion winner = determineWinner();
+            if (winner != null) {
+                subtitlesPrinter.printWinner(winner.getName());
+            }
         }
+    }
+
+    private Description getSpell(KeyType type, Champion champion, Enemy enemy) {
+        switch (type) {
+            case AA -> {
+                return champion.useAA();
+            }
+            case Q -> {
+                return champion.useQ(enemy);
+            }
+            case W -> {
+                return champion.useW(enemy);
+            }
+            case E -> {
+                return champion.useE(enemy);
+            }
+            case R -> {
+                return champion.useR(enemy);
+            }
+        }
+        return null;
+    }
+
+    private boolean anyChampionDied() {
+        return champion1.getHp() <= 0 || champion2.getHp() <= 0;
     }
 
     private Champion determineWinner() {
@@ -81,44 +111,5 @@ public class Game {
             }
         }
         return null;
-    }
-
-    private void startRounds() {
-        Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
-        Champion champion = champion1;
-        Champion attackedChampion = champion2;
-        String move;
-        KeyType type;
-        int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
-        //todo/ and name can be more descriptive then like: playerInMove : Champion
-        while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {
-            subtitlesPrinter.printActionPoints(champion.getCurrentActionPoints());
-            getSpell(KeyboardMenager.getKey(), champion, attackedChampion);
-
-            if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
-                champion = champion2;
-                attackedChampion = champion1;
-                turn = 0;
-                subtitlesPrinter.printEnter(1);
-                subtitlesPrinter.printTurn(champion.getName());
-                subtitlesPrinter.printHp(champion2);
-                subtitlesPrinter.printHp(champion1);
-            } else if (turn == 0 && champion.getCurrentActionPoints() == 0) {
-                champion = champion1;
-                attackedChampion = champion2;
-                turn = 1;
-                subtitlesPrinter.printEnter(1);
-                subtitlesPrinter.printTurn(champion.getName());
-                subtitlesPrinter.printHp(champion2);
-                subtitlesPrinter.printHp(champion1);
-            }
-            if (champion.getHp() < 0) {
-                break;
-            }
-        }
-        Champion winner = determineWinner();
-        if (winner != null) {
-            subtitlesPrinter.printWinner(winner.getName());
-        }
     }
 }

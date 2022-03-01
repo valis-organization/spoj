@@ -4,24 +4,18 @@ import oop.LeagueOfBattle.champions.base.Champion;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
-public class PickingHandler {
+public class PickChampion {
     ArrayList<Champion> champions;
-
-    public PickingHandler(ArrayList<Champion> champions) {
+    Scanner scan;
+    public PickChampion(ArrayList<Champion> champions, Scanner scan) {
         this.champions = champions;
+        this.scan = scan;
     }
 
-    private Champion findChampionByName(String championName){
-        for (Champion champion : champions) {
-            if (Objects.equals(championName, champion.getName())) {
-                return champion;
-            }
-        }
-        return null;
-    }
-
-    public Champion pickingChampion(String championName) {
+    public Champion pickingChampion() {
+        String championName = scan.next();
         switch (championName) {
             case "Garen": {
                 System.out.println("You've chosen Garen, THE MIGHT OF DEMACIA!");
@@ -45,6 +39,15 @@ public class PickingHandler {
                 System.out.println("You've chosen Vladimir, THE CRIMSON REAPER!");
                 Champion champion = findChampionByName(championName);
                 champions.remove(champion);
+                return champion;
+            }
+        }
+        return null;
+    }
+
+    private Champion findChampionByName(String championName) {
+        for (Champion champion : champions) {
+            if (Objects.equals(championName, champion.getName())) {
                 return champion;
             }
         }
