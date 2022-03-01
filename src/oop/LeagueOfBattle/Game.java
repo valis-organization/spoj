@@ -7,7 +7,6 @@ import oop.LeagueOfBattle.champions.base.spell.KeyType;
 import oop.LeagueOfBattle.menagers.KeyboardManager;
 import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -29,51 +28,27 @@ public class Game {
     }
 
     public void start() throws InterruptedException {
-        while (!anyChampionDied()) {
-            TimeUnit.SECONDS.sleep(2);
-            subtitlesPrinter.printEnter(15);
-            //          resetCooldowns();
+        while (!someChampionDied()) {
             roundCount++;
-            subtitlesPrinter.printRoundCount(roundCount);
-            subtitlesPrinter.printTurn(champion1.getName());
-            subtitlesPrinter.printHp(champion1);
-            subtitlesPrinter.printHp(champion2);
-            Scanner scan = new Scanner(System.in); //abstract whole thing to a controller class
-            Champion champion = champion1;
-            Champion attackedChampion = champion2;
-            String move;
-            KeyType type;
-            int turn = 1; //todo change to shouldSwitchTurn(), int can be changed to Champion object
-            //todo/ and name can be more descriptive then like: playerInMove : Champion
-            while (champion1.getCurrentActionPoints() > 0 || champion2.getCurrentActionPoints() > 0) {
-                subtitlesPrinter.printActionPoints(champion.getCurrentActionPoints());
-                getSpell(KeyboardManager.getKey(), champion, attackedChampion);
+            printOnBeginningOfTheRound();
 
-                if (turn == 1 && champion.getCurrentActionPoints() == 0) { //todo abstract to method e.g hasActionPoints(champion)
-                    champion = champion2;
-                    attackedChampion = champion1;
-                    turn = 0;
-                    subtitlesPrinter.printEnter(1);
-                    subtitlesPrinter.printTurn(champion.getName());
-                    subtitlesPrinter.printHp(champion2);
-                    subtitlesPrinter.printHp(champion1);
-                } else if (turn == 0 && champion.getCurrentActionPoints() == 0) {
-                    champion = champion1;
-                    attackedChampion = champion2;
-                    turn = 1;
-                    subtitlesPrinter.printEnter(1);
-                    subtitlesPrinter.printTurn(champion.getName());
-                    subtitlesPrinter.printHp(champion2);
-                    subtitlesPrinter.printHp(champion1);
-                }
-                if (champion.getHp() < 0) {
-                    break;
-                }
+            Champion championInMove = champion1;
+            Champion attackedChampion = champion2;
+            while (championInMove.getCurrentActionPoints() > 0 || attackedChampion.getHp() > 0) {
+                subtitlesPrinter.printActionPoints(championInMove.getCurrentActionPoints());
+                Description spell;
+                do {
+                    spell = getSpell(KeyboardManager.getKey(), championInMove, attackedChampion);
+                } while (spell == null);
+
+                attackedChampion.receiveSpell(spell);
             }
+
             Champion winner = determineWinner();
             if (winner != null) {
                 subtitlesPrinter.printWinner(winner.getName());
             }
+            TimeUnit.SECONDS.sleep(2); //Wait for subtitles to be read.
         }
     }
 
@@ -98,12 +73,12 @@ public class Game {
         return null;
     }
 
-    private boolean anyChampionDied() {
+    private boolean someChampionDied() {
         return champion1.getHp() <= 0 || champion2.getHp() <= 0;
     }
 
     private Champion determineWinner() {
-        if (anyChampionDied()) {
+        if (someChampionDied()) {
             if (champion1.getHp() < champion2.getHp()) {
                 return champion2;
             } else {
@@ -112,4 +87,18 @@ public class Game {
         }
         return null;
     }
+
+    private void printOnBeginningOfTheRound() {
+        subtitlesPrinter.printEnter(15);
+        subtitlesPrinter.printRoundCount(roundCount);
+        subtitlesPrinter.printTurn(champion1.getName());
+        subtitlesPrinter.printHp(champion1);
+        subtitlesPrinter.printHp(champion2);
+    }
 }
+/* subtitlesPrinter.printEnter(1);
+                    subtitlesPrinter.printTurn(championInMove.getName());
+                    subtitlesPrinter.printHp(champion2);
+                    subtitlesPrinter.printHp(champion1);
+
+ */
