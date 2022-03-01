@@ -10,10 +10,10 @@ import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
-    Champion champion1;
-    Champion champion2;
-    int roundCount = 0;
-    SubtitlesPrinter subtitlesPrinter;
+    private final Champion champion1;
+    private final Champion champion2;
+    private int roundCount = 0;
+    private final SubtitlesPrinter subtitlesPrinter;
 
     public Game(Champion champion1, Champion champion2, SubtitlesPrinter subtitlesPrinter) {
         this.subtitlesPrinter = subtitlesPrinter;
@@ -28,12 +28,16 @@ public class Game {
     }
 
     public void start() throws InterruptedException {
+        Champion championInMove = champion1;
+        Champion attackedChampion = champion2;
+        int turnCount = 0;
         while (!someChampionDied()) {
-            roundCount++;
-            printOnBeginningOfTheRound();
+            turnCount++;
+            if (turnCount % 2 != 0) {
+                roundCount++;
+                printOnBeginningOfTheRound();
+            }
 
-            Champion championInMove = champion1;
-            Champion attackedChampion = champion2;
             while (championInMove.getCurrentActionPoints() > 0 || attackedChampion.getHp() > 0) {
                 subtitlesPrinter.printActionPoints(championInMove.getCurrentActionPoints());
                 Description spell;
@@ -41,8 +45,15 @@ public class Game {
                     spell = getSpell(KeyboardManager.getKey(), championInMove, attackedChampion);
                 } while (spell == null);
 
+                subtitlesPrinter.printEnter(1);
+                subtitlesPrinter.printTurn(championInMove.getName());
+                subtitlesPrinter.printHp(champion2);
+                subtitlesPrinter.printHp(champion1);
                 attackedChampion.receiveSpell(spell);
             }
+            Champion previousChampionInMove = championInMove;
+            championInMove = attackedChampion;
+            attackedChampion = previousChampionInMove;
 
             Champion winner = determineWinner();
             if (winner != null) {
@@ -96,9 +107,3 @@ public class Game {
         subtitlesPrinter.printHp(champion2);
     }
 }
-/* subtitlesPrinter.printEnter(1);
-                    subtitlesPrinter.printTurn(championInMove.getName());
-                    subtitlesPrinter.printHp(champion2);
-                    subtitlesPrinter.printHp(champion1);
-
- */
