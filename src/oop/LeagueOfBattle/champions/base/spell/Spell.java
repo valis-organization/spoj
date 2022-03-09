@@ -1,9 +1,12 @@
 package oop.LeagueOfBattle.champions.base.spell;
 
 public class Spell {
-    KeyType type;
     public Description description;
-    int actionPointsCost;
-    public boolean isOnCooldown;
+    public int actionPointsCost;
+
+    public Spell(Description description, int actionPointsCost) {
+        this.description = description;
+        this.actionPointsCost = actionPointsCost;
+    }
 }
 

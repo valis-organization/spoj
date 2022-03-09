@@ -17,7 +17,7 @@ public class Vladimir extends Champion {
         attackDimig = 40;
         actionPoints = 4;
         currentActionPoints = actionPoints;
-        isAssasin = false;
+        isAssassin = false;
     }
 
     @Override

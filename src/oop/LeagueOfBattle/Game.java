@@ -18,7 +18,7 @@ public class Game {
     public Game(Champion champion1, Champion champion2, SubtitlesPrinter subtitlesPrinter) {
         this.subtitlesPrinter = subtitlesPrinter;
 
-        if (champion2.isAssasin()) { // todo crate abstraction around the logic of picking first player to move
+        if (champion2.isAssassin()) { // todo crate abstraction around the logic of picking first player to move
             this.champion1 = champion2;
             this.champion2 = champion1;
         } else {

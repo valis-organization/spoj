@@ -2,14 +2,15 @@ package oop.LeagueOfBattle.champions.base;
 
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
-import oop.LeagueOfBattle.voiceLines.SoundHandler;
+import oop.LeagueOfBattle.champions.base.spell.SpellProvider;
+import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 
-import javax.swing.text.DefaultEditorKit;
 import java.util.Collections;
 import java.util.List;
 
 
-public abstract class Champion implements Enemy {
+public abstract class Champion implements Enemy, SpellProvider {
+    public ChampionVoiceLineHandler voiceHandler;
     protected String name;
     //hp
     protected int maxHP;
@@ -24,12 +25,13 @@ public abstract class Champion implements Enemy {
     protected float magicPenetration;
     protected int actionPoints;
     protected int currentActionPoints;
-    protected boolean isAssasin;  //todo interface?
+    protected boolean isAssassin;  //todo interface?
 
-    protected List<Spell> spells = Collections.emptyList();
+    public Champion(ChampionVoiceLineHandler voiceHandler) {
+        this.voiceHandler = voiceHandler;
+    }
 
     public final void receiveSpell(Description description) {
-
         int relativeArmor = (int) ((armor * (1 - armorPenetration)) / 2);
         int relativeMR = (int) ((magicResist * (1 - magicPenetration)) / 2);
         relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
@@ -46,33 +48,37 @@ public abstract class Champion implements Enemy {
         return new Description();
     }
 
-    abstract public Description useQ(Enemy enemy);
-
-    abstract public Description useW(Enemy enemy);
-
-    abstract public Description useE(Enemy enemy);
-
-    abstract public Description useR(Enemy enemy);
-
-    public List<Spell> usableSpells() {
-        List<Spell> spellsWithoutCooldown = spells;
-        for (Spell spell : spells) {
-            if (!spell.isOnCooldown) {
-                spellsWithoutCooldown.remove(spell);
-            }
-        }
-        return spellsWithoutCooldown;
+    public final Description useQ(Enemy enemy) {
+        Spell spellQ = provideQ(enemy);
+        voiceHandler.playQSound();
+        currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
+        return spellQ.description;
     }
+
+    public final Description useW(Enemy enemy) {
+        Spell spellW = provideW(enemy);
+        voiceHandler.playWSound();
+        currentActionPoints = currentActionPoints - spellW.actionPointsCost;
+        return spellW.description;
+    }
+
+    public final Description useE(Enemy enemy) {
+        voiceHandler.playESound();
+        return provideE(enemy).description;
+    }
+
+    ;
+
+    public final Description useR(Enemy enemy) {
+        voiceHandler.playRSound();
+        return provideR(enemy).description;
+    }
+
+    ;
 
     //reset
     public final void resetCurrentActionPoints() { //
         currentActionPoints = actionPoints;
-    }
-
-    public final void resetCooldowns() {
-        for (Spell spell : spells) {
-            spell.isOnCooldown = false;
-        }
     }
 
     //getters, setters
@@ -92,8 +98,8 @@ public abstract class Champion implements Enemy {
         return currentActionPoints;
     }
 
-    public final boolean isAssasin() {
-        return isAssasin;
+    public final boolean isAssassin() {
+        return isAssassin;
     }
 
     @Override

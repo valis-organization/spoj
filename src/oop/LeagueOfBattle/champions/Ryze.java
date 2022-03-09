@@ -17,7 +17,7 @@ public class Ryze extends Champion {
         actionPoints = 5;
         armorPenetration = 10;
         currentActionPoints = actionPoints;
-        isAssasin = false;
+        isAssassin = false;
     }
 
     boolean isMarked = false;
