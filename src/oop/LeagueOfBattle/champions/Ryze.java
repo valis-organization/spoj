@@ -1,12 +1,15 @@
-package oop.LeagueOfBattle.champions;
+/* package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
+import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 
 public class Ryze extends Champion {
     public Ryze() {
+        super(RyzeVoiceHandler);
         name = "Ryze";
         maxHP = 200;
         hp = 200;
@@ -21,7 +24,7 @@ public class Ryze extends Champion {
     }
 
     boolean isMarked = false;
-
+/*
     @Override
     public Description useQ(Enemy enemy) {
         if(isMarked){
@@ -61,17 +64,38 @@ public class Ryze extends Champion {
         }
         return new Description();
     }
-
+/*
     @Override
     public Description useE(Enemy enemy) {
         isMarked = true;
         //todo resets Q cooldown
         return new Description(0,0, (int) (abilityPower*0.6),0,0,0,false);
     }
-
+/*
     @Override
     public Description useR(Enemy enemy) {
         //todo gains 5 ActionPoints or come up with new idea
         return null;
     }
+
+    @Override
+    public Spell provideQ(Enemy enemy) {
+        return null;
+    }
+
+    @Override
+    public Spell provideW(Enemy enemy) {
+        return null;
+    }
+
+    @Override
+    public Spell provideE(Enemy enemy) {
+        return null;
+    }
+
+    @Override
+    public Spell provideR(Enemy enemy) {
+        return null;
+    }
 }
+*/

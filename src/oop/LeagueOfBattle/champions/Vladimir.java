@@ -1,4 +1,4 @@
-package oop.LeagueOfBattle.champions;
+/* package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
@@ -74,6 +74,6 @@ public class Vladimir extends Champion {
             System.out.println("Crimson Pact: Vladimir lost 20 blood.");
         }
     }
-*/
-}
 
+}
+*/
