@@ -65,19 +65,19 @@ public class Game {
 
     private Description getSpell(KeyType type, Champion champion, Enemy enemy) {
         switch (type) {
-            case AA -> {
+            case AA: {
                 return champion.useAA();
             }
-            case Q -> {
+            case Q: {
                 return champion.useQ(enemy);
             }
-            case W -> {
+            case W: {
                 return champion.useW(enemy);
             }
-            case E -> {
+            case E: {
                 return champion.useE(enemy);
             }
-            case R -> {
+            case R: {
                 return champion.useR(enemy);
             }
         }
