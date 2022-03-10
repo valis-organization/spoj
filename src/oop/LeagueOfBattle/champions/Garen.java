@@ -2,128 +2,116 @@ package oop.LeagueOfBattle.champions;
 
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.champions.base.Enemy;
+import oop.LeagueOfBattle.champions.base.spell.Description;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
-import oop.LeagueOfBattle.voiceLines.Garen.GarenSounds;
-import oop.LeagueOfBattle.voiceLines.SoundHandler;
+import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
+import oop.LeagueOfBattle.voiceLines.Garen.GarenVoiceHandler;
 
-public class Garen extends Champion {
-    public Garen() {
-        name = "Garen";
-        maxHP = 200;
-        hp = 200;
-        armor = 20;
+public class Garen extends Champion{
+
+    private final String GAREN = "Garen";
+
+    public Garen(ChampionVoiceLineHandler garenVoiceHandler) {
+        super(garenVoiceHandler);
+        name = GAREN;
+        maxHP = 400;
+        hp = 400;
+        armor = 40;
         magicResist = 20;
         abilityPower = 0;
         attackDimig = 20;
         actionPoints = 4;
         currentActionPoints = actionPoints;
-        isSpellOnCooldown = new boolean[3];
-        isUltimateOnCooldown = true;
-        ultimateCooldown = 5;
-        soundPath = "zadanie\\src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav";
-        assasin = false;
+        isAssassin = false;
+    }
+
+    /* @Override
+     public void passiveSpell() {
+         //Perseverance: Garen regeneraters 3.5% of his hp every round. He also gains 2 armor.
+         if (hp != maxHP) {
+             hp = (float) (hp + ((maxHP - hp) * 0.035));
+             System.out.println("Perseverance: Garen regenerated " + ((maxHP - hp) * 0.035) + " hp.");
+         }
+         armor++;
+     }
+
+
+  */
+
+   /* @Override
+    public Description useQ(Enemy enemy) {
+        garenVoiceHandler.playQSound();
+        return provideQ(enemy).description;
     }
 
     @Override
-    public void getTrueDamage(float attackDimig) {
-        hp = hp - attackDimig;
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " True damage.");
+    public Description useW(Enemy enemy) {
+        garenVoiceHandler.playWSound();
+        armor = armor + 2;
+        magicResist = magicResist + 2;
+        return new Description();
     }
 
     @Override
-    public void getDamage(float attackDimig, float armor) {
-        hp = hp - (attackDimig / (armor / 2));
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig / (armor / 2) + " damage.");
-    }
-
-    @Override
-    public void basicAttack(Champion champion) {
-        champion.getDamage(attackDimig, champion.getArmor());
-        currentActionPoints--;
-    }
-
-    @Override
-    public void spellQ(Champion champion) {
-        //Garen deals damage (3x his base ad)
-        if (!isSpellOnCooldown[0]) {
-            if (currentActionPoints >= 2) {
-                champion.getDamage(attackDimig * 3, champion.getArmor());
-                currentActionPoints = currentActionPoints - 2;
-                isSpellOnCooldown[0] = true;
-                if (MathHelper.randomInt(0,1) == 1) {
-                    soundHandler.playSound(GarenSounds.Q1);
-                } else {
-                    soundHandler.playSound(GarenSounds.Q2);
-                }
-            } else {
-                System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
-            }
-        } else {
-            System.out.println("Your spell is on cooldown!");
+    public Description useE(Enemy enemy) {
+        garenVoiceHandler.playESound();
+        int spins = MathHelper.randomInt(0, 13);
+        int spinsDamage = 15;
+        for (int i = 1; i <= spins; i++) {
+            spinsDamage = spinsDamage + 7;
         }
+        return new Description(0, spinsDamage, 0, 0, 0, 0, false);
     }
 
     @Override
-    public void spellW() {
-        //Adding amount of armor. (concept: TENACITY: Gains 1 action point, allows to use 1 spell and removes 2 action points)  - 1 Action Point
-        armor = (float) (armor + 1.5);
-        System.out.println("Increased your armor and MR! Now A: " + armor);
-        if (MathHelper.randomInt(0,1) == 1) {
-            soundHandler.playSound(GarenSounds.E1);
-        } else {
-            soundHandler.playSound(GarenSounds.E2);
-        }
-        currentActionPoints--;
+    public Description useR(Enemy enemy) {
+        garenVoiceHandler.playRSound();
+        int enemyHpPercentage = enemy.getHpPercentage();
+        int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
+        return new Description(0, damageDealt, 0, 0, 0, 0, true);
+    }
+*/
+    @Override
+    public Spell provideQ(Enemy enemy) {
+        Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
+        return new Spell(spellQ,2);
     }
 
     @Override
-    public void spellE(Champion champion) { //Garen can spin random amount of times. Spin deals 3 + (1 dmg*every spin)
-        if (currentActionPoints >= 2) {
-            int spins = MathHelper.randomInt(0,13);
-            float spinsDamage = 15;
-            System.out.println(spins);
-            for (int i = 1; i <= spins; i++) {
-                spinsDamage = spinsDamage + 7;
-            }
-            champion.getDamage(spinsDamage, champion.getArmor());
-            currentActionPoints = currentActionPoints - 2;
-            if (MathHelper.randomInt(0,1) == 1) {
-                soundHandler.playSound(GarenSounds.E1);
-            } else {
-                soundHandler.playSound(GarenSounds.E2);
-            }
-        } else {
-            System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
-        }
+    public Spell provideW(Enemy enemy) {
+        armor = armor + 2;
+        magicResist = magicResist + 2;
+        return new Spell(new Description(), 1);
     }
 
     @Override
-    public void ultimateSpell(Champion champion) {
-        if (currentActionPoints >= 3) {
-            if (!isUltimateOnCooldown) {
-                champion.getTrueDamage((float) (5 + ((maxHP - hp) * 0.30)));
-                currentActionPoints = 0;
-                if (MathHelper.randomInt(0,1) == 1) {
-                    soundHandler.playSound(GarenSounds.R1);
-                } else {
-                    soundHandler.playSound(GarenSounds.R2);
-                }
-            } else {
-                System.out.println("Your spell is on cooldown!");
-            }
-        } else {
-            System.out.println("You dont have enough Action Points! Your current Action Points: " + currentActionPoints);
+    public Spell provideE(Enemy enemy) {
+
+        int spins = MathHelper.randomInt(0, 13);
+        int spinsDamage = 15;
+        for (int i = 1; i <= spins; i++) {
+            spinsDamage = spinsDamage + 7;
         }
+        Description spellE = new Description(0, spinsDamage, 0, 0, 0, 0, false);
+        return new Spell(spellE, 2);
     }
 
     @Override
-    public void passiveSpell() {
-        //Perseverance: Garen regeneraters 7% of his hp every round. He also gains 2 armor.
-        if (hp != maxHP) {
-            hp = (float) (hp + ((maxHP - hp) * 0.07));
-            System.out.println("Perseverance: Garen regenerated " + ((maxHP - hp) * 0.07) + " hp.");
-        }
-        armor++;
+    public Spell provideR(Enemy enemy) {
+
+        int enemyHpPercentage = enemy.getHpPercentage();
+        int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
+        Description spellR = new Description(0, damageDealt, 0, 0, 0, 0, true);
+        return new Spell(spellR, 4);
     }
 
+   /* @Override
+    public Description useR() {
+        int dimigDealt = (int) (5 + ((maxHP - hp) * 0.15));
+        return new Description();
+    }
+*/
 }
+
