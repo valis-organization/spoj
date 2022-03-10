@@ -24,7 +24,7 @@ public class PickChampion {
     public Champion pickingChampion() {
         String championName = scan.next();
         switch (championName) {
-            case GAREN, RENGAR, RYZE, VLADIMIR -> {
+            case GAREN, RENGAR, RYZE, VLADIMIR: {
                 subtitlesPrinter.printChosenChampion(championName);
                 Champion champion = findChampionByName(championName);
                 champions.remove(champion);
