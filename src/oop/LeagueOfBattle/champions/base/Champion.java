@@ -1,66 +1,89 @@
 package oop.LeagueOfBattle.champions.base;
 
-import oop.LeagueOfBattle.voiceLines.SoundHandler;
+import oop.LeagueOfBattle.champions.base.spell.Description;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
+import oop.LeagueOfBattle.champions.base.spell.SpellProvider;
+import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-public abstract class Champion {
+
+public abstract class Champion implements Enemy, SpellProvider {
+    public ChampionVoiceLineHandler voiceHandler;
     protected String name;
-    protected float maxHP;
-    protected float hp;
-    protected float armor;
-    protected float magicResist;
-    protected float abilityPower;
-    protected float attackDimig;
+    //hp
+    protected int maxHP;
+    protected int hp;
+    //defense
+    protected int armor;
+    protected int magicResist;
+    //damage
+    protected int abilityPower;
+    protected int attackDimig;
     protected float armorPenetration;
+    protected float magicPenetration;
     protected int actionPoints;
-    protected boolean[] isSpellOnCooldown;
-    public int currentActionPoints; //TODO why public
-    protected boolean isUltimateOnCooldown; //todo abstraction around coldowns -> spells
-    protected int ultimateCooldown; //todo abstrcation
+    protected int currentActionPoints;
+    protected boolean isAssassin;  //todo interface?
 
-    protected String soundPath;//todo interface? Sound provider?
-    protected boolean assasin;  //todo interface?
-    protected SoundHandler soundHandler = new SoundHandler(); //todo pass as argument / necessary?
+    public Champion(ChampionVoiceLineHandler voiceHandler) {
+        this.voiceHandler = voiceHandler;
+    }
 
-    //???
-    public abstract void getTrueDamage(float attackDimig);
+    public final void receiveSpell(Description description) {
+        int relativeArmor = (int) ((armor * (1 - armorPenetration)) / 2);
+        int relativeMR = (int) ((magicResist * (1 - magicPenetration)) / 2);
+        relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
+        relativeMR = relativeMR == 0 ? 1 : relativeMR;
 
-    public abstract void getDamage(float attackDimig, float armor);
+        this.hp = hp - description.addDmg / relativeArmor;
+        this.hp = hp - description.apDmg / relativeMR;
+        this.hp = hp - description.trueDmg;
+        this.currentActionPoints = currentActionPoints - description.removedActionPoints;
+
+    }
+
+    public Description useAA() {
+        return new Description();
+    }
+
+    public final Description useQ(Enemy enemy) {
+        Spell spellQ = provideQ(enemy);
+        voiceHandler.playQSound();
+        currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
+        return spellQ.description;
+    }
+
+    public final Description useW(Enemy enemy) {
+        Spell spellW = provideW(enemy);
+        voiceHandler.playWSound();
+        currentActionPoints = currentActionPoints - spellW.actionPointsCost;
+        return spellW.description;
+    }
+
+    public final Description useE(Enemy enemy) {
+        voiceHandler.playESound();
+        return provideE(enemy).description;
+    }
+
+    ;
+
+    public final Description useR(Enemy enemy) {
+        voiceHandler.playRSound();
+        return provideR(enemy).description;
+    }
+
+    ;
 
     //reset
     public final void resetCurrentActionPoints() { //
         currentActionPoints = actionPoints;
     }
 
-    public final void resetCooldowns() {
-        Arrays.fill(isSpellOnCooldown, false);
-    }
-
-    public final void resetUltimate() {
-        isUltimateOnCooldown = false;
-    }
-
-    //spells
-    public abstract void basicAttack(Champion champion);
-
-    public abstract void spellQ(Champion champion);
-
-    public abstract void spellW(); //todo missing champion
-
-    public abstract void spellE(Champion champion);
-
-    public abstract void ultimateSpell(Champion champion);
-
-    public abstract void passiveSpell();
-
     //getters, setters
     public final String getName() {
         return name;
-    }
-
-    public final String getSound() {
-        return soundPath;
     }
 
     public final float getHp() {
@@ -75,18 +98,18 @@ public abstract class Champion {
         return currentActionPoints;
     }
 
-    public int getUltimateCooldown() {
-        return ultimateCooldown;
+    public final boolean isAssassin() {
+        return isAssassin;
     }
-
-    public final boolean isAssasin() {
-        return assasin;
-    }
-
 
     @Override
     public String toString() {
         return name;
     }
 
+
+    @Override
+    public final int getHpPercentage() {
+        return hp / maxHP;
+    }
 }

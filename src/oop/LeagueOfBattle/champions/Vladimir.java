@@ -1,12 +1,14 @@
-package oop.LeagueOfBattle.champions;
+/* package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
-import oop.LeagueOfBattle.helpers.MathHelper;
-import oop.LeagueOfBattle.voiceLines.Rengar.RengarSounds;
+import oop.LeagueOfBattle.champions.base.Enemy;
+import oop.LeagueOfBattle.champions.base.spell.Description;
 
 public class Vladimir extends Champion {
+    private final String NAME = "Vladimir";
+
     public Vladimir() {
-        name = "Vladimir";
+        name = NAME;
         maxHP = 300;
         hp = 300;
         armor = 20;
@@ -15,40 +17,34 @@ public class Vladimir extends Champion {
         attackDimig = 40;
         actionPoints = 4;
         currentActionPoints = actionPoints;
-        isSpellOnCooldown = new boolean[3];
-        isUltimateOnCooldown = true;
-        ultimateCooldown = 5;
-        soundPath = "src\\oop\\LeagueOfBattle\\voiceLines\\Garen\\PickGaren.wav\\";
-        assasin = false;
+        isAssassin = false;
     }
 
     @Override
-    public void getDamage(float attackDimig, float armor) {
-        hp = hp - (attackDimig / (armor / 2));
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig / (armor / 2) + " damage.");
+    public Description useQ(Enemy enemy) {
+        return null;
     }
 
     @Override
-    public void getTrueDamage(float attackDimig) {
-        hp = hp - attackDimig;
-        System.out.println(this.getClass().getSimpleName() + " had suffered " + attackDimig + " True damage.");
+    public Description useW(Enemy enemy) {
+        return null;
     }
 
     @Override
-    public void basicAttack(Champion champion) {
-        champion.getDamage(attackDimig, champion.getArmor());
-        currentActionPoints--;
+    public Description useE(Enemy enemy) {
+        return null;
     }
 
     @Override
+    public Description useR(Enemy enemy) {
+        return null;
+    }
+
+ /*   @Override
     public void spellQ(Champion champion) {
         if (!isSpellOnCooldown[0]) {
             if (currentActionPoints >= 2) {
-                float damageHealed = (attackDimig * 2)/ (champion.getArmor()/2);
-                float missingHp = maxHP - hp;
-                float hpCost = (float) ((maxHP - missingHp)*0.1);
-                hp = hp - hpCost;
-                System.out.println("Vladimir used " + hpCost + " of his health.");
+
                 champion.getDamage(attackDimig * 2,champion.getArmor());
                 hp = hp + damageHealed;
                 System.out.println(damageHealed);
@@ -67,22 +63,6 @@ public class Vladimir extends Champion {
             System.out.println("Your spell is on cooldown!");
         }
     }
-
-    @Override
-    public void spellW() {
-
-    }
-
-    @Override
-    public void spellE(Champion champion) {
-
-    }
-
-    @Override
-    public void ultimateSpell(Champion champion) {
-
-    }
-
     @Override
     public void passiveSpell() {
         if(maxHP*0.5 >= hp){
@@ -94,4 +74,6 @@ public class Vladimir extends Champion {
             System.out.println("Crimson Pact: Vladimir lost 20 blood.");
         }
     }
+
 }
+*/
