@@ -70,7 +70,7 @@ public abstract class Champion implements Enemy, SpellProvider {
         return provideR(enemy).description;
     }
 
-    protected boolean isSpellOnCooldown(boolean cooldown){
+    protected boolean isSpellOnCooldown(boolean cooldown) {
         return cooldown;
     }
 
