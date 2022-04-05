@@ -16,7 +16,7 @@ public class Main {
         SoundHandler soundHandler = new SoundHandler();
         SubtitlesPrinter subtitlesPrinter = new SubtitlesPrinter();
         Scanner scan = new Scanner(System.in);
-        ArrayList<Champion> champions = ChampionCreator.createChampions(soundHandler);
+        ArrayList<Champion> champions = ChampionCreator.createChampions(soundHandler, subtitlesPrinter);
         PickChampion pickingHandler = new PickChampion(champions, scan, subtitlesPrinter);
         //Picking Champions
         subtitlesPrinter.printChampionList(champions);

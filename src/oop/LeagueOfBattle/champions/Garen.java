@@ -7,7 +7,6 @@ import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
-import oop.LeagueOfBattle.voiceLines.Garen.GarenVoiceHandler;
 
 public class Garen extends Champion{
 
@@ -25,7 +24,9 @@ public class Garen extends Champion{
         actionPoints = 4;
         currentActionPoints = actionPoints;
         isAssassin = false;
+        cooldown = new boolean[3];
     }
+    String spellIsOnCooldown = "Your spell is on cooldown! Wait for the next round."; // TEMPORARY VARIABLE
 
     /* @Override
      public void passiveSpell() {
@@ -75,8 +76,13 @@ public class Garen extends Champion{
 */
     @Override
     public Spell provideQ(Enemy enemy) {
-        Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
-        return new Spell(spellQ,2);
+        if(isSpellOnCooldown(cooldown[0])) {
+            Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
+            return new Spell(spellQ, 2);
+        }else {
+            System.out.println(spellIsOnCooldown);
+            return new Spell(new Description(),0);
+        }
     }
 
     @Override

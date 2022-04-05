@@ -17,7 +17,7 @@ public class SubtitlesPrinter {
     }
 
     public void printTurn(String championName) {
-        print(championName + "'s turn!            ");
+        println(championName + "'s turn!            ");
     }
 
     public void printHp(Champion champion) {
@@ -46,6 +46,9 @@ public class SubtitlesPrinter {
 
     public void printChosenChampion(String championName) {
         System.out.println("You've chosen " + championName);
+    }
+    public void spellOnCooldown(){
+        println("Your spell is on cooldown! Wait for the next round.");
     }
 
     private void print(String string) {

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ChampionCreator {
 
-    public static ArrayList<Champion> createChampions(SoundHandler soundHandler) {
+    public static ArrayList<Champion> createChampions(SoundHandler soundHandler, SubtitlesPrinter subtitlesPrinter) {
         GarenVoiceHandler garenVoiceHandler = new GarenVoiceHandler(soundHandler);
         RengarVoiceHandler rengarVoiceHandler = new RengarVoiceHandler(soundHandler);
         ArrayList<Champion> championsList = new ArrayList<>();

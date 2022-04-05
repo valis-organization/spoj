@@ -5,9 +5,6 @@ import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.champions.base.spell.SpellProvider;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 
-import java.util.Collections;
-import java.util.List;
-
 
 public abstract class Champion implements Enemy, SpellProvider {
     public ChampionVoiceLineHandler voiceHandler;
@@ -26,6 +23,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     protected int actionPoints;
     protected int currentActionPoints;
     protected boolean isAssassin;  //todo interface?
+    protected boolean[] cooldown;
 
     public Champion(ChampionVoiceLineHandler voiceHandler) {
         this.voiceHandler = voiceHandler;
@@ -67,14 +65,14 @@ public abstract class Champion implements Enemy, SpellProvider {
         return provideE(enemy).description;
     }
 
-    ;
-
     public final Description useR(Enemy enemy) {
         voiceHandler.playRSound();
         return provideR(enemy).description;
     }
 
-    ;
+    protected boolean isSpellOnCooldown(boolean cooldown){
+        return cooldown;
+    }
 
     //reset
     public final void resetCurrentActionPoints() { //

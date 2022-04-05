@@ -38,7 +38,7 @@ public class Game {
                 printOnBeginningOfTheRound();
             }
 
-            while (championInMove.getCurrentActionPoints() > 0 || attackedChampion.getHp() > 0) {
+            while (championInMove.getCurrentActionPoints() > 0 && attackedChampion.getHp() > 0) {
                 subtitlesPrinter.printActionPoints(championInMove.getCurrentActionPoints());
                 Description spell;
                 do {
