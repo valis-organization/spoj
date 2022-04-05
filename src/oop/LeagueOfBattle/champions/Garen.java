@@ -43,47 +43,54 @@ public class Garen extends Champion {
   */
 
     /* @Override
-     public Description useQ(Enemy enemy) {
-         garenVoiceHandler.playQSound();
-         return provideQ(enemy).description;
-     }
-
-     @Override
-     public Description useW(Enemy enemy) {
-         garenVoiceHandler.playWSound();
-         armor = armor + 2;
-         magicResist = magicResist + 2;
-         return new Description();
-     }
-
-     @Override
-     public Description useE(Enemy enemy) {
-         garenVoiceHandler.playESound();
-         int spins = MathHelper.randomInt(0, 13);
-         int spinsDamage = 15;
-         for (int i = 1; i <= spins; i++) {
-             spinsDamage = spinsDamage + 7;
+         public Description useQ(Enemy enemy) {
+             garenVoiceHandler.playQSound();
+             return provideQ(enemy).description;
          }
-         return new Description(0, spinsDamage, 0, 0, 0, 0, false);
-     }
 
-     @Override
-     public Description useR(Enemy enemy) {
-         garenVoiceHandler.playRSound();
-         int enemyHpPercentage = enemy.getHpPercentage();
-         int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
-         return new Description(0, damageDealt, 0, 0, 0, 0, true);
-     }
- */
+         @Override
+         public Description useW(Enemy enemy) {
+             garenVoiceHandler.playWSound();
+             armor = armor + 2;
+             magicResist = magicResist + 2;
+             return new Description();
+         }
+
+         @Override
+         public Description useE(Enemy enemy) {
+             garenVoiceHandler.playESound();
+             int spins = MathHelper.randomInt(0, 13);
+             int spinsDamage = 15;
+             for (int i = 1; i <= spins; i++) {
+                 spinsDamage = spinsDamage + 7;
+             }
+             return new Description(0, spinsDamage, 0, 0, 0, 0, false);
+         }
+
+         @Override
+         public Description useR(Enemy enemy) {
+             garenVoiceHandler.playRSound();
+             int enemyHpPercentage = enemy.getHpPercentage();
+             int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
+             return new Description(0, damageDealt, 0, 0, 0, 0, true);
+         }
+     */
+    @Override
+    public Spell provideAA(Enemy enemy) {
+        Description AA = new Description(0, attackDimig, 0, 0, 0, 0, false);
+        return new Spell(AA, 1);
+    }
+
     @Override
     public Spell provideQ(Enemy enemy) {
-        if (isSpellOnCooldown(cooldown[0])) {
-            Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
-            return new Spell(spellQ, 2);
+        if (!isSpellOnCooldown(cooldown[0])) {
+        Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
+          cooldown[0] = true;
+        return new Spell(spellQ, 2);
         } else {
-            System.out.println(spellIsOnCooldown);
-            return new Spell(new Description(), 0);
-        }
+           System.out.println(spellIsOnCooldown);
+         return new Spell(new Description(), 0);
+          }
     }
 
     @Override

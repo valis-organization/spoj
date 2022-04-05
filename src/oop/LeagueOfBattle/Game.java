@@ -36,6 +36,8 @@ public class Game {
             if (turnCount % 2 != 0) {
                 roundCount++;
                 printOnBeginningOfTheRound();
+                championInMove.resetCurrentActionPoints();
+                attackedChampion.resetCurrentActionPoints();
             }
 
             while (championInMove.getCurrentActionPoints() > 0 && attackedChampion.getHp() > 0) {
@@ -46,7 +48,6 @@ public class Game {
                 } while (spell == null);
 
                 subtitlesPrinter.printEnter(1);
-                subtitlesPrinter.printTurn(championInMove.getName());
                 subtitlesPrinter.printHp(champion2);
                 subtitlesPrinter.printHp(champion1);
                 attackedChampion.receiveSpell(spell);
@@ -54,6 +55,7 @@ public class Game {
             Champion previousChampionInMove = championInMove;
             championInMove = attackedChampion;
             attackedChampion = previousChampionInMove;
+            subtitlesPrinter.printTurn(championInMove.getName());
 
             Champion winner = determineWinner();
             if (winner != null) {
@@ -66,7 +68,7 @@ public class Game {
     private Description getSpell(KeyType type, Champion champion, Enemy enemy) {
         switch (type) {
             case AA -> {
-                return champion.useAA();
+                return champion.useAA(enemy);
             }
             case Q -> {
                 return champion.useQ(enemy);

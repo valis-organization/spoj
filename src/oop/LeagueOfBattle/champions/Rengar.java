@@ -29,6 +29,12 @@ public class Rengar extends Champion {
     }
 
     @Override
+    public Spell provideAA(Enemy enemy) {
+        Description AA = new Description(0, attackDimig, 0, 0, 0, 0, false);
+        return new Spell(AA, 1);
+    }
+
+    @Override
     public Spell provideQ(Enemy enemy) {
         rengarVoiceHandler.playQSound();
         Description spellQ = new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
@@ -42,9 +48,9 @@ public class Rengar extends Champion {
 
         if ((MathHelper.randomInt(1, 2) == 1)) {
             hp = hp + healedHp;
-            // System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp);
+             System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp); //TODO subtitles for champions
         } else {
-            //  System.out.println("You did not heal yourself");
+              System.out.println("You did not heal yourself");
         }
         Description spellW = new Description();
         return new Spell(spellW, 1);
@@ -64,7 +70,7 @@ public class Rengar extends Champion {
         useW(enemy);
         useE(enemy);
         attackDimig = attackDimig - 20;
-        return new Spell(new Description(),4);
+        return new Spell(new Description(), 4);
     }
     /*
 

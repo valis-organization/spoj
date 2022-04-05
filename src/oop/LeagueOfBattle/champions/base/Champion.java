@@ -42,7 +42,9 @@ public abstract class Champion implements Enemy, SpellProvider {
 
     }
 
-    public Description useAA() {
+    public Description useAA(Enemy enemy) {
+        Spell AA = provideAA(enemy);
+        currentActionPoints = currentActionPoints - AA.actionPointsCost;
         return new Description();
     }
 
@@ -62,16 +64,20 @@ public abstract class Champion implements Enemy, SpellProvider {
 
     public final Description useE(Enemy enemy) {
         voiceHandler.playESound();
+        Spell spellE = provideE(enemy);
+        currentActionPoints = currentActionPoints - spellE.actionPointsCost;
         return provideE(enemy).description;
     }
 
     public final Description useR(Enemy enemy) {
         voiceHandler.playRSound();
+        Spell spellR = provideR(enemy);
+        currentActionPoints = currentActionPoints - spellR.actionPointsCost;
         return provideR(enemy).description;
     }
 
-    protected boolean isSpellOnCooldown(boolean cooldown) {
-        return cooldown;
+    protected boolean isSpellOnCooldown(boolean whichSpell) {
+        return whichSpell;
     }
 
     //reset
