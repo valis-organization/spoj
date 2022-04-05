@@ -30,12 +30,12 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     public final void receiveSpell(Description description) {
-        int relativeArmor = (int) ((armor * (1 - armorPenetration)) / 2);
+        int relativeArmor = (int) ((armor * (1 - armorPenetration)) / 2); //TODO Naprawic bug, ktory polega na braniu armorPen od atakowanego championa
         int relativeMR = (int) ((magicResist * (1 - magicPenetration)) / 2);
         relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
         relativeMR = relativeMR == 0 ? 1 : relativeMR;
 
-        this.hp = hp - description.addDmg / relativeArmor;
+        this.hp = hp - description.adDmg / relativeArmor;
         this.hp = hp - description.apDmg / relativeMR;
         this.hp = hp - description.trueDmg;
         this.currentActionPoints = currentActionPoints - description.removedActionPoints;

@@ -47,10 +47,10 @@ public class Game {
                     spell = getSpell(KeyboardManager.getKey(), championInMove, attackedChampion);
                 } while (spell == null);
 
+                attackedChampion.receiveSpell(spell);
                 subtitlesPrinter.printEnter(1);
                 subtitlesPrinter.printHp(champion2);
                 subtitlesPrinter.printHp(champion1);
-                attackedChampion.receiveSpell(spell);
             }
             Champion previousChampionInMove = championInMove;
             championInMove = attackedChampion;

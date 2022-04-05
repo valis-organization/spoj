@@ -22,6 +22,7 @@ public class Garen extends Champion {
         abilityPower = 0;
         attackDimig = 20;
         actionPoints = 4;
+        armorPenetration = 0;
         currentActionPoints = actionPoints;
         isAssassin = false;
         cooldown = new boolean[3];
@@ -84,13 +85,13 @@ public class Garen extends Champion {
     @Override
     public Spell provideQ(Enemy enemy) {
         if (!isSpellOnCooldown(cooldown[0])) {
-        Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
-          cooldown[0] = true;
-        return new Spell(spellQ, 2);
+            Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
+            cooldown[0] = true;
+            return new Spell(spellQ, 2);
         } else {
-           System.out.println(spellIsOnCooldown);
-         return new Spell(new Description(), 0);
-          }
+            System.out.println(spellIsOnCooldown);
+            return new Spell(new Description(), 0);
+        }
     }
 
     @Override

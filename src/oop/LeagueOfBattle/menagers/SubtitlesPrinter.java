@@ -47,7 +47,8 @@ public class SubtitlesPrinter {
     public void printChosenChampion(String championName) {
         System.out.println("You've chosen " + championName);
     }
-    public void spellOnCooldown(){
+
+    public void spellOnCooldown() {
         println("Your spell is on cooldown! Wait for the next round.");
     }
 

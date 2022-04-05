@@ -19,12 +19,12 @@ public class ChampionCreator {
         ArrayList<Champion> championsList = new ArrayList<>();
         Champion garen = new Garen(garenVoiceHandler);
         Champion rengar = new Rengar(rengarVoiceHandler);
-      //  Champion ryze = new Ryze();
-      //  Champion vladimir = new Vladimir();
+        //  Champion ryze = new Ryze();
+        //  Champion vladimir = new Vladimir();
         championsList.add(garen);
         championsList.add(rengar);
-  //      championsList.add(ryze);
-    //    championsList.add(vladimir);
+        //      championsList.add(ryze);
+        //    championsList.add(vladimir);
         return championsList;
     }
 }

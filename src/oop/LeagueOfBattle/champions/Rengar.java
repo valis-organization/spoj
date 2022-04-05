@@ -22,7 +22,7 @@ public class Rengar extends Champion {
         abilityPower = 0;
         attackDimig = 50;
         actionPoints = 4;
-        armorPenetration = 10;
+        armorPenetration = 0;
         currentActionPoints = actionPoints;
         isAssassin = true;
         this.rengarVoiceHandler = rengarVoiceHandler;
@@ -48,9 +48,9 @@ public class Rengar extends Champion {
 
         if ((MathHelper.randomInt(1, 2) == 1)) {
             hp = hp + healedHp;
-             System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp); //TODO subtitles for champions
+            System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp); //TODO subtitles for champions
         } else {
-              System.out.println("You did not heal yourself");
+            System.out.println("You did not heal yourself");
         }
         Description spellW = new Description();
         return new Spell(spellW, 1);

@@ -2,7 +2,7 @@ package oop.LeagueOfBattle.champions.base.spell;
 
 public class Description {
     public int removedActionPoints;
-    public int addDmg;
+    public int adDmg;
     public int apDmg;
     public int trueDmg;
     public float armorPen;
@@ -12,7 +12,7 @@ public class Description {
     public Description(int removedActionPoints, int addDmg, int apDmg, int trueDmg, float armorPen, float magicPen, boolean damageByMissingHp) {
         this.removedActionPoints = removedActionPoints;
 
-        this.addDmg = addDmg;
+        this.adDmg = addDmg;
         this.apDmg = apDmg;
         this.trueDmg = trueDmg;
         this.armorPen = armorPen;
@@ -21,7 +21,7 @@ public class Description {
 
     public Description() {
         this.removedActionPoints = 0;
-        this.addDmg = 0;
+        this.adDmg = 0;
         this.apDmg = 0;
         this.trueDmg = 0;
         this.armorPen = 0;
