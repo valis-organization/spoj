@@ -36,8 +36,7 @@ public class Game {
             if (turnCount % 2 != 0) {
                 roundCount++;
                 printOnBeginningOfTheRound();
-                championInMove.resetCurrentActionPoints();
-                attackedChampion.resetCurrentActionPoints();
+                resetAbilities(championInMove,attackedChampion);
             }
 
             while (championInMove.getCurrentActionPoints() > 0 && attackedChampion.getHp() > 0) {
@@ -99,6 +98,12 @@ public class Game {
             }
         }
         return null;
+    }
+    private void resetAbilities(Champion championInMove, Champion attackedChampion){
+        championInMove.resetCurrentActionPoints();
+        attackedChampion.resetCurrentActionPoints();
+        championInMove.resetCooldowns();
+        attackedChampion.resetCooldowns();
     }
 
     private void printOnBeginningOfTheRound() {

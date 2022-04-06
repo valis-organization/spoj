@@ -5,6 +5,8 @@ import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.champions.base.spell.SpellProvider;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 
+import java.util.Arrays;
+
 
 public abstract class Champion implements Enemy, SpellProvider {
     public ChampionVoiceLineHandler voiceHandler;
@@ -23,11 +25,12 @@ public abstract class Champion implements Enemy, SpellProvider {
     protected int actionPoints;
     protected int currentActionPoints;
     protected boolean isAssassin;  //todo interface?
-    protected boolean[] cooldown;
+    protected boolean[] cooldown = new boolean[4];
 
     public Champion(ChampionVoiceLineHandler voiceHandler) {
         this.voiceHandler = voiceHandler;
     }
+    String spellIsOnCooldown = "Your spell is on cooldown! Wait for the next round."; // TEMPORARY VARIABLE
 
     public final void receiveSpell(Description description) {
         int relativeArmor = (int) ((armor * (1 - armorPenetration * 0.01)) / 2); //TODO Naprawic bug, ktory polega na braniu armorPen od atakowanego championa
@@ -49,31 +52,51 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     public final Description useQ(Enemy enemy) {
-        Spell spellQ = provideQ(enemy);
-        voiceHandler.playQSound();
-        currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
-        return spellQ.description;
+        if (!isSpellOnCooldown(cooldown[0])) {
+            Spell spellQ = provideQ(enemy);
+            voiceHandler.playQSound();
+            currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
+            setOnCooldown(0);
+            return spellQ.description;
+        }
+        System.out.println(spellIsOnCooldown);
+        return new Description();
     }
 
     public final Description useW(Enemy enemy) {
-        Spell spellW = provideW(enemy);
-        voiceHandler.playWSound();
-        currentActionPoints = currentActionPoints - spellW.actionPointsCost;
-        return spellW.description;
+        if (!isSpellOnCooldown(cooldown[1])) {
+            Spell spellW = provideW(enemy);
+            voiceHandler.playWSound();
+            currentActionPoints = currentActionPoints - spellW.actionPointsCost;
+            setOnCooldown(1);
+            return spellW.description;
+        }
+        System.out.println(spellIsOnCooldown);
+        return new Description();
     }
 
     public final Description useE(Enemy enemy) {
-        voiceHandler.playESound();
-        Spell spellE = provideE(enemy);
-        currentActionPoints = currentActionPoints - spellE.actionPointsCost;
-        return provideE(enemy).description;
+        if (!isSpellOnCooldown(cooldown[2])) {
+            voiceHandler.playESound();
+            Spell spellE = provideE(enemy);
+            currentActionPoints = currentActionPoints - spellE.actionPointsCost;
+            setOnCooldown(2);
+            return provideE(enemy).description;
+        }
+        System.out.println(spellIsOnCooldown);
+        return new Description();
     }
 
     public final Description useR(Enemy enemy) {
-        voiceHandler.playRSound();
-        Spell spellR = provideR(enemy);
-        currentActionPoints = currentActionPoints - spellR.actionPointsCost;
-        return provideR(enemy).description;
+        if (!isSpellOnCooldown(cooldown[3])) {
+            voiceHandler.playRSound();
+            Spell spellR = provideR(enemy);
+            currentActionPoints = currentActionPoints - spellR.actionPointsCost;
+            setOnCooldown(3);
+            return provideR(enemy).description;
+        }
+        System.out.println(spellIsOnCooldown);
+        return new Description();
     }
 
     protected boolean isSpellOnCooldown(boolean whichSpell) {
@@ -83,6 +106,15 @@ public abstract class Champion implements Enemy, SpellProvider {
     //reset
     public final void resetCurrentActionPoints() { //
         currentActionPoints = actionPoints;
+    }
+
+    //cooldowns
+    public final void resetCooldowns() {
+        Arrays.fill(cooldown, Boolean.FALSE);
+    }
+
+    protected void setOnCooldown(int spellNumber) {
+        cooldown[spellNumber] = true;
     }
 
     //getters, setters
