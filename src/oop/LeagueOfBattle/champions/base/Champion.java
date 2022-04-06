@@ -58,9 +58,10 @@ public abstract class Champion implements Enemy, SpellProvider {
             currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
             setOnCooldown(0);
             return spellQ.description;
+        }else {
+            System.out.println(spellIsOnCooldown);
+            return new Description();
         }
-        System.out.println(spellIsOnCooldown);
-        return new Description();
     }
 
     public final Description useW(Enemy enemy) {
@@ -70,9 +71,10 @@ public abstract class Champion implements Enemy, SpellProvider {
             currentActionPoints = currentActionPoints - spellW.actionPointsCost;
             setOnCooldown(1);
             return spellW.description;
+        }else {
+            System.out.println(spellIsOnCooldown);
+            return new Description();
         }
-        System.out.println(spellIsOnCooldown);
-        return new Description();
     }
 
     public final Description useE(Enemy enemy) {
@@ -81,10 +83,11 @@ public abstract class Champion implements Enemy, SpellProvider {
             Spell spellE = provideE(enemy);
             currentActionPoints = currentActionPoints - spellE.actionPointsCost;
             setOnCooldown(2);
-            return provideE(enemy).description;
+            return spellE.description;
+        }else {
+            System.out.println(spellIsOnCooldown);
+            return new Description();
         }
-        System.out.println(spellIsOnCooldown);
-        return new Description();
     }
 
     public final Description useR(Enemy enemy) {
@@ -93,10 +96,11 @@ public abstract class Champion implements Enemy, SpellProvider {
             Spell spellR = provideR(enemy);
             currentActionPoints = currentActionPoints - spellR.actionPointsCost;
             setOnCooldown(3);
-            return provideR(enemy).description;
+            return spellR.description;
+        }else {
+            System.out.println(spellIsOnCooldown);
+            return new Description();
         }
-        System.out.println(spellIsOnCooldown);
-        return new Description();
     }
 
     protected boolean isSpellOnCooldown(boolean whichSpell) {

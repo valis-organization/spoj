@@ -67,8 +67,9 @@ public class Rengar extends Champion {
     public Spell provideR(Enemy enemy) {
         attackDimig = attackDimig + 20;
         useQ(enemy);
-        useW(enemy);
-        useE(enemy);
+        provideE(enemy);
+        provideW(enemy);
+        provideE(enemy);
         attackDimig = attackDimig - 20;
         return new Spell(new Description(), 4);
     }

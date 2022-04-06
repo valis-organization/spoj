@@ -98,6 +98,7 @@ public class Garen extends Champion {
 
         int spins = MathHelper.randomInt(0, 13);
         int spinsDamage = 15;
+        System.out.println("SPINS: " + spins);
         for (int i = 1; i <= spins; i++) {
             spinsDamage = spinsDamage + 7;
         }
