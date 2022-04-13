@@ -108,7 +108,6 @@ public class Garen extends Champion {
 
     @Override
     public Spell provideR(Enemy enemy) {
-
         int enemyHpPercentage = enemy.getHpPercentage();
         int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
         Description spellR = new Description(0, damageDealt, 0, 0, 0, 0, true);

@@ -53,10 +53,10 @@ public abstract class Champion implements Enemy, SpellProvider {
 
     public final Description useQ(Enemy enemy) {
         if (!isSpellOnCooldown(cooldown[0])) {
+            setOnCooldown(0);
             Spell spellQ = provideQ(enemy);
             voiceHandler.playQSound();
             currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
-            setOnCooldown(0);
             return spellQ.description;
         }else {
             System.out.println(spellIsOnCooldown);
@@ -66,10 +66,10 @@ public abstract class Champion implements Enemy, SpellProvider {
 
     public final Description useW(Enemy enemy) {
         if (!isSpellOnCooldown(cooldown[1])) {
+            setOnCooldown(1);
             Spell spellW = provideW(enemy);
             voiceHandler.playWSound();
             currentActionPoints = currentActionPoints - spellW.actionPointsCost;
-            setOnCooldown(1);
             return spellW.description;
         }else {
             System.out.println(spellIsOnCooldown);
@@ -119,6 +119,10 @@ public abstract class Champion implements Enemy, SpellProvider {
 
     protected void setOnCooldown(int spellNumber) {
         cooldown[spellNumber] = true;
+    }
+
+    protected void resetTheCooldown(int spellNumber) {
+        cooldown[spellNumber] = false;
     }
 
     //getters, setters
