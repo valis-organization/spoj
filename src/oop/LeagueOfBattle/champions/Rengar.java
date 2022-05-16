@@ -36,14 +36,12 @@ public class Rengar extends Champion {
 
     @Override
     public Spell provideQ(Enemy enemy) {
-        rengarVoiceHandler.playQSound();
         Description spellQ = new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
         return new Spell(spellQ, 2);
     }
 
     @Override
     public Spell provideW(Enemy enemy) {
-        rengarVoiceHandler.playWSound();
         int healedHp = MathHelper.randomInt(0, 21);
 
         if ((MathHelper.randomInt(1, 2) == 1)) {
@@ -58,7 +56,6 @@ public class Rengar extends Champion {
 
     @Override
     public Spell provideE(Enemy enemy) {
-        rengarVoiceHandler.playESound();
         Description spellE = new Description(1, (int) (attackDimig * 0.9), 0, 0, 0, 0, false);
         return new Spell(spellE, 2);
     }
@@ -71,7 +68,7 @@ public class Rengar extends Champion {
         provideW(enemy);
         provideE(enemy);
         attackDimig = attackDimig - 20;
-        return new Spell(new Description(), 4);
+        return new Spell(new Description(), actionPoints);
     }
     /*
 

@@ -30,13 +30,17 @@ public class RyzeVoiceHandler implements ChampionVoiceLineHandler {
 
     @Override
     public void playQSound() {
-        if (MathHelper.randomBoolean()) {
+        int rand = MathHelper.randomInt(1, 4);
+        if (rand == 1) {
             soundHandler.playSound(Q1);
-        } else {
+        } else if (rand == 2) {
             soundHandler.playSound(Q2);
+        } else if (rand == 3) {
+            soundHandler.playSound(MQ1);
+        } else if (rand == 4) {
+            soundHandler.playSound(MQ2);
         }
     }
-
     @Override
     public void playWSound() {
         int rand = MathHelper.randomInt(1, 5);

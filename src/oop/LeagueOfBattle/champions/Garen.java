@@ -111,7 +111,7 @@ public class Garen extends Champion {
         int enemyHpPercentage = enemy.getHpPercentage();
         int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
         Description spellR = new Description(0, damageDealt, 0, 0, 0, 0, true);
-        return new Spell(spellR, 4);
+        return new Spell(spellR, actionPoints);
     }
 
    /* @Override

@@ -62,4 +62,5 @@ public class GarenVoiceHandler implements ChampionVoiceLineHandler {
             soundHandler.playSound(R2);
         }
     }
+
 }
