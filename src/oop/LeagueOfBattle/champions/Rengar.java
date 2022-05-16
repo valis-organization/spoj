@@ -22,7 +22,7 @@ public class Rengar extends Champion {
         abilityPower = 0;
         attackDimig = 50;
         actionPoints = 4;
-        armorPenetration = 0;
+        armorPenetration = 20;
         currentActionPoints = actionPoints;
         costQ = 2;
         costW = 1;
