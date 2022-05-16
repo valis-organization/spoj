@@ -71,6 +71,16 @@ public class Garen extends Champion {
         return new Spell(spellR, costR);
     }
 
+    @Override
+    public Spell providePassive(Enemy enemy) {
+        if (hp != maxHP) {
+            hp = (int) (hp + ((maxHP - hp) * 0.035));
+            System.out.println("Perseverance: Garen regenerated " + ((maxHP - hp) * 0.035) + " hp.");
+        }
+        armor++;
+        return new Spell(new Description(),0);
+    }
+
    /* @Override
     public Description useR() {
         int dimigDealt = (int) (5 + ((maxHP - hp) * 0.15));

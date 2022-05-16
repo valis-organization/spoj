@@ -91,6 +91,13 @@ public class Ryze extends Champion {
         costR++;
         return new Spell(new Description(), costR);
     }
+
+    @Override
+    public Spell providePassive(Enemy enemy) {
+        abilityPower = abilityPower + 3;
+        System.out.println("Passive has been used");
+        return new Spell(new Description(), 0);
+    }
 }
 
 /*

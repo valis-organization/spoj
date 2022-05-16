@@ -55,6 +55,11 @@ public class Vladimir extends Champion {
     public Spell provideR(Enemy enemy) {
         return new Spell(new Description(), 2);
     }
+
+    @Override
+    public Spell providePassive(Enemy enemy) {
+        return null;
+    }
 }
 /*   @Override
     public void spellQ(Champion champion) {

@@ -37,6 +37,7 @@ public class Game {
                 roundCount++;
                 printOnBeginningOfTheRound();
                 resetAbilities(championInMove,attackedChampion);
+                usePassiveSpells(championInMove,attackedChampion);
             }
 
             while (championInMove.getCurrentActionPoints() > 0 && attackedChampion.getHp() > 0) {
@@ -105,7 +106,10 @@ public class Game {
         championInMove.resetCooldowns();
         attackedChampion.resetCooldowns();
     }
-
+    private void usePassiveSpells(Champion championInMove, Champion attackedChampion){
+        championInMove.usePassive(attackedChampion);
+        attackedChampion.usePassive(championInMove);
+    }
     private void printOnBeginningOfTheRound() {
         subtitlesPrinter.printEnter(15);
         subtitlesPrinter.printRoundCount(roundCount);

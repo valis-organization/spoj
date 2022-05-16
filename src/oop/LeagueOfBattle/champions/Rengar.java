@@ -74,6 +74,11 @@ public class Rengar extends Champion {
         attackDimig = attackDimig - 20;
         return new Spell(new Description(), costR);
     }
+
+    @Override
+    public Spell providePassive(Enemy enemy) {
+        return null;
+    }
     /*
 
     @Override

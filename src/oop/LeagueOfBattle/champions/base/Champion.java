@@ -108,7 +108,10 @@ public abstract class Champion implements Enemy, SpellProvider {
             return new Description();
         }
     }
-
+    public final Description usePassive(Enemy enemy) {
+            Spell spellPassive = providePassive(enemy);
+            return new Description();
+    }
     protected boolean isSpellOnCooldown(boolean whichSpell) {
         return whichSpell;
     }

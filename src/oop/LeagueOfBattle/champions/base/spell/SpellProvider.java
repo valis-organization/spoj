@@ -12,4 +12,6 @@ public interface SpellProvider {
     Spell provideE(Enemy enemy);
 
     Spell provideR(Enemy enemy);
+
+    Spell providePassive(Enemy enemy);
 }
