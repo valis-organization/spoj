@@ -24,6 +24,10 @@ public class Rengar extends Champion {
         actionPoints = 4;
         armorPenetration = 0;
         currentActionPoints = actionPoints;
+        costQ = 2;
+        costW = 1;
+        costE = 2;
+        costR = actionPoints;
         isAssassin = true;
         this.rengarVoiceHandler = rengarVoiceHandler;
     }
@@ -37,7 +41,7 @@ public class Rengar extends Champion {
     @Override
     public Spell provideQ(Enemy enemy) {
         Description spellQ = new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
-        return new Spell(spellQ, 2);
+        return new Spell(spellQ, costQ);
     }
 
     @Override
@@ -51,13 +55,13 @@ public class Rengar extends Champion {
             System.out.println("You did not heal yourself");
         }
         Description spellW = new Description();
-        return new Spell(spellW, 1);
+        return new Spell(spellW, costW);
     }
 
     @Override
     public Spell provideE(Enemy enemy) {
         Description spellE = new Description(1, (int) (attackDimig * 0.9), 0, 0, 0, 0, false);
-        return new Spell(spellE, 2);
+        return new Spell(spellE, costE);
     }
 
     @Override
@@ -68,7 +72,7 @@ public class Rengar extends Champion {
         provideW(enemy);
         provideE(enemy);
         attackDimig = attackDimig - 20;
-        return new Spell(new Description(), actionPoints);
+        return new Spell(new Description(), costR);
     }
     /*
 

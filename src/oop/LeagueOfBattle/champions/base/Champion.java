@@ -22,10 +22,16 @@ public abstract class Champion implements Enemy, SpellProvider {
     protected int attackDimig;
     protected float armorPenetration;
     protected float magicPenetration;
+    //ActionPoints and Cooldowns
     protected int actionPoints;
     protected int currentActionPoints;
-    protected boolean isAssassin;  //todo interface?
+    protected int costQ;
+    protected int costW;
+    protected int costE;
+    protected int costR;
     protected boolean[] cooldown = new boolean[4];
+
+    protected boolean isAssassin;  //todo interface?
 
     public Champion(ChampionVoiceLineHandler voiceHandler) {
         this.voiceHandler = voiceHandler;
@@ -52,7 +58,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     public final Description useQ(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[0])) {
+        if (!isSpellOnCooldown(cooldown[0]) && currentActionPoints >= costQ) {
             setOnCooldown(0);
             Spell spellQ = provideQ(enemy);
             voiceHandler.playQSound();
@@ -65,7 +71,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     public final Description useW(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[1])) {
+        if (!isSpellOnCooldown(cooldown[1])&& currentActionPoints >= costW) {
             setOnCooldown(1);
             Spell spellW = provideW(enemy);
             voiceHandler.playWSound();
@@ -78,7 +84,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     public final Description useE(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[2])) {
+        if (!isSpellOnCooldown(cooldown[2]) && currentActionPoints >= costE) {
             voiceHandler.playESound();
             Spell spellE = provideE(enemy);
             currentActionPoints = currentActionPoints - spellE.actionPointsCost;
@@ -91,7 +97,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     public final Description useR(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[3])) {
+        if (!isSpellOnCooldown(cooldown[3]) && currentActionPoints >= costR) {
             voiceHandler.playRSound();
             Spell spellR = provideR(enemy);
             currentActionPoints = currentActionPoints - spellR.actionPointsCost;

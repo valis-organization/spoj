@@ -24,9 +24,61 @@ public class Garen extends Champion {
         actionPoints = 4;
         armorPenetration = 0;
         currentActionPoints = actionPoints;
+        costQ = 2;
+        costW = 1;
+        costE = 2;
+        costR = actionPoints;
         isAssassin = false;
-       // cooldown = new boolean[3];
     }
+
+    @Override
+    public Spell provideAA(Enemy enemy) {
+        Description AA = new Description(0, attackDimig, 0, 0, 0, 0, false);
+        return new Spell(AA, 1);
+    }
+
+    @Override
+    public Spell provideQ(Enemy enemy) {
+            Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
+            return new Spell(spellQ, costQ);
+    }
+
+    @Override
+    public Spell provideW(Enemy enemy) {
+        armor = armor + 2;
+        magicResist = magicResist + 2;
+        return new Spell(new Description(), costW);
+    }
+
+    @Override
+    public Spell provideE(Enemy enemy) {
+
+        int spins = MathHelper.randomInt(0, 13);
+        int spinsDamage = 15;
+        System.out.println("SPINS: " + spins);
+        for (int i = 1; i <= spins; i++) {
+            spinsDamage = spinsDamage + 7;
+        }
+        Description spellE = new Description(0, spinsDamage, 0, 0, 0, 0, false);
+        return new Spell(spellE, costE);
+    }
+
+    @Override
+    public Spell provideR(Enemy enemy) {
+        int enemyHpPercentage = enemy.getHpPercentage();
+        int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
+        Description spellR = new Description(0, damageDealt, 0, 0, 0, 0, true);
+        return new Spell(spellR, costR);
+    }
+
+   /* @Override
+    public Description useR() {
+        int dimigDealt = (int) (5 + ((maxHP - hp) * 0.15));
+        return new Description();
+    }
+*/
+}
+
 
     /* @Override
      public void passiveSpell() {
@@ -74,51 +126,3 @@ public class Garen extends Champion {
              return new Description(0, damageDealt, 0, 0, 0, 0, true);
          }
      */
-    @Override
-    public Spell provideAA(Enemy enemy) {
-        Description AA = new Description(0, attackDimig, 0, 0, 0, 0, false);
-        return new Spell(AA, 1);
-    }
-
-    @Override
-    public Spell provideQ(Enemy enemy) {
-            Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
-            return new Spell(spellQ, 2);
-    }
-
-    @Override
-    public Spell provideW(Enemy enemy) {
-        armor = armor + 2;
-        magicResist = magicResist + 2;
-        return new Spell(new Description(), 1);
-    }
-
-    @Override
-    public Spell provideE(Enemy enemy) {
-
-        int spins = MathHelper.randomInt(0, 13);
-        int spinsDamage = 15;
-        System.out.println("SPINS: " + spins);
-        for (int i = 1; i <= spins; i++) {
-            spinsDamage = spinsDamage + 7;
-        }
-        Description spellE = new Description(0, spinsDamage, 0, 0, 0, 0, false);
-        return new Spell(spellE, 2);
-    }
-
-    @Override
-    public Spell provideR(Enemy enemy) {
-        int enemyHpPercentage = enemy.getHpPercentage();
-        int damageDealt = (int) (5 + enemyHpPercentage * 0.15);
-        Description spellR = new Description(0, damageDealt, 0, 0, 0, 0, true);
-        return new Spell(spellR, actionPoints);
-    }
-
-   /* @Override
-    public Description useR() {
-        int dimigDealt = (int) (5 + ((maxHP - hp) * 0.15));
-        return new Description();
-    }
-*/
-}
-
