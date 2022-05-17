@@ -36,6 +36,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     public Champion(ChampionVoiceLineHandler voiceHandler) {
         this.voiceHandler = voiceHandler;
     }
+
     String spellIsOnCooldown = "Your spell is on cooldown! Wait for the next round."; // TEMPORARY VARIABLE
 
     public final void receiveSpell(Description description) {
@@ -64,20 +65,20 @@ public abstract class Champion implements Enemy, SpellProvider {
             voiceHandler.playQSound();
             currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
             return spellQ.description;
-        }else {
+        } else {
             System.out.println(spellIsOnCooldown);
             return new Description();
         }
     }
 
     public final Description useW(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[1])&& currentActionPoints >= costW) {
+        if (!isSpellOnCooldown(cooldown[1]) && currentActionPoints >= costW) {
             setOnCooldown(1);
             Spell spellW = provideW(enemy);
             voiceHandler.playWSound();
             currentActionPoints = currentActionPoints - spellW.actionPointsCost;
             return spellW.description;
-        }else {
+        } else {
             System.out.println(spellIsOnCooldown);
             return new Description();
         }
@@ -90,7 +91,7 @@ public abstract class Champion implements Enemy, SpellProvider {
             currentActionPoints = currentActionPoints - spellE.actionPointsCost;
             setOnCooldown(2);
             return spellE.description;
-        }else {
+        } else {
             System.out.println(spellIsOnCooldown);
             return new Description();
         }
@@ -103,15 +104,17 @@ public abstract class Champion implements Enemy, SpellProvider {
             currentActionPoints = currentActionPoints - spellR.actionPointsCost;
             setOnCooldown(3);
             return spellR.description;
-        }else {
+        } else {
             System.out.println(spellIsOnCooldown);
             return new Description();
         }
     }
+
     public final Description usePassive(Enemy enemy) {
-            Spell spellPassive = providePassive(enemy);
-            return new Description();
+        Spell spellPassive = providePassive(enemy);
+        return new Description();
     }
+
     protected boolean isSpellOnCooldown(boolean whichSpell) {
         return whichSpell;
     }
@@ -160,9 +163,8 @@ public abstract class Champion implements Enemy, SpellProvider {
         return name;
     }
 
-
     @Override
-    public final int getHpPercentage() {
-        return hp / maxHP;
+    public int getHpPercentage() {
+        return (int) hp / maxHP;
     }
 }

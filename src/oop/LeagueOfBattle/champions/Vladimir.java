@@ -38,6 +38,11 @@ public class Vladimir extends Champion {
 
     @Override
     public Spell provideQ(Enemy enemy) {
+        int hpCost = (int) (0.05 * hp);
+        hp = hp - hpCost;
+        System.out.println("Vladimir used " + hpCost + " to prepare his spell.");
+
+        //int damageDealt = 2*abilityPower/enemy.
         return new Spell(new Description(), 2);
     }
 
