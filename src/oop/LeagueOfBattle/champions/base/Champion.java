@@ -164,7 +164,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     @Override
-    public int getHpPercentage() {
+    public final int getHpPercentage() {
         return (int) hp / maxHP;
     }
 }

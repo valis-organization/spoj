@@ -41,9 +41,11 @@ public class Vladimir extends Champion {
         int hpCost = (int) (0.05 * hp);
         hp = hp - hpCost;
         System.out.println("Vladimir used " + hpCost + " to prepare his spell.");
-
-        //int damageDealt = 2*abilityPower/enemy.
-        return new Spell(new Description(), 2);
+        int absoluteDamageDealt = 2 * abilityPower;
+        int damageHealed = (int) (absoluteDamageDealt * 0.1);
+        hp = hp + damageHealed;
+        System.out.println(damageHealed);
+        return new Spell(new Description(0, 0, absoluteDamageDealt, 0, 0, 0, false), costQ);
     }
 
     @Override
@@ -63,7 +65,14 @@ public class Vladimir extends Champion {
 
     @Override
     public Spell providePassive(Enemy enemy) {
-        return null;
+        if (maxHP * 0.5 >= hp) {
+            attackDimig = attackDimig + 10;
+            System.out.println("Crimson Pact: Vladimir gained 10 AP. Current AP: " + attackDimig);
+        } else {
+            hp = hp - 20;
+            System.out.println("Crimson Pact: Vladimir lost 20 blood.");
+        }
+        return new Spell(new Description(),0);
     }
 }
 /*   @Override
