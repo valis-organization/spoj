@@ -6,17 +6,16 @@ import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
-import oop.LeagueOfBattle.voiceLines.Rengar.RengarVoiceHandler;
+import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
 public class Rengar extends Champion {
-    private final ChampionVoiceLineHandler rengarVoiceHandler;
     private final String NAME = "Rengar";
 
-    public Rengar(ChampionVoiceLineHandler rengarVoiceHandler) {
-        super(rengarVoiceHandler);
+    public Rengar(ChampionVoiceLineHandler rengarVoiceHandler, SubtitlesPrinter subtitlesPrinter) {
+        super(rengarVoiceHandler, subtitlesPrinter);
         name = NAME;
         maxHP = 200;
-        hp = 200;
+        currentHp = 200;
         armor = 20;
         magicResist = 10;
         abilityPower = 0;
@@ -29,7 +28,6 @@ public class Rengar extends Champion {
         costE = 2;
         costR = actionPoints;
         isAssassin = true;
-        this.rengarVoiceHandler = rengarVoiceHandler;
     }
 
     @Override
@@ -49,10 +47,10 @@ public class Rengar extends Champion {
         int healedHp = MathHelper.randomInt(0, 21);
 
         if ((MathHelper.randomInt(1, 2) == 1)) {
-            hp = hp + healedHp;
-            System.out.println("Successfully healed for: " + healedHp + "hp, Your current hp is: " + hp); //TODO subtitles for champions
+            currentHp = currentHp + healedHp;
+            subtitlesPrinter.rengarSuccessfulHeal(healedHp, currentHp);
         } else {
-            System.out.println("You did not heal yourself");
+            subtitlesPrinter.rengarUnSuccessfulHeal();
         }
         Description spellW = new Description();
         return new Spell(spellW, costW);
@@ -77,7 +75,9 @@ public class Rengar extends Champion {
 
     @Override
     public Spell providePassive(Enemy enemy) {
-        return null;
+        attackDimig = attackDimig + 5;
+        subtitlesPrinter.rengarPrintPassive();
+        return new Spell(new Description(), 0);
     }
     /*
 

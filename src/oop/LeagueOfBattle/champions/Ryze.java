@@ -6,16 +6,16 @@ import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
+import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
 public class Ryze extends Champion {
-    private final ChampionVoiceLineHandler ryzeVoiceHandler;
     private final String RYZE = "Ryze";
 
-    public Ryze(ChampionVoiceLineHandler ryzeVoiceHandler) {
-        super(ryzeVoiceHandler);
+    public Ryze(ChampionVoiceLineHandler ryzeVoiceHandler, SubtitlesPrinter subtitlesPrinter) {
+        super(ryzeVoiceHandler, subtitlesPrinter);
         name = RYZE;
         maxHP = 200;
-        hp = 200;
+        currentHp = 200;
         armor = 20;
         magicResist = 10;
         abilityPower = 50;
@@ -28,7 +28,6 @@ public class Ryze extends Champion {
         costE = 1;
         costR = actionPoints;
         isAssassin = false;
-        this.ryzeVoiceHandler = ryzeVoiceHandler;
     }
 
     boolean isMarked = false;
@@ -57,22 +56,23 @@ public class Ryze extends Champion {
         int random = MathHelper.randomInt(1, 6);
         if (random == 1) {
             abilityPower = abilityPower + 5;
-            System.out.println("Ryze gained 5 AP");
+            subtitlesPrinter.ryzeGainsAp();
         } else if (random == 2) {
             resetTheCooldown(0);
-            System.out.println("Ryze: Q COOLDOWN HAS BEEN RESET!");
+            subtitlesPrinter.ryzeResetQCooldown();
         } else if (random == 3) {
             resetTheCooldown(1);
-            System.out.println("Ryze: W COOLDOWN HAS BEEN RESET!");
+            subtitlesPrinter.ryzeResetWCooldown();
         } else if (random == 4) {
             resetTheCooldown(2);
             currentActionPoints++;
-            System.out.println("Ryze: E COOLDOWN HAS BEEN RESET! Gained 1 action point");
+            subtitlesPrinter.ryzeResetECooldown();
+            subtitlesPrinter.ryzeGainsActionPoint();
         } else if (random == 5) {
             currentActionPoints++;
-            System.out.println("Ryze: Gained 1 action points");
+            subtitlesPrinter.ryzeGainsActionPoint();
         } else if (random == 6) {
-            System.out.println("The scroll has burned out. Nothing happens.");
+            subtitlesPrinter.ryzeBurnedScroll();
         }
         return new Spell(new Description(), costW);
     }
@@ -94,8 +94,9 @@ public class Ryze extends Champion {
 
     @Override
     public Spell providePassive(Enemy enemy) {
-        abilityPower = abilityPower + 3;
-        System.out.println("Passive has been used");
+        int gainedAp = MathHelper.randomInt(1, 5);
+        abilityPower = abilityPower + gainedAp;
+        subtitlesPrinter.ryzePrintPassive(gainedAp);
         return new Spell(new Description(), 0);
     }
 }

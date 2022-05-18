@@ -17,14 +17,10 @@ public class Game {
 
     public Game(Champion champion1, Champion champion2, SubtitlesPrinter subtitlesPrinter) {
         this.subtitlesPrinter = subtitlesPrinter;
-
-        if (champion2.isAssassin()) { // todo crate abstraction around the logic of picking first player to move
-            this.champion1 = champion2;
-            this.champion2 = champion1;
-        } else {
-            this.champion1 = champion1;
-            this.champion2 = champion2;
-        }
+        // todo crate abstraction around the logic of picking first player to move
+            Champion firstPick = determineFirstPick(champion1,champion2);
+            this.champion1 = firstPick;
+            this.champion2 = determineSecondPick(firstPick,champion1,champion2);
     }
 
     public void start() throws InterruptedException {
@@ -36,8 +32,8 @@ public class Game {
             if (turnCount % 2 != 0) {
                 roundCount++;
                 printOnBeginningOfTheRound();
-                resetAbilities(championInMove,attackedChampion);
-                usePassiveSpells(championInMove,attackedChampion);
+                resetAbilities(championInMove, attackedChampion);
+                usePassiveSpells(championInMove, attackedChampion);
             }
 
             while (championInMove.getCurrentActionPoints() > 0 && attackedChampion.getHp() > 0) {
@@ -100,16 +96,31 @@ public class Game {
         }
         return null;
     }
-    private void resetAbilities(Champion championInMove, Champion attackedChampion){
+
+    private Champion determineFirstPick(Champion champion1, Champion champion2) {
+        if (champion2.isAssassin()) {
+            return champion2;
+        }
+        return champion1;
+    }
+    private Champion determineSecondPick(Champion firstPick, Champion champion1, Champion champion2){
+      if(firstPick.equals(champion1)){
+          return champion2;
+       }
+      return champion1;
+    }
+    private void resetAbilities(Champion championInMove, Champion attackedChampion) {
         championInMove.resetCurrentActionPoints();
         attackedChampion.resetCurrentActionPoints();
         championInMove.resetCooldowns();
         attackedChampion.resetCooldowns();
     }
-    private void usePassiveSpells(Champion championInMove, Champion attackedChampion){
+
+    private void usePassiveSpells(Champion championInMove, Champion attackedChampion) {
         championInMove.usePassive(attackedChampion);
         attackedChampion.usePassive(championInMove);
     }
+
     private void printOnBeginningOfTheRound() {
         subtitlesPrinter.printEnter(15);
         subtitlesPrinter.printRoundCount(roundCount);

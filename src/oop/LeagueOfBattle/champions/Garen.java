@@ -7,16 +7,17 @@ import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
+import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
 public class Garen extends Champion {
 
     private final String GAREN = "Garen";
 
-    public Garen(ChampionVoiceLineHandler garenVoiceHandler) {
-        super(garenVoiceHandler);
+    public Garen(ChampionVoiceLineHandler garenVoiceHandler, SubtitlesPrinter subtitlesPrinter) {
+        super(garenVoiceHandler, subtitlesPrinter);
         name = GAREN;
         maxHP = 400;
-        hp = 400;
+        currentHp = 400;
         armor = 40;
         magicResist = 20;
         abilityPower = 0;
@@ -39,8 +40,8 @@ public class Garen extends Champion {
 
     @Override
     public Spell provideQ(Enemy enemy) {
-            Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
-            return new Spell(spellQ, costQ);
+        Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
+        return new Spell(spellQ, costQ);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class Garen extends Champion {
 
         int spins = MathHelper.randomInt(0, 13);
         int spinsDamage = 15;
-        System.out.println("SPINS: " + spins);
+        subtitlesPrinter.garenPrintSpinsCount(spins);
         for (int i = 1; i <= spins; i++) {
             spinsDamage = spinsDamage + 7;
         }
@@ -66,19 +67,21 @@ public class Garen extends Champion {
     @Override
     public Spell provideR(Enemy enemy) {
         int enemyHpPercentage = enemy.getHpPercentage();
-        int damageDealt = (int) (50 * (1.1- enemyHpPercentage));
-        Description spellR = new Description(0, 0, 0,damageDealt , 0, 0, true);
+        int damageDealt = (int) (50 * (1.1 - enemyHpPercentage));
+        Description spellR = new Description(0, 0, 0, damageDealt, 0, 0, true);
         return new Spell(spellR, costR);
     }
 
     @Override
     public Spell providePassive(Enemy enemy) {
-        if (hp != maxHP) {
-            hp = (int) (hp + ((maxHP - hp) * 0.035));
-            System.out.println("Perseverance: Garen regenerated " + ((maxHP - hp) * 0.035) + " hp.");
+        int minHpToGetPassive = maxHP - 30;
+        if (currentHp <= minHpToGetPassive) {
+            int regeneratedHp = (int) ((maxHP - currentHp) * 0.035);
+            currentHp = (currentHp + regeneratedHp);
+            subtitlesPrinter.garenPrintPassive(regeneratedHp);
         }
         armor++;
-        return new Spell(new Description(),0);
+        return new Spell(new Description(), 0);
     }
 
    /* @Override

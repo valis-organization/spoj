@@ -4,18 +4,18 @@ import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
-import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
+import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
 public class Vladimir extends Champion {
 
     private final String VLADIMIR = "Vladimir";
 
-    public Vladimir(ChampionVoiceLineHandler voiceHandler) {
-        super(voiceHandler);
+    public Vladimir(ChampionVoiceLineHandler voiceHandler, SubtitlesPrinter subtitlesPrinter) {
+        super(voiceHandler, subtitlesPrinter);
         name = VLADIMIR;
         maxHP = 300;
-        hp = 300;
+        currentHp = 300;
         armor = 20;
         magicResist = 20;
         abilityPower = 40;
@@ -38,12 +38,12 @@ public class Vladimir extends Champion {
 
     @Override
     public Spell provideQ(Enemy enemy) {
-        int hpCost = (int) (0.05 * hp);
-        hp = hp - hpCost;
-        System.out.println("Vladimir used " + hpCost + " to prepare his spell.");
+        int hpCost = (int) (0.05 * currentHp);
+        currentHp = currentHp - hpCost;
+        subtitlesPrinter.vladimirLostBlood(hpCost);
         int absoluteDamageDealt = 2 * abilityPower;
         int damageHealed = (int) (absoluteDamageDealt * 0.1);
-        hp = hp + damageHealed;
+        currentHp = currentHp + damageHealed;
         System.out.println(damageHealed);
         return new Spell(new Description(0, 0, absoluteDamageDealt, 0, 0, 0, false), costQ);
     }
@@ -65,14 +65,14 @@ public class Vladimir extends Champion {
 
     @Override
     public Spell providePassive(Enemy enemy) {
-        if (maxHP * 0.5 >= hp) {
-            attackDimig = attackDimig + 10;
-            System.out.println("Crimson Pact: Vladimir gained 10 AP. Current AP: " + attackDimig);
+        if (maxHP * 0.5 >= currentHp) {
+            abilityPower = abilityPower + 10;
+            subtitlesPrinter.vladimirPrintPassiveGainedAp(abilityPower);
         } else {
-            hp = hp - 20;
-            System.out.println("Crimson Pact: Vladimir lost 20 blood.");
+            currentHp = currentHp - 20;
+            subtitlesPrinter.vladimirPrintPassiveLostBlood();
         }
-        return new Spell(new Description(),0);
+        return new Spell(new Description(), 0);
     }
 }
 /*   @Override

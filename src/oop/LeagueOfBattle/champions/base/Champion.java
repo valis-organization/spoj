@@ -4,16 +4,18 @@ import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.champions.base.spell.SpellProvider;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
+import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
 import java.util.Arrays;
 
 
 public abstract class Champion implements Enemy, SpellProvider {
+    protected final SubtitlesPrinter subtitlesPrinter;
     public ChampionVoiceLineHandler voiceHandler;
     protected String name;
     //hp
     protected int maxHP;
-    protected int hp;
+    protected int currentHp;
     //defense
     protected int armor;
     protected int magicResist;
@@ -33,11 +35,10 @@ public abstract class Champion implements Enemy, SpellProvider {
 
     protected boolean isAssassin;  //todo interface?
 
-    public Champion(ChampionVoiceLineHandler voiceHandler) {
+    public Champion(ChampionVoiceLineHandler voiceHandler, SubtitlesPrinter subtitlesPrinter) {
         this.voiceHandler = voiceHandler;
+        this.subtitlesPrinter = subtitlesPrinter;
     }
-
-    String spellIsOnCooldown = "Your spell is on cooldown! Wait for the next round."; // TEMPORARY VARIABLE
 
     public final void receiveSpell(Description description) {
         int relativeArmor = (int) ((armor * (1 - description.armorPen * 0.01)) / 2);
@@ -45,9 +46,9 @@ public abstract class Champion implements Enemy, SpellProvider {
         relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
         relativeMR = relativeMR == 0 ? 1 : relativeMR;
 
-        this.hp = hp - description.adDmg / relativeArmor;
-        this.hp = hp - description.apDmg / relativeMR;
-        this.hp = hp - description.trueDmg;
+        this.currentHp = currentHp - description.adDmg / relativeArmor;
+        this.currentHp = currentHp - description.apDmg / relativeMR;
+        this.currentHp = currentHp - description.trueDmg;
         this.currentActionPoints = currentActionPoints - description.removedActionPoints;
 
     }
@@ -66,7 +67,7 @@ public abstract class Champion implements Enemy, SpellProvider {
             currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
             return spellQ.description;
         } else {
-            System.out.println(spellIsOnCooldown);
+            subtitlesPrinter.spellOnCooldown();
             return new Description();
         }
     }
@@ -79,7 +80,7 @@ public abstract class Champion implements Enemy, SpellProvider {
             currentActionPoints = currentActionPoints - spellW.actionPointsCost;
             return spellW.description;
         } else {
-            System.out.println(spellIsOnCooldown);
+            subtitlesPrinter.spellOnCooldown();
             return new Description();
         }
     }
@@ -92,7 +93,7 @@ public abstract class Champion implements Enemy, SpellProvider {
             setOnCooldown(2);
             return spellE.description;
         } else {
-            System.out.println(spellIsOnCooldown);
+            subtitlesPrinter.spellOnCooldown();
             return new Description();
         }
     }
@@ -105,7 +106,7 @@ public abstract class Champion implements Enemy, SpellProvider {
             setOnCooldown(3);
             return spellR.description;
         } else {
-            System.out.println(spellIsOnCooldown);
+            subtitlesPrinter.spellOnCooldown();
             return new Description();
         }
     }
@@ -143,7 +144,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     }
 
     public final float getHp() {
-        return hp;
+        return currentHp;
     }
 
     public final float getArmor() {
@@ -165,6 +166,6 @@ public abstract class Champion implements Enemy, SpellProvider {
 
     @Override
     public final int getHpPercentage() {
-        return (int) hp / maxHP;
+        return (int) currentHp / maxHP;
     }
 }

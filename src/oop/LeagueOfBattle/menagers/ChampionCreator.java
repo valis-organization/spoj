@@ -24,10 +24,10 @@ public class ChampionCreator {
         VladimirVoiceHandler vladimirVoiceHandler = new VladimirVoiceHandler(soundHandler);
 
         ArrayList<Champion> championsList = new ArrayList<>();
-        Champion garen = new Garen(garenVoiceHandler);
-        Champion rengar = new Rengar(rengarVoiceHandler);
-        Champion ryze = new Ryze(ryzeVoiceHandler);
-        Champion vladimir = new Vladimir(vladimirVoiceHandler);
+        Champion garen = new Garen(garenVoiceHandler,subtitlesPrinter);
+        Champion rengar = new Rengar(rengarVoiceHandler,subtitlesPrinter);
+        Champion ryze = new Ryze(ryzeVoiceHandler,subtitlesPrinter);
+        Champion vladimir = new Vladimir(vladimirVoiceHandler,subtitlesPrinter);
 
         championsList.add(garen);
         championsList.add(rengar);
