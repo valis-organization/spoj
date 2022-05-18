@@ -31,9 +31,10 @@ public class Game {
             turnCount++;
             if (turnCount % 2 != 0) {
                 roundCount++;
-                printOnBeginningOfTheRound();
+                subtitlesPrinter.printEnter(15);
                 resetAbilities(championInMove, attackedChampion);
                 usePassiveSpells(championInMove, attackedChampion);
+                printOnBeginningOfTheRound();
             }
 
             while (championInMove.getCurrentActionPoints() > 0 && attackedChampion.getHp() > 0) {
@@ -57,7 +58,6 @@ public class Game {
             if (winner != null) {
                 subtitlesPrinter.printWinner(winner.getName());
             }
-            TimeUnit.SECONDS.sleep(2); //Wait for subtitles to be read.
         }
     }
 
@@ -124,10 +124,11 @@ public class Game {
     }
 
     private void printOnBeginningOfTheRound() {
-        subtitlesPrinter.printEnter(15);
-        subtitlesPrinter.printRoundCount(roundCount);
-        subtitlesPrinter.printTurn(champion1.getName());
         subtitlesPrinter.printHp(champion1);
         subtitlesPrinter.printHp(champion2);
+        subtitlesPrinter.printEnter(1);
+        subtitlesPrinter.printRoundCount(roundCount);
+        subtitlesPrinter.printEnter(1);
+        subtitlesPrinter.printTurn(champion1.getName());
     }
 }

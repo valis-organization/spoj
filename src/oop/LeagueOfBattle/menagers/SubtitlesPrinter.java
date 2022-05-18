@@ -16,13 +16,9 @@ public class SubtitlesPrinter {
         println("ROUND: " + roundCount + ". FIGHT!");
     }
 
-    public void printTurn(String championName) {
-        println(championName + "'s turn!            ");
-    }
+    public void printTurn(String championName) {println("================== " + championName + "'s turn! ==================");}
 
-    public void printHp(Champion champion) {
-        println(champion.getClass().getSimpleName() + ": " + champion.getHp() + " hp");
-    }
+    public void printHp(Champion champion) {println(champion.getClass().getSimpleName() + ": " + champion.getHp() + " hp");}
 
     public void printWinner(String championName) {
         println(championName + " has won!");
