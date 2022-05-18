@@ -41,6 +41,7 @@ public class VladimirVoiceHandler implements ChampionVoiceLineHandler {
             soundHandler.playSound(MQ2);
         }
     }
+
     @Override
     public void playWSound() {
         int rand = MathHelper.randomInt(1, 5);

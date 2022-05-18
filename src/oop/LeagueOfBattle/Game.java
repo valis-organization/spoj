@@ -18,9 +18,9 @@ public class Game {
     public Game(Champion champion1, Champion champion2, SubtitlesPrinter subtitlesPrinter) {
         this.subtitlesPrinter = subtitlesPrinter;
         // todo crate abstraction around the logic of picking first player to move
-            Champion firstPick = determineFirstPick(champion1,champion2);
-            this.champion1 = firstPick;
-            this.champion2 = determineSecondPick(firstPick,champion1,champion2);
+        Champion firstPick = determineFirstPick(champion1, champion2);
+        this.champion1 = firstPick;
+        this.champion2 = determineSecondPick(firstPick, champion1, champion2);
     }
 
     public void start() throws InterruptedException {
@@ -103,12 +103,14 @@ public class Game {
         }
         return champion1;
     }
-    private Champion determineSecondPick(Champion firstPick, Champion champion1, Champion champion2){
-      if(firstPick.equals(champion1)){
-          return champion2;
-       }
-      return champion1;
+
+    private Champion determineSecondPick(Champion firstPick, Champion champion1, Champion champion2) {
+        if (firstPick.equals(champion1)) {
+            return champion2;
+        }
+        return champion1;
     }
+
     private void resetAbilities(Champion championInMove, Champion attackedChampion) {
         championInMove.resetCurrentActionPoints();
         attackedChampion.resetCurrentActionPoints();
