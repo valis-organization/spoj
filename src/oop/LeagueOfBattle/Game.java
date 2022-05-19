@@ -1,7 +1,6 @@
 package oop.LeagueOfBattle;
 
 import oop.LeagueOfBattle.champions.base.Champion;
-import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.KeyType;
 import oop.LeagueOfBattle.menagers.KeyboardManager;
@@ -41,7 +40,7 @@ public class Game {
                 subtitlesPrinter.printActionPoints(championInMove.getCurrentActionPoints());
                 Description spell;
                 do {
-                    spell = getSpell(KeyboardManager.getKey(), championInMove, attackedChampion);
+                    spell = getSpell(KeyboardManager.getKey(), championInMove);
                 } while (spell == null);
 
                 attackedChampion.receiveSpell(spell);
@@ -61,22 +60,22 @@ public class Game {
         }
     }
 
-    private Description getSpell(KeyType type, Champion champion, Enemy enemy) {
+    private Description getSpell(KeyType type, Champion champion) {
         switch (type) {
             case AA -> {
-                return champion.useAA(enemy);
+                return champion.useAA();
             }
             case Q -> {
-                return champion.useQ(enemy);
+                return champion.useQ();
             }
             case W -> {
-                return champion.useW(enemy);
+                return champion.useW();
             }
             case E -> {
-                return champion.useE(enemy);
+                return champion.useE();
             }
             case R -> {
-                return champion.useR(enemy);
+                return champion.useR();
             }
         }
         return null;
@@ -119,8 +118,8 @@ public class Game {
     }
 
     private void usePassiveSpells(Champion championInMove, Champion attackedChampion) {
-        championInMove.usePassive(attackedChampion);
-        attackedChampion.usePassive(championInMove);
+        championInMove.usePassive();
+        attackedChampion.usePassive();
     }
 
     private void printOnBeginningOfTheRound() {

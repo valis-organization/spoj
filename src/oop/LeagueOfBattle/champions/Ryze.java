@@ -1,7 +1,6 @@
 package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
-import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
@@ -23,36 +22,36 @@ public class Ryze extends Champion {
         actionPoints = 3;
         armorPenetration = 10;
         currentActionPoints = actionPoints;
-        costQ = 2;
-        costW = 1;
-        costE = 1;
-        costR = actionPoints;
+     //   costQ = 2;
+     //   costW = 1;
+     //   costE = = 1;
+        //   costR = actionPoints;
         isAssassin = false;
     }
 
     boolean isMarked = false;
 
     @Override
-    public Spell provideAA(Enemy enemy) {
-        Description AA = new Description(0, attackDimig, 0, 0, 0, 0, false);
+    public Spell provideAA() {
+        Description AA = new Description(0, attackDimig, 0, false, 0, 0, false);
         return new Spell(AA, 1);
     }
 
     @Override
-    public Spell provideQ(Enemy enemy) {
+    public Spell provideQ() {
         Description spellQ;
         resetTheCooldown(2);
         if (isMarked) {
             isMarked = false;
-            spellQ = new Description(0, (int) (abilityPower * 3), 0, 0, 0, 0, false);
+            spellQ = new Description(0, (int) (abilityPower * 3), 0, false, 0, 0, false);
         } else {
-            spellQ = new Description(0, (int) (abilityPower * 1.5), 0, 0, 0, 0, false);
+            spellQ = new Description(0, (int) (abilityPower * 1.5), 0, false, 0, 0, false);
         }
-        return new Spell(spellQ, costQ);
+        return new Spell(spellQ, 2);
     }
 
     @Override
-    public Spell provideW(Enemy enemy) {
+    public Spell provideW() {
         int random = MathHelper.randomInt(1, 6);
         if (random == 1) {
             abilityPower = abilityPower + 5;
@@ -74,26 +73,26 @@ public class Ryze extends Champion {
         } else if (random == 6) {
             subtitlesPrinter.ryzeBurnedScroll();
         }
-        return new Spell(new Description(), costW);
+        return new Spell(new Description(), 1);
     }
 
     @Override
-    public Spell provideE(Enemy enemy) {
+    public Spell provideE() {
         isMarked = true;
         resetTheCooldown(0);
-        Description spellE = new Description(0, 0, (int) (abilityPower * 0.6), 0, 0, 0, false);
-        return new Spell(spellE, costE);
+        Description spellE = new Description(0, 0, (int) (abilityPower * 0.6), false, 0, 0, false);
+        return new Spell(spellE, 1);
     }
 
     @Override
-    public Spell provideR(Enemy enemy) {
+    public Spell provideR() {
         actionPoints++;
-        costR++;
-        return new Spell(new Description(), costR);
+     //   costR++;
+        return new Spell(new Description(), actionPoints);
     }
 
     @Override
-    public Spell providePassive(Enemy enemy) {
+    public Spell providePassive() {
         int gainedAp = MathHelper.randomInt(1, 5);
         abilityPower = abilityPower + gainedAp;
         subtitlesPrinter.ryzePrintPassive(gainedAp);

@@ -2,7 +2,6 @@ package oop.LeagueOfBattle.champions;
 
 
 import oop.LeagueOfBattle.champions.base.Champion;
-import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
@@ -25,34 +24,30 @@ public class Garen extends Champion {
         actionPoints = 4;
         armorPenetration = 0;
         currentActionPoints = actionPoints;
-        costQ = 2;
-        costW = 1;
-        costE = 2;
-        costR = actionPoints;
         isAssassin = false;
     }
 
     @Override
-    public Spell provideAA(Enemy enemy) {
-        Description AA = new Description(0, attackDimig, 0, 0, 0, 0, false);
+    public Spell provideAA() {
+        Description AA = new Description(0, attackDimig, 0, false, 0, 0, false);
         return new Spell(AA, 1);
     }
 
     @Override
-    public Spell provideQ(Enemy enemy) {
-        Description spellQ = new Description(0, attackDimig * 3, 0, 0, 0, 0, false);
-        return new Spell(spellQ, costQ);
+    public Spell provideQ() {
+        Description spellQ = new Description(0, attackDimig * 3, 0, false, 0, 0, false);
+        return new Spell(spellQ, 2);
     }
 
     @Override
-    public Spell provideW(Enemy enemy) {
+    public Spell provideW() {
         armor = armor + 2;
         magicResist = magicResist + 2;
-        return new Spell(new Description(), costW);
+        return new Spell(new Description(), 1);
     }
 
     @Override
-    public Spell provideE(Enemy enemy) {
+    public Spell provideE() {
 
         int spins = MathHelper.randomInt(0, 13);
         int spinsDamage = 15;
@@ -60,20 +55,20 @@ public class Garen extends Champion {
         for (int i = 1; i <= spins; i++) {
             spinsDamage = spinsDamage + 7;
         }
-        Description spellE = new Description(0, spinsDamage, 0, 0, 0, 0, false);
-        return new Spell(spellE, costE);
+        Description spellE = new Description(0, spinsDamage, 0, false, 0, 0, false);
+        return new Spell(spellE, 2);
     }
 
     @Override
-    public Spell provideR(Enemy enemy) {
-        int enemyHpPercentage = enemy.getHpPercentage();
-        int damageDealt = (int) (50 * (1.1 - enemyHpPercentage));
-        Description spellR = new Description(0, 0, 0, damageDealt, 0, 0, true);
-        return new Spell(spellR, costR);
+    public Spell provideR() {
+       // int enemyHpPercentage = enemy.getHpPercentage();
+        int damageDealt = (int) 50; //* (1.1 - enemyHpPercentage));
+        Description spellR = new Description(0, damageDealt, 0, true, 0, 0, true);
+        return new Spell(spellR, actionPoints);
     }
 
     @Override
-    public Spell providePassive(Enemy enemy) {
+    public Spell providePassive() {
         int minHpToGetPassive = maxHP - 30;
         if (currentHp <= minHpToGetPassive) {
             int regeneratedHp = (int) ((maxHP - currentHp) * 0.035);

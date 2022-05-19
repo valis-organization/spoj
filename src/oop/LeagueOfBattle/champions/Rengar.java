@@ -1,7 +1,6 @@
 package oop.LeagueOfBattle.champions;
 
 import oop.LeagueOfBattle.champions.base.Champion;
-import oop.LeagueOfBattle.champions.base.Enemy;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.helpers.MathHelper;
@@ -23,27 +22,27 @@ public class Rengar extends Champion {
         actionPoints = 4;
         armorPenetration = 20;
         currentActionPoints = actionPoints;
-        costQ = 2;
-        costW = 1;
-        costE = 2;
-        costR = actionPoints;
+       // costQ = 2;
+        //costW = 1;
+       // costE = 2;
+       // costR = actionPoints;
         isAssassin = true;
     }
 
     @Override
-    public Spell provideAA(Enemy enemy) {
-        Description AA = new Description(0, attackDimig, 0, 0, 0, 0, false);
+    public Spell provideAA() {
+        Description AA = new Description(0, attackDimig, 0, false, 0, 0, false);
         return new Spell(AA, 1);
     }
 
     @Override
-    public Spell provideQ(Enemy enemy) {
-        Description spellQ = new Description(0, attackDimig * 3, 0, 0, armorPenetration, 0, false);
-        return new Spell(spellQ, costQ);
+    public Spell provideQ() {
+        Description spellQ = new Description(0, attackDimig * 3, 0, false, armorPenetration, 0, false);
+        return new Spell(spellQ, 2);
     }
 
     @Override
-    public Spell provideW(Enemy enemy) {
+    public Spell provideW() {
         int healedHp = MathHelper.randomInt(0, 21);
 
         if ((MathHelper.randomInt(1, 2) == 1)) {
@@ -53,28 +52,27 @@ public class Rengar extends Champion {
             subtitlesPrinter.rengarUnSuccessfulHeal();
         }
         Description spellW = new Description();
-        return new Spell(spellW, costW);
+        return new Spell(spellW, 1);
     }
 
     @Override
-    public Spell provideE(Enemy enemy) {
-        Description spellE = new Description(1, (int) (attackDimig * 0.9), 0, 0, 0, 0, false);
-        return new Spell(spellE, costE);
+    public Spell provideE() {
+        Description spellE = new Description(1, (int) (attackDimig * 0.9), 0, false, 0, 0, false);
+        return new Spell(spellE, 2);
     }
 
     @Override
-    public Spell provideR(Enemy enemy) {
+    public Spell provideR() {
         attackDimig = attackDimig + 20;
-        useQ(enemy);
-        provideE(enemy);
-        provideW(enemy);
-        provideE(enemy);
+        useQ();
+        provideE();
+        provideW();
         attackDimig = attackDimig - 20;
-        return new Spell(new Description(), costR);
+        return new Spell(new Description(), actionPoints);
     }
 
     @Override
-    public Spell providePassive(Enemy enemy) {
+    public Spell providePassive() {
         attackDimig = attackDimig + 5;
         subtitlesPrinter.rengarPrintPassive();
         return new Spell(new Description(), 0);

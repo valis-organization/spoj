@@ -1,17 +1,15 @@
 package oop.LeagueOfBattle.champions.base.spell;
 
-import oop.LeagueOfBattle.champions.base.Enemy;
-
 public interface SpellProvider {
-    Spell provideAA(Enemy enemy);
+    Spell provideAA();
 
-    Spell provideQ(Enemy enemy);
+    Spell provideQ();
 
-    Spell provideW(Enemy enemy);
+    Spell provideW();
 
-    Spell provideE(Enemy enemy);
+    Spell provideE();
 
-    Spell provideR(Enemy enemy);
+    Spell provideR();
 
-    Spell providePassive(Enemy enemy);
+    Spell providePassive();
 }

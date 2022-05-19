@@ -9,7 +9,7 @@ import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 import java.util.Arrays;
 
 
-public abstract class Champion implements Enemy, SpellProvider {
+public abstract class Champion implements SpellProvider {
     protected final SubtitlesPrinter subtitlesPrinter;
     public ChampionVoiceLineHandler voiceHandler;
     protected String name;
@@ -27,10 +27,6 @@ public abstract class Champion implements Enemy, SpellProvider {
     //ActionPoints and Cooldowns
     protected int actionPoints;
     protected int currentActionPoints;
-    protected int costQ;
-    protected int costW;
-    protected int costE;
-    protected int costR;
     protected boolean[] cooldown = new boolean[4];
 
     protected boolean isAssassin;  //todo interface?
@@ -45,24 +41,36 @@ public abstract class Champion implements Enemy, SpellProvider {
         int relativeMR = (int) ((magicResist * (1 - description.magicPen * 0.01)) / 2);
         relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
         relativeMR = relativeMR == 0 ? 1 : relativeMR;
-
-        this.currentHp = currentHp - description.adDmg / relativeArmor;
-        this.currentHp = currentHp - description.apDmg / relativeMR;
-        this.currentHp = currentHp - description.trueDmg;
+        if(description.damageByMissingHp && description.trueDmg) {
+            int damageByMissingHp = (int) (description.adDmg * (1.1 - getHpPercentage()));
+            this.currentHp = currentHp - damageByMissingHp;
+        }else if(description.damageByMissingHp){
+            int adDamageByMissingHp = (int) (description.adDmg * (1.1 - getHpPercentage()));
+            this.currentHp = currentHp - adDamageByMissingHp / relativeArmor;
+            this.currentHp = currentHp - description.apDmg / relativeMR;
+        }else {
+            if (description.trueDmg) {
+                this.currentHp = currentHp - description.adDmg;
+                this.currentHp = currentHp - description.apDmg;
+            } else {
+                this.currentHp = currentHp - description.adDmg / relativeArmor;
+                this.currentHp = currentHp - description.apDmg / relativeMR;
+            }
+        }
         this.currentActionPoints = currentActionPoints - description.removedActionPoints;
 
     }
 
-    public Description useAA(Enemy enemy) {
-        Spell AA = provideAA(enemy);
+    public Description useAA() {
+        Spell AA = provideAA();
         currentActionPoints = currentActionPoints - AA.actionPointsCost;
         return new Description();
     }
 
-    public final Description useQ(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[0]) && currentActionPoints >= costQ) {
+    public final Description useQ() {
+        if (!isSpellOnCooldown(cooldown[0]) && currentActionPoints > 0) {
             setOnCooldown(0);
-            Spell spellQ = provideQ(enemy);
+            Spell spellQ = provideQ();
             voiceHandler.playQSound();
             currentActionPoints = currentActionPoints - spellQ.actionPointsCost;
             return spellQ.description;
@@ -72,10 +80,10 @@ public abstract class Champion implements Enemy, SpellProvider {
         }
     }
 
-    public final Description useW(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[1]) && currentActionPoints >= costW) {
+    public final Description useW() {
+        if (!isSpellOnCooldown(cooldown[1]) && currentActionPoints > 0) {
             setOnCooldown(1);
-            Spell spellW = provideW(enemy);
+            Spell spellW = provideW();
             voiceHandler.playWSound();
             currentActionPoints = currentActionPoints - spellW.actionPointsCost;
             return spellW.description;
@@ -85,10 +93,10 @@ public abstract class Champion implements Enemy, SpellProvider {
         }
     }
 
-    public final Description useE(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[2]) && currentActionPoints >= costE) {
+    public final Description useE() {
+        if (!isSpellOnCooldown(cooldown[2]) && currentActionPoints > 0) { //todo currentaction points >= spellcost
             voiceHandler.playESound();
-            Spell spellE = provideE(enemy);
+            Spell spellE = provideE();
             currentActionPoints = currentActionPoints - spellE.actionPointsCost;
             setOnCooldown(2);
             return spellE.description;
@@ -98,10 +106,10 @@ public abstract class Champion implements Enemy, SpellProvider {
         }
     }
 
-    public final Description useR(Enemy enemy) {
-        if (!isSpellOnCooldown(cooldown[3]) && currentActionPoints >= costR) {
+    public final Description useR() {
+        if (!isSpellOnCooldown(cooldown[3]) && currentActionPoints > 0) {
             voiceHandler.playRSound();
-            Spell spellR = provideR(enemy);
+            Spell spellR = provideR();
             currentActionPoints = currentActionPoints - spellR.actionPointsCost;
             setOnCooldown(3);
             return spellR.description;
@@ -111,8 +119,8 @@ public abstract class Champion implements Enemy, SpellProvider {
         }
     }
 
-    public final Description usePassive(Enemy enemy) {
-        Spell spellPassive = providePassive(enemy);
+    public final Description usePassive() {
+        Spell spellPassive = providePassive();
         return new Description();
     }
 
@@ -163,9 +171,7 @@ public abstract class Champion implements Enemy, SpellProvider {
     public String toString() {
         return name;
     }
-
-    @Override
-    public final int getHpPercentage() {
+    private final int getHpPercentage() {
         return (int) currentHp / maxHP;
     }
 }
