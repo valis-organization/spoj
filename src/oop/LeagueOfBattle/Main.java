@@ -1,6 +1,7 @@
 package oop.LeagueOfBattle;
 
 import oop.LeagueOfBattle.champions.base.Champion;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.menagers.ChampionCreator;
 import oop.LeagueOfBattle.menagers.PickChampion;
 import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
@@ -32,4 +33,5 @@ public class Main {
         Game game = new Game(champion1, champion2, subtitlesPrinter);
         game.start();
     }
+
 }

@@ -3,9 +3,13 @@ package oop.LeagueOfBattle;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.KeyType;
+import oop.LeagueOfBattle.champions.base.spell.Spell;
 import oop.LeagueOfBattle.menagers.KeyboardManager;
 import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -14,7 +18,7 @@ public class Game {
     private int roundCount = 0;
     private final SubtitlesPrinter subtitlesPrinter;
 
-    public Game(Champion champion1, Champion champion2, SubtitlesPrinter subtitlesPrinter) {
+    public Game(Champion champion1, Champion champion2,SubtitlesPrinter subtitlesPrinter) {
         this.subtitlesPrinter = subtitlesPrinter;
         // todo crate abstraction around the logic of picking first player to move
         Champion firstPick = determineFirstPick(champion1, champion2);
@@ -25,6 +29,9 @@ public class Game {
     public void start() throws InterruptedException {
         Champion championInMove = champion1;
         Champion attackedChampion = champion2;
+
+
+
         int turnCount = 0;
         while (!someChampionDied()) {
             turnCount++;
@@ -38,12 +45,13 @@ public class Game {
 
             while (championInMove.getCurrentActionPoints() > 0 && attackedChampion.getHp() > 0) {
                 subtitlesPrinter.printActionPoints(championInMove.getCurrentActionPoints());
-                Description spell;
+                Spell spell;
                 do {
                     spell = getSpell(KeyboardManager.getKey(), championInMove);
                 } while (spell == null);
 
-                attackedChampion.receiveSpell(spell);
+                spell.use();
+                attackedChampion.receiveSpell(spell.description);
                 subtitlesPrinter.printEnter(1);
                 subtitlesPrinter.printHp(champion2);
                 subtitlesPrinter.printHp(champion1);
@@ -60,22 +68,22 @@ public class Game {
         }
     }
 
-    private Description getSpell(KeyType type, Champion champion) {
+    private Spell getSpell(KeyType type, Champion champion) {
         switch (type) {
             case AA -> {
-                return champion.useAA();
+                return champion.provideAA();
             }
             case Q -> {
-                return champion.useQ();
+                return champion.provideQ();
             }
             case W -> {
-                return champion.useW();
+                return champion.provideW();
             }
             case E -> {
-                return champion.useE();
+                return champion.provideE();
             }
             case R -> {
-                return champion.useR();
+                return champion.provideR();
             }
         }
         return null;
@@ -113,15 +121,30 @@ public class Game {
     private void resetAbilities(Champion championInMove, Champion attackedChampion) {
         championInMove.resetCurrentActionPoints();
         attackedChampion.resetCurrentActionPoints();
-        championInMove.resetCooldowns();
-        attackedChampion.resetCooldowns();
+        //championInMove.resetCooldowns();
+        //attackedChampion.resetCooldowns();
     }
 
     private void usePassiveSpells(Champion championInMove, Champion attackedChampion) {
         championInMove.usePassive();
         attackedChampion.usePassive();
     }
-
+    private ArrayList<Spell> firstChampionSpells(Spell spellQ,Spell spellW,Spell spellE,Spell spellR){
+        ArrayList<Spell> spells= new ArrayList<>();
+        spells.add(spellQ);
+        spells.add(spellW);
+        spells.add(spellE);
+        spells.add(spellR);
+        return spells;
+    }
+    private ArrayList<Spell> secondChampionSpells(Spell spellQ,Spell spellW,Spell spellE,Spell spellR){
+        ArrayList<Spell> spells= new ArrayList<>();
+        spells.add(spellQ);
+        spells.add(spellW);
+        spells.add(spellE);
+        spells.add(spellR);
+        return spells;
+    }
     private void printOnBeginningOfTheRound() {
         subtitlesPrinter.printHp(champion1);
         subtitlesPrinter.printHp(champion2);

@@ -3,6 +3,7 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
+import oop.LeagueOfBattle.champions.base.spell.SpellListener;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
@@ -31,51 +32,80 @@ public class Rengar extends Champion {
 
     @Override
     public Spell provideAA() {
-        Description AA = new Description(0, attackDimig, 0, false, 0, 0, false);
-        return new Spell(AA, 1);
+        if (aa == null) {
+            aa = new Spell(new Description(0, attackDimig, 0, false, 0, 0, false), 1, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                }
+            });
+        }
+        return aa;
     }
 
     @Override
     public Spell provideQ() {
-        Description spellQ = new Description(0, attackDimig * 3, 0, false, armorPenetration, 0, false);
-        return new Spell(spellQ, 2);
+        if (spellQ == null) {
+            spellQ = new Spell(new Description(0, attackDimig * 3, 0, false, armorPenetration, 0, false), 2, new SpellListener() {@Override public void onSpellUsed() {}});
+        }
+        return spellQ;
     }
 
     @Override
     public Spell provideW() {
-        int healedHp = MathHelper.randomInt(0, 21);
-
-        if ((MathHelper.randomInt(1, 2) == 1)) {
-            currentHp = currentHp + healedHp;
-            subtitlesPrinter.rengarSuccessfulHeal(healedHp, currentHp);
-        } else {
-            subtitlesPrinter.rengarUnSuccessfulHeal();
+        if (spellW == null) {
+            spellW = new Spell(new Description(), 1, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    int healedHp = MathHelper.randomInt(0, 21);
+                    if ((MathHelper.randomInt(1, 2) == 1)) {
+                        currentHp = currentHp + healedHp;
+                        subtitlesPrinter.rengarSuccessfulHeal(healedHp, currentHp);
+                    } else {
+                        subtitlesPrinter.rengarUnSuccessfulHeal();
+                    }
+                }
+            });
         }
-        Description spellW = new Description();
-        return new Spell(spellW, 1);
+        return spellW;
     }
 
     @Override
     public Spell provideE() {
-        Description spellE = new Description(1, (int) (attackDimig * 0.9), 0, false, 0, 0, false);
-        return new Spell(spellE, 2);
+        if (spellE == null) {
+            spellE = new Spell(new Description(1, (int) (attackDimig * 0.5), 0, false, 0, 0, false), 2, new SpellListener() {@Override public void onSpellUsed() {}});
+        }
+        return spellE;
     }
 
     @Override
     public Spell provideR() {
-        attackDimig = attackDimig + 20;
-        useQ();
-        provideE();
-        provideW();
-        attackDimig = attackDimig - 20;
-        return new Spell(new Description(), actionPoints);
+        if (aa == null) {
+            aa = new Spell(new Description(), actionPoints, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    attackDimig = attackDimig + 20;
+                    provideQ();
+                    provideE();
+                    provideW();
+                    attackDimig = attackDimig - 20;
+                }
+            });
+        }
+        return aa;
     }
 
     @Override
     public Spell providePassive() {
-        attackDimig = attackDimig + 5;
-        subtitlesPrinter.rengarPrintPassive();
-        return new Spell(new Description(), 0);
+        if (passive == null) {
+            passive = new Spell(new Description(), 0, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    attackDimig = attackDimig + 5;
+                    subtitlesPrinter.rengarPrintPassive();
+                }
+            });
+        }
+        return passive;
     }
     /*
 

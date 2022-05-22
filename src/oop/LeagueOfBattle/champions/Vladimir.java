@@ -1,5 +1,5 @@
 package oop.LeagueOfBattle.champions;
-
+/*
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;

@@ -4,6 +4,7 @@ package oop.LeagueOfBattle.champions;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
+import oop.LeagueOfBattle.champions.base.spell.SpellListener;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
@@ -29,54 +30,90 @@ public class Garen extends Champion {
 
     @Override
     public Spell provideAA() {
-        Description AA = new Description(0, attackDimig, 0, false, 0, 0, false);
-        return new Spell(AA, 1);
+        if (aa == null) {
+            aa = new Spell(new Description(0, attackDimig, 0, false, 0, 0, false), 1, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                }
+            });
+        }
+        return aa;
     }
 
     @Override
     public Spell provideQ() {
-        Description spellQ = new Description(0, attackDimig * 3, 0, false, 0, 0, false);
-        return new Spell(spellQ, 2);
+        if (spellQ == null) {
+            spellQ = new Spell(new Description(0, attackDimig * 3, 0, false, 0, 0, false), 2, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                }
+            });
+        }
+        return spellQ;
     }
 
     @Override
     public Spell provideW() {
-        armor = armor + 2;
-        magicResist = magicResist + 2;
-        return new Spell(new Description(), 1);
+        if (spellW == null) {
+            spellW = new Spell(new Description(), 1, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    armor = armor + 2;
+                    magicResist = magicResist + 2;
+                }
+            });
+        }
+        return spellW;
     }
 
     @Override
     public Spell provideE() {
+        if (spellE == null) {
+            final int[] spinsDamage = {15};
+            spellE = new Spell(new Description(0, spinsDamage[0], 0, false, 0, 0, false), 2, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    int spins = MathHelper.randomInt(0, 13);
+                    subtitlesPrinter.garenPrintSpinsCount(spins);
+                    for (int i = 1; i <= spins; i++) {
+                        spinsDamage[0] = spinsDamage[0] + 7;
+                    }
 
-        int spins = MathHelper.randomInt(0, 13);
-        int spinsDamage = 15;
-        subtitlesPrinter.garenPrintSpinsCount(spins);
-        for (int i = 1; i <= spins; i++) {
-            spinsDamage = spinsDamage + 7;
+                }
+            });
         }
-        Description spellE = new Description(0, spinsDamage, 0, false, 0, 0, false);
-        return new Spell(spellE, 2);
+        return spellE;
     }
 
     @Override
     public Spell provideR() {
-       // int enemyHpPercentage = enemy.getHpPercentage();
-        int damageDealt = (int) 50; //* (1.1 - enemyHpPercentage));
-        Description spellR = new Description(0, damageDealt, 0, true, 0, 0, true);
-        return new Spell(spellR, actionPoints);
+        if (spellR == null) {
+            spellR = new Spell(new Description(0, 50, 0, true, 0, 0, true), actionPoints, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                }
+            });
+        }
+        return spellR;
     }
 
     @Override
     public Spell providePassive() {
-        int minHpToGetPassive = maxHP - 30;
-        if (currentHp <= minHpToGetPassive) {
-            int regeneratedHp = (int) ((maxHP - currentHp) * 0.035);
-            currentHp = (currentHp + regeneratedHp);
-            subtitlesPrinter.garenPrintPassive(regeneratedHp);
+        if (passive == null) {
+            passive = new Spell(new Description(), 0, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    int minHpToGetPassive = maxHP - 30;
+                    if (currentHp <= minHpToGetPassive) {
+                        int regeneratedHp = (int) ((maxHP - currentHp) * 0.035);
+                        currentHp = (currentHp + regeneratedHp);
+                        subtitlesPrinter.garenPrintPassive(regeneratedHp);
+                    }
+                    armor++;
+                }
+            });
         }
-        armor++;
-        return new Spell(new Description(), 0);
+        return passive;
     }
 
    /* @Override

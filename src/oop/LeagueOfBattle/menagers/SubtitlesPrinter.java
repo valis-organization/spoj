@@ -79,7 +79,7 @@ public class SubtitlesPrinter {
 
     public void vladimirPrintPassiveGainedAp(int abilityPower){println("Crimson Pact: Vladimir gained 10 AP. Current AP: " + abilityPower);}
 
-    public void vladimirLostBlood(int hpCost){println("Vladimir used " + hpCost + " to prepare his spell.");}
+    public void vladimirLostBlood(int hpCost){println("Vladimir used " + hpCost + " to hp prepare his spell.");}
 
     //OTHERS
     private void print(String string) {
