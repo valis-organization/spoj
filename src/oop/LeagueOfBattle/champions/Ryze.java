@@ -57,7 +57,9 @@ public class Ryze extends Champion {
                     } else {
                         qDamage[0] = (int) abilityPower * 2;
                     }
-                    //add reset E cooldown
+                    if(spellE !=null) {
+                        spellE.isSpellOnCooldown = false;
+                    }
                 }
             });
         }
@@ -75,13 +77,13 @@ public class Ryze extends Champion {
                         abilityPower = abilityPower + 5;
                         subtitlesPrinter.ryzeGainsAp();
                     } else if (random == 2) {
-                        resetTheCooldown(0);
+                        resetCooldown(spellQ);
                         subtitlesPrinter.ryzeResetQCooldown();
                     } else if (random == 3) {
-                        resetTheCooldown(1);
+                        resetCooldown(spellW);
                         subtitlesPrinter.ryzeResetWCooldown();
                     } else if (random == 4) {
-                        resetTheCooldown(2);
+                        resetCooldown(spellE);
                         currentActionPoints++;
                         subtitlesPrinter.ryzeResetECooldown();
                         subtitlesPrinter.ryzeGainsActionPoint();
@@ -104,7 +106,7 @@ public class Ryze extends Champion {
                 @Override
                 public void onSpellUsed() {
                     isMarked = true;
-                    resetTheCooldown(0);
+                    resetCooldown(spellQ);
                 }
             });
         }

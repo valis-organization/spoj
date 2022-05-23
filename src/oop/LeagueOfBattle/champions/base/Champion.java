@@ -26,7 +26,7 @@ public abstract class Champion implements SpellProvider {
     //ActionPoints and Cooldowns
     protected int actionPoints;
     protected int currentActionPoints;
-    protected boolean[] cooldown = new boolean[4];
+   // protected boolean[] cooldown = new boolean[4];
     protected Spell aa;
     protected Spell spellQ;
     protected Spell spellW;
@@ -141,10 +141,10 @@ public abstract class Champion implements SpellProvider {
         }
     }
 
-    public final Description usePassive() {
-        Spell spellPassive = providePassive();
-        return new Description();
-    }
+   // public final Description usePassive() {
+   //     Spell spellPassive = providePassive();
+   //     return new Description();
+   // }
 
     protected boolean isSpellOnCooldown(boolean whichSpell) {
         return whichSpell;
@@ -171,12 +171,16 @@ public abstract class Champion implements SpellProvider {
         }
     }
 
-    protected void setOnCooldown(int spellNumber) {
-        cooldown[spellNumber] = true;
+    protected void setOnCooldown(Spell spell) {
+        if(spell !=null) {
+            spell.isSpellOnCooldown = false;
+        }
     }
 
-    protected void resetTheCooldown(int spellNumber) {
-        cooldown[spellNumber] = false;
+    protected void resetCooldown(Spell spell) {
+        if(spell !=null) {
+            spell.isSpellOnCooldown = false;
+        }
     }
 
     //getters, setters

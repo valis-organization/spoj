@@ -79,7 +79,15 @@ public class SubtitlesPrinter {
 
     public void vladimirPrintPassiveGainedAp(int abilityPower){println("Crimson Pact: Vladimir gained 10 AP. Current AP: " + abilityPower);}
 
-    public void vladimirLostBlood(int hpCost){println("Vladimir used " + hpCost + " to hp prepare his spell.");}
+    public void vladimirUsedBlood(int hpCost){println("Vladimir used " + hpCost + " to hp prepare his spell.");}
+
+    public void vladimirHealed(int hpHealed){println("Vladimir healed himself by " + hpHealed + " hp.");}
+
+    public  void vladimirExchange(int ap, int hp){println("Vladimir exchanged " + ap + " AP for " + hp + "HP. " );}
+
+    public  void vladimirGainedAp(int ap, int abilityPower){println("Vladimir gained " + ap + ". Current AP: " + abilityPower);}
+
+    public  void vladimirNotEnoughAp(){println("You don't have enough Ability Power to use this spell.");}
 
     //OTHERS
     private void print(String string) {

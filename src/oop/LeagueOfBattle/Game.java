@@ -125,8 +125,8 @@ public class Game {
     }
 
     private void usePassiveSpells(Champion championInMove, Champion attackedChampion) {
-        championInMove.usePassive();
-        attackedChampion.usePassive();
+        championInMove.providePassive().use();
+        attackedChampion.providePassive().use();
     }
 
     private ArrayList<Spell> firstChampionSpells(Spell spellQ, Spell spellW, Spell spellE, Spell spellR) {

@@ -3,7 +3,7 @@ package oop.LeagueOfBattle.menagers;
 import oop.LeagueOfBattle.champions.Garen;
 import oop.LeagueOfBattle.champions.Rengar;
 import oop.LeagueOfBattle.champions.Ryze;
-//import oop.LeagueOfBattle.champions.Vladimir;
+import oop.LeagueOfBattle.champions.Vladimir;
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.voiceLines.Garen.GarenVoiceHandler;
 import oop.LeagueOfBattle.voiceLines.Rengar.RengarVoiceHandler;
@@ -25,12 +25,12 @@ public class ChampionCreator {
         Champion garen = new Garen(garenVoiceHandler, subtitlesPrinter);
         Champion rengar = new Rengar(rengarVoiceHandler, subtitlesPrinter);
         Champion ryze = new Ryze(ryzeVoiceHandler, subtitlesPrinter);
-        //  Champion vladimir = new Vladimir(vladimirVoiceHandler, subtitlesPrinter);
+        Champion vladimir = new Vladimir(vladimirVoiceHandler, subtitlesPrinter);
 
         championsList.add(garen);
         championsList.add(rengar);
         championsList.add(ryze);
-        //     championsList.add(vladimir);
+        championsList.add(vladimir);
         return championsList;
     }
 }
