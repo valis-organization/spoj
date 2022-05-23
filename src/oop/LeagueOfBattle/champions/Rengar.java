@@ -23,10 +23,10 @@ public class Rengar extends Champion {
         actionPoints = 4;
         armorPenetration = 20;
         currentActionPoints = actionPoints;
-       // costQ = 2;
+        // costQ = 2;
         //costW = 1;
-       // costE = 2;
-       // costR = actionPoints;
+        // costE = 2;
+        // costR = actionPoints;
         isAssassin = true;
     }
 
@@ -45,7 +45,11 @@ public class Rengar extends Champion {
     @Override
     public Spell provideQ() {
         if (spellQ == null) {
-            spellQ = new Spell(new Description(0, attackDimig * 3, 0, false, armorPenetration, 0, false), 2, new SpellListener() {@Override public void onSpellUsed() {}});
+            spellQ = new Spell(new Description(0, attackDimig * 3, 0, false, armorPenetration, 0, false), 2, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                }
+            });
         }
         return spellQ;
     }
@@ -72,7 +76,11 @@ public class Rengar extends Champion {
     @Override
     public Spell provideE() {
         if (spellE == null) {
-            spellE = new Spell(new Description(1, (int) (attackDimig * 0.5), 0, false, 0, 0, false), 2, new SpellListener() {@Override public void onSpellUsed() {}});
+            spellE = new Spell(new Description(1, (int) (attackDimig * 0.5), 0, false, 0, 0, false), 2, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                }
+            });
         }
         return spellE;
     }

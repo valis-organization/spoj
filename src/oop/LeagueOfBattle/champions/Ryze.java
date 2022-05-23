@@ -1,8 +1,9 @@
- package oop.LeagueOfBattle.champions;
-/*
+package oop.LeagueOfBattle.champions;
+
 import oop.LeagueOfBattle.champions.base.Champion;
 import oop.LeagueOfBattle.champions.base.spell.Description;
 import oop.LeagueOfBattle.champions.base.spell.Spell;
+import oop.LeagueOfBattle.champions.base.spell.SpellListener;
 import oop.LeagueOfBattle.helpers.MathHelper;
 import oop.LeagueOfBattle.menagers.ChampionVoiceLineHandler;
 import oop.LeagueOfBattle.menagers.SubtitlesPrinter;
@@ -22,9 +23,9 @@ public class Ryze extends Champion {
         actionPoints = 3;
         armorPenetration = 10;
         currentActionPoints = actionPoints;
-     //   costQ = 2;
-     //   costW = 1;
-     //   costE = = 1;
+        //   costQ = 2;
+        //   costW = 1;
+        //   costE = = 1;
         //   costR = actionPoints;
         isAssassin = false;
     }
@@ -33,70 +34,110 @@ public class Ryze extends Champion {
 
     @Override
     public Spell provideAA() {
-        Description AA = new Description(0, attackDimig, 0, false, 0, 0, false);
-        return new Spell(AA, 1);
+        if (aa == null) {
+            aa = new Spell(new Description(0, attackDimig, 0, false, 0, 0, false), 1, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                }
+            });
+        }
+        return aa;
     }
 
     @Override
     public Spell provideQ() {
-        Description spellQ;
-        resetTheCooldown(2);
-        if (isMarked) {
-            isMarked = false;
-            spellQ = new Description(0, (int) (abilityPower * 3), 0, false, 0, 0, false);
-        } else {
-            spellQ = new Description(0, (int) (abilityPower * 1.5), 0, false, 0, 0, false);
+        if (spellQ == null) {
+            final int[] qDamage = {(int) (abilityPower * 1.5)};
+            spellQ = new Spell(new Description(0, 0, qDamage[0], false, 0, 0, false), 2, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    if (isMarked) {
+                        isMarked = false;
+                        qDamage[0] = abilityPower * 4;
+                    } else {
+                        qDamage[0] = (int) abilityPower * 2;
+                    }
+                    //add reset E cooldown
+                }
+            });
         }
-        return new Spell(spellQ, 2);
+        return spellQ;
     }
 
     @Override
     public Spell provideW() {
-        int random = MathHelper.randomInt(1, 6);
-        if (random == 1) {
-            abilityPower = abilityPower + 5;
-            subtitlesPrinter.ryzeGainsAp();
-        } else if (random == 2) {
-            resetTheCooldown(0);
-            subtitlesPrinter.ryzeResetQCooldown();
-        } else if (random == 3) {
-            resetTheCooldown(1);
-            subtitlesPrinter.ryzeResetWCooldown();
-        } else if (random == 4) {
-            resetTheCooldown(2);
-            currentActionPoints++;
-            subtitlesPrinter.ryzeResetECooldown();
-            subtitlesPrinter.ryzeGainsActionPoint();
-        } else if (random == 5) {
-            currentActionPoints++;
-            subtitlesPrinter.ryzeGainsActionPoint();
-        } else if (random == 6) {
-            subtitlesPrinter.ryzeBurnedScroll();
+        if (spellW == null) {
+            spellW = new Spell(new Description(), 1, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    int random = MathHelper.randomInt(1, 6);
+                    if (random == 1) {
+                        abilityPower = abilityPower + 5;
+                        subtitlesPrinter.ryzeGainsAp();
+                    } else if (random == 2) {
+                        resetTheCooldown(0);
+                        subtitlesPrinter.ryzeResetQCooldown();
+                    } else if (random == 3) {
+                        resetTheCooldown(1);
+                        subtitlesPrinter.ryzeResetWCooldown();
+                    } else if (random == 4) {
+                        resetTheCooldown(2);
+                        currentActionPoints++;
+                        subtitlesPrinter.ryzeResetECooldown();
+                        subtitlesPrinter.ryzeGainsActionPoint();
+                    } else if (random == 5) {
+                        currentActionPoints++;
+                        subtitlesPrinter.ryzeGainsActionPoint();
+                    } else if (random == 6) {
+                        subtitlesPrinter.ryzeBurnedScroll();
+                    }
+                }
+            });
         }
-        return new Spell(new Description(), 1);
+        return spellW;
     }
 
     @Override
     public Spell provideE() {
-        isMarked = true;
-        resetTheCooldown(0);
-        Description spellE = new Description(0, 0, (int) (abilityPower * 0.6), false, 0, 0, false);
-        return new Spell(spellE, 1);
+        if (spellE == null) {
+            spellE = new Spell(new Description(0, 0, (int) (abilityPower * 0.6), false, 0, 0, false), 1, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    isMarked = true;
+                    resetTheCooldown(0);
+                }
+            });
+        }
+        return spellE;
     }
 
     @Override
     public Spell provideR() {
-        actionPoints++;
-     //   costR++;
-        return new Spell(new Description(), actionPoints);
+        if (spellR == null) {
+            spellR = new Spell(new Description(), actionPoints, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    actionPoints++;
+                }
+            });
+        }
+        return spellR;
+
     }
 
     @Override
     public Spell providePassive() {
-        int gainedAp = MathHelper.randomInt(1, 5);
-        abilityPower = abilityPower + gainedAp;
-        subtitlesPrinter.ryzePrintPassive(gainedAp);
-        return new Spell(new Description(), 0);
+        if (passive == null) {
+            passive = new Spell(new Description(), 0, new SpellListener() {
+                @Override
+                public void onSpellUsed() {
+                    int gainedAp = MathHelper.randomInt(1, 5);
+                    abilityPower = abilityPower + gainedAp;
+                    subtitlesPrinter.ryzePrintPassive(gainedAp);
+                }
+            });
+        }
+        return passive;
     }
 }
 
